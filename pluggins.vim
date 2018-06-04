@@ -1,10 +1,6 @@
 call plug#begin('$HOME/.vim/plugged')
 
-function! BuildYCM(info)
-    if a:info.status == 'installed' || a:info.force
-        !./install.sh --clang-completer --gocode-completer --system-libclang
-    endif
-endfunction
+
 
 Plug 'rking/ag.vim'
 Plug 'jiangmiao/auto-pairs'
@@ -39,7 +35,16 @@ Plug 'terryma/vim-multiple-cursors'
 " complete
 Plug 'SirVer/ultisnips' 
 Plug 'honza/vim-snippets' 
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') , 'for': [ 'go', 'python' ], 'on': [] }
+
+if has('mac')
+    function! BuildYCM(info)
+        if a:info.status == 'installed' || a:info.force
+            !./install.sh --clang-completer --gocode-completer --system-libclang
+        endif
+    endfunction
+
+    Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') , 'for': [ 'go', 'python' ], 'on': [] }
+endif
 
 " 文本对象: textobj-user 全家桶
 Plug 'kana/vim-textobj-user'

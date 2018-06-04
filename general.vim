@@ -43,10 +43,19 @@ set nobackup                    " 不生成备份文件
 set noswapfile                  " 不生成交换文件
 set autoread                    " 当文件在外部被修改，自动更新该文件
 
-" GUI
-if g:isGUI 
-    set macligatures
-    set guifont=Fira\ Code:h12
+" font
+if g:isMac
+    if g:isGUI 
+        set macligatures
+        set guifont=Source\ Code\ Pro\ For\ Powerline:h12
+    else
+        set guifont=Fira\ Code:h14
+    endif
+else
+    if g:isGUI 
+        set macligatures
+        set guifont=Fira\ Code\ 12
+    endif
 endif
 
 " 文件格式，默认 ffs=dos,unix
