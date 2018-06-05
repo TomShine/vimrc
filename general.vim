@@ -1,9 +1,13 @@
 let g:isMac = 0
 let g:isLinux = 0
-if has("linux")
+let g:isWindows = 0
+
+if has('mac')
     let g:isLinux = 1
-else
+elseif has('linux')
     let g:isMac = 1
+else
+    let g:isWindows = 1
 endif
 
 if has("gui_running")
@@ -53,8 +57,7 @@ if g:isMac
     endif
 else
     if g:isGUI 
-        set macligatures
-        set guifont=Fira\ Code\ 12
+        set guifont=Fira\ Code\ 10
     endif
 endif
 

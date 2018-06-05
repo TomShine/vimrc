@@ -1,7 +1,5 @@
 call plug#begin('$HOME/.vim/plugged')
 
-
-
 Plug 'rking/ag.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'skywind3000/asyncrun.vim'

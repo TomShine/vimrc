@@ -1,6 +1,9 @@
-" molokai
 set t_Co=256
 syntax enable
-"colorscheme molokai
-colorscheme gruvbox 
-let g:molokai_original = 1
+
+if has('linux')
+    colorscheme molokai
+    let g:molokai_original = 1
+elseif has('mac')
+   colorscheme gruvbox 
+endif

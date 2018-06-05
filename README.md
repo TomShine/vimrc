@@ -1,11 +1,11 @@
-# Intro
+# Introduce
 
 this is my vim confg
 
 ## install 
 
-```
+``` sh
 git clone https://github.com/TomShine/vimrc.git .vim
 cd .vim
-sh install.sh
+bash install.sh
 ```

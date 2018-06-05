@@ -280,8 +280,12 @@
 "}
 
 "Airline {
-    set rtp+=/Library/Python/2.7/site-packages/powerline/bindings/vim
-
+    if has('linux')
+        set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
+    elseif has('mac')
+        set rtp+=/Library/Python/2.7/site-packages/powerline/bindings/vim
+    endif
+    
     "这个是安装字体后 必须设置此项
     let g:airline_powerline_fonts = 1
 
