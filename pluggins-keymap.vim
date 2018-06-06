@@ -104,19 +104,6 @@ vnoremap <space>a<bar> :Tabularize /\|<cr>
 nnoremap <space>ar :Tabularize /\|/r0<cr>
 vnoremap <space>ar :Tabularize /\|/r0<cr>
 
-" MultiCursor
-" Map start key separately from next key
-let g:multi_cursor_start_key=';n'
-let g:multi_cursor_start_word_key=';gn'
-
-let g:muti_cursor_use_default_mapping = 0
-let g:multi_cursor_next_key=';n'
-let g:multi_cursor_prev_key=';p'
-let g:multi_cursor_skip_key=';x'
-let g:multi_cursor_quit_key='<Esc>'
-
-nnoremap <C-n> :call multiple_cursors#quit()<CR>
-
 " leaderF
 let g:Lf_CommandMap = {'<Tab>': ['<ESC>']}
 let g:Lf_ShortcutF = '<space>ff'
@@ -124,7 +111,3 @@ let g:Lf_ShortcutB = '<space>fb'
 noremap <space>fr :LeaderfMru<cr>
 noremap <space>fn :LeaderfFunction!<cr>
 noremap <space>ft :LeaderfTag<cr>
-
-" auto formater
-noremap <space>f= :Autoformat<cr>
-

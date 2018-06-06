@@ -13,22 +13,15 @@ Plug 'kien/rainbow_parentheses.vim'
 Plug 'wakatime/vim-wakatime'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'thinca/vim-quickrun'
-Plug 'lfv89/vim-interestingwords'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'w0rp/ale'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-Plug 'mhinz/vim-signify'
-Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/echodoc.vim'
 Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
-Plug 'justinmk/vim-dirvish'
-Plug 'skywind3000/vim-preview'
 Plug 'tpope/vim-unimpaired'
 Plug 't9md/vim-choosewin'
 Plug 'rizzatti/dash.vim'
-Plug 'kshenoy/vim-signature'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'terryma/vim-multiple-cursors'
 
 " complete
 Plug 'SirVer/ultisnips' 
@@ -43,13 +36,6 @@ if has('mac')
 
     Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') , 'for': [ 'go', 'python' ], 'on': [] }
 endif
-
-" 文本对象: textobj-user 全家桶
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-indent'
-Plug 'kana/vim-textobj-syntax'
-Plug 'kana/vim-textobj-function', { 'for':['c', 'cpp', 'vim', 'java'] }
-Plug 'sgur/vim-textobj-parameter'
 
 " theme
 Plug 'vim-airline/vim-airline'
