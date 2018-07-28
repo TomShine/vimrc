@@ -1,5 +1,6 @@
 call plug#begin('$HOME/.vim/plugged')
 
+<<<<<<< HEAD
 " common
 Plug 'jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
@@ -17,8 +18,16 @@ function! BuildYCM(info)
     endif
 endfunction
 
+=======
+Plug 'rking/ag.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'ervandew/supertab'
+>>>>>>> update config
 Plug 'Valloric/ListToggle'
 Plug 'kien/rainbow_parentheses.vim'
+<<<<<<< HEAD
 Plug 'tpope/vim-unimpaired'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'godlygeek/tabular'
@@ -48,6 +57,18 @@ Plug 'rking/ag.vim'
 Plug 'wakatime/vim-wakatime'
 Plug 'editorconfig/editorconfig-vim'
 Plug 't9md/vim-choosewin'
+=======
+Plug 'wakatime/vim-wakatime'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'thinca/vim-quickrun'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
+Plug 'tpope/vim-unimpaired'
+Plug 't9md/vim-choosewin'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'w0rp/ale'
+>>>>>>> update config
 
 " theme
 Plug 'altercation/vim-colors-solarized'

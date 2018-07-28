@@ -1,11 +1,22 @@
 let g:isMac = 0
 let g:isLinux = 0
+<<<<<<< HEAD
 let g:isGUI = 0
 
 if has('mac')
     let g:isMac = 1
 elseif has('unix')
     let g:isLinux = 1
+=======
+let g:isWindows = 0
+
+if has('mac')
+    let g:isLinux = 1
+elseif has('linux')
+    let g:isMac = 1
+else
+    let g:isWindows = 1
+>>>>>>> update config
 endif
 
 if has("gui_running")
@@ -43,6 +54,7 @@ set nobackup                    " 不生成备份文件
 set noswapfile                  " 不生成交换文件
 set autoread                    " 当文件在外部被修改，自动更新该文件
 
+<<<<<<< HEAD
 if g:isGUI
     set guioptions-=m  " hide tool menu
     set guioptions-=T  " hide menu
@@ -67,6 +79,20 @@ elseif g:isLinux
         set guifont=Fira\ Code\ 14
     endif
     " set guifont=Droid\ Sans\ Mono\ Nerd\ Font\ Complete\ 12
+=======
+" font
+if g:isMac
+    if g:isGUI 
+        set macligatures
+        set guifont=Source\ Code\ Pro\ For\ Powerline:h12
+    else
+        set guifont=Fira\ Code:h14
+    endif
+else
+    if g:isGUI 
+        set guifont=Fira\ Code\ 10
+    endif
+>>>>>>> update config
 endif
 
 " 文件格式，默认 ffs=dos,unix

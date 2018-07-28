@@ -285,6 +285,7 @@ endif
     hi link ALEWarningSign  Warning
 "}
 
+<<<<<<< HEAD
 " leaderF {
     let g:Lf_MruMaxFiles = 2048
     "let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
@@ -429,6 +430,22 @@ endif
 
     "automatically rebalance windows on vim resize
     autocmd VimResized * :wincmd =
+=======
+"vim-choosewin{
+    " if you want to use overlay feature
+    let g:choosewin_overlay_enable = 1
+"}
+
+"Airline {
+    if has('linux')
+        set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim
+    elseif has('mac')
+        set rtp+=/Library/Python/2.7/site-packages/powerline/bindings/vim
+    endif
+    
+    "这个是安装字体后 必须设置此项
+    let g:airline_powerline_fonts = 1
+>>>>>>> update config
 
     let g:go_fmt_command = "goimports"
     let g:go_autodetect_gopath = 1
@@ -478,6 +495,7 @@ endif
         " :GoDef but opens in a horizontal split
         autocmd FileType go nmap <Leader>s <Plug>(go-def-split)
 
+<<<<<<< HEAD
         " :GoAlternate  commands :A, :AV, :AS and :AT
         autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
         autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
@@ -511,6 +529,12 @@ endif
           \ "Standard" : "C++11",
           \ "BreakBeforeBraces" : "Stroustrup"}
 "}
+=======
+" SuperTab {
+    " 0 - 不记录上次的补全方式
+    " 1 - 记住上次的补全方式,直到用其他的补全命令改变它
+    " 2 - 记住上次的补全方式,直到按ESC退出插入模式为止
+>>>>>>> update config
 
 " fswitch {
     let b:fswitchdst = 'cpp,cxx,C'

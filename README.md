@@ -5,6 +5,7 @@ this is my vim confg
 ## install require sofware
 
 ``` sh
+<<<<<<< HEAD
 # all platform
 pip install powerline-status
 
@@ -30,5 +31,9 @@ sudo pacman -S zsh
 ``` sh
 git clone https://github.com/TomShine/vimrc.git ~/.vim
 cd ~/.vim
+=======
+git clone https://github.com/TomShine/vimrc.git .vim
+cd .vim
+>>>>>>> update config
 bash install.sh
 ```

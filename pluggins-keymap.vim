@@ -68,10 +68,13 @@ vnoremap <space>a<bar> :Tabularize /\|<cr>
 nnoremap <space>ar :Tabularize /\|/r0<cr>
 vnoremap <space>ar :Tabularize /\|/r0<cr>
 
+<<<<<<< HEAD
 " vim-easy-align
 vmap <leader>ea <Plug>(EasyAlign)
 nmap <leader>ea <Plug>(EasyAlign)
 
+=======
+>>>>>>> update config
 " leaderF
 let g:Lf_CommandMap = {'<Tab>': ['<ESC>']}
 let g:Lf_ShortcutF = '<space>ff'
@@ -79,6 +82,7 @@ let g:Lf_ShortcutB = '<space>fb'
 noremap <space>fr :LeaderfMru<cr>
 noremap <space>fn :LeaderfFunction!<cr>
 noremap <space>ft :LeaderfTag<cr>
+<<<<<<< HEAD
 noremap <space>fbt :LeaderfBufTag!<cr>
 noremap<space>fb :LeaderfBuffer<cr>
 
@@ -121,3 +125,5 @@ nmap <silent> <Leader>oJ :FSSplitBelow<cr>  " Switch to the file and load it int
 let g:UltiSnipsExpandTrigger="<leader><tab>"
 let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
 let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
+=======
+>>>>>>> update config
