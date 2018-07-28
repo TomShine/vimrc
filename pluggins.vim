@@ -14,28 +14,14 @@ Plug 'wakatime/vim-wakatime'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'thinca/vim-quickrun'
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'w0rp/ale'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+Plug 'w0rp/ale'
 Plug 'Shougo/echodoc.vim'
 Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 Plug 'tpope/vim-unimpaired'
 Plug 't9md/vim-choosewin'
 Plug 'rizzatti/dash.vim'
 Plug 'nathanaelkane/vim-indent-guides'
-
-" complete
-Plug 'SirVer/ultisnips' 
-Plug 'honza/vim-snippets' 
-
-if has('mac')
-    function! BuildYCM(info)
-        if a:info.status == 'installed' || a:info.force
-            !./install.sh --clang-completer --gocode-completer --system-libclang
-        endif
-    endfunction
-
-    Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') , 'for': [ 'go', 'python' ], 'on': [] }
-endif
 
 " theme
 Plug 'vim-airline/vim-airline'
