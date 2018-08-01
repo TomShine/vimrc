@@ -169,13 +169,18 @@ endif
     au Syntax * RainbowParenthesesLoadChevrons  " <>
 "}
 
+<<<<<<< HEAD
 " Ag {
+=======
+" search {
+>>>>>>> purge vim config
     if executable('ag')
         " Use Ag over Grep
         let g:ackprg='ag --nogroup --nocolor --column'
     endif
 "}
 
+<<<<<<< HEAD
 " IndentGuide {
     "let g:indent_guides_enable_on_vim_startup = 1  " 随vim 自启动,h默认关闭
     let g:indent_guides_start_level=2               " 从第二层开始可视化显示缩进
@@ -530,6 +535,8 @@ endif
           \ "BreakBeforeBraces" : "Stroustrup"}
 "}
 =======
+=======
+>>>>>>> purge vim config
 " SuperTab {
     " 0 - 不记录上次的补全方式
     " 1 - 记住上次的补全方式,直到用其他的补全命令改变它

@@ -21,11 +21,11 @@ endfunction
 =======
 Plug 'rking/ag.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'skywind3000/asyncrun.vim'
 Plug 'scrooloose/nerdcommenter'
 Plug 'ervandew/supertab'
 >>>>>>> update config
 Plug 'Valloric/ListToggle'
+<<<<<<< HEAD
 Plug 'kien/rainbow_parentheses.vim'
 <<<<<<< HEAD
 Plug 'tpope/vim-unimpaired'
@@ -69,6 +69,12 @@ Plug 't9md/vim-choosewin'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'w0rp/ale'
 >>>>>>> update config
+=======
+Plug 'scrooloose/nerdtree'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'tpope/vim-unimpaired'
+>>>>>>> purge vim config
 
 " theme
 Plug 'altercation/vim-colors-solarized'
