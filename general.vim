@@ -113,7 +113,7 @@ set foldmethod=marker   " marker 折叠方式
 
 " highlight tabs and trailing spaces
 "set list " 显示特殊字符，其中Tab使用高亮~代替，尾部空白使用高亮点号代替
-set listchars=tab:>-,trail:-,extends:>,precedes:<
+"set listchars=tab:>-,trail:-,extends:>,precedes:<
 
 " if has('statusline')
 "     " Broken down into easily includeable segments

@@ -36,19 +36,6 @@ nnoremap <silent> ]t :tabnext<cr>
 nnoremap <silent> [T :tabfirst<cr>
 nnoremap <silent> ]T :tablast<cr>
 
-" airline
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
-nmap <leader>- <Plug>AirlineSelectPrevTab
-nmap <leader>+ <Plug>AirlineSelectNextTab
-
 " tags
 nmap <leader>tn :tnext<CR>      " 正向遍历同名标签
 nmap <leader>tp :tprevious<CR>  " 反向遍历同名标签
@@ -78,12 +65,6 @@ nmap <silent> <leader>i :IndentGuidesToggle<cr> " 快捷键 i 开/关缩进可�
 
 " vim-choosewin {
 nmap - <Plug>(choosewin)
-
-" ycm
-nnoremap gb :YcmCompleter GoToDeclaration<cr>
-nnoremap gl :YcmCompleter GoToDefinition<cr>
-nnoremap gx :YcmCompleter GoToDefinitionElseDeclaration<cr>
-nnoremap gy :YcmCompleter GoToReferences<cr>
 
 " UltiSnips 的 tab 键与 YCM 冲突，重新设定
 let g:UltiSnipsExpandTrigger="<leader><tab>"
