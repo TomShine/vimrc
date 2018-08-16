@@ -3,9 +3,9 @@ let g:isLinux = 0
 let g:isWindows = 0
 
 if has('mac')
-    let g:isLinux = 1
-elseif has('linux')
     let g:isMac = 1
+elseif has('unix')
+    let g:isLinux = 1
 else
     let g:isWindows = 1
 endif
