@@ -56,9 +56,7 @@ if g:isMac
         set guifont=Fira\ Code:h14
     endif
 else
-    if g:isGUI 
-        set guifont=Fira\ Code\ 10
-    endif
+  set guifont=Droid\ Sans\ Mono\ Nerd\ Font\ Complete\ 12
 endif
 
 " 文件格式，默认 ffs=dos,unix
@@ -175,3 +173,8 @@ let mapleader = ","
 
     inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 "}
+
+" 个性化
+if filereadable(expand($HOME . '/.vimrc.local'))
+    source $HOME/.vimrc.local
+endif
