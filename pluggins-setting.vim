@@ -404,71 +404,77 @@
     "}
 
 " YCM {
-    "autocmd! VimEnter * call plug#load('ultisnips', 'YouCompleteMe') 
-    ""        \| call youcompleteme#Enable()
+    if has("mac")
+        "autocmd! VimEnter * call plug#load('ultisnips', 'YouCompleteMe') 
+        ""        \| call youcompleteme#Enable()
 
-    set completeopt=longest,menu                                  " 让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
-    "autocmd InsertLeave * if pumvisible() == 0|pclose|endif       " 离开插入模式后自动关闭预览窗口
-    "inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"  " 回车即选中当前项
+        set completeopt=longest,menu                                  " 让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)
+        autocmd InsertLeave * if pumvisible() == 0|pclose|endif       " 离开插入模式后自动关闭预览窗口
+        inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"  " 回车即选中当前项
 
-    " Youcompleteme的默认tab,s-tab 和自动补全冲突
-    "let g:ycm_key_list_select_completion=['<c-n>']
-    let g:ycm_key_list_select_completion = ['<Down>']
-    "let g:ycm_key_list_previous_completion=['<c-p>']
-    let g:ycm_key_list_previous_completion = ['<Up>']
-    let g:ycm_key_invoke_completion = '<C-Space>'
-    let g:ycm_confirm_extra_conf=0                    " 关闭加载.ycm_extra_conf.py提示
-    let g:ycm_collect_identifiers_from_tags_files=1   " 开启 YCM 基于标签引擎
-    let g:ycm_min_num_of_chars_for_completion=2       " 从第2个键入字符就开始罗列匹配项
-    let g:ycm_cache_omnifunc=0                        " 禁止缓存匹配项,每次都重新生成匹配项
-    let g:ycm_seed_identifiers_with_syntax=1          " 语法关键字补全
-    let g:ycm_complete_in_comments = 1 " 在注释输入中也能补全
-    let g:ycm_complete_in_strings = 1  " 在字符串输入中也能补全
-    let g:ycm_collect_identifiers_from_comments_and_strings = 0 "注释和字符串中的文字也会被收入补全
-    let g:ycm_error_symbol = '✗'
-    let g:ycm_warning_symbol = '✗'
+        
+        "let g:ycm_key_list_select_completion=['<c-n>']    " Youcompleteme的默认tab,s-tab 和自动补全冲突
+        let g:ycm_key_list_select_completion = ['<Down>']
+        "let g:ycm_key_list_previous_completion=['<c-p>']
+        let g:ycm_key_list_previous_completion = ['<Up>']
+        let g:ycm_key_invoke_completion = '<C-Space>'
+        let g:ycm_confirm_extra_conf=0                    " 关闭加载.ycm_extra_conf.py提示
+        let g:ycm_collect_identifiers_from_tags_files=1   " 开启 YCM 基于标签引擎
+        let g:ycm_min_num_of_chars_for_completion=2       " 从第2个键入字符就开始罗列匹配项
+        let g:ycm_cache_omnifunc=0                        " 禁止缓存匹配项,每次都重新生成匹配项
+        let g:ycm_seed_identifiers_with_syntax=1          " 语法关键字补全
+        let g:ycm_complete_in_comments = 1                " 在注释输入中也能补全
+        let g:ycm_complete_in_strings = 1                 " 在字符串输入中也能补全
+        let g:ycm_collect_identifiers_from_comments_and_strings = 0 "注释和字符串中的文字也会被收入补全
+        let g:ycm_error_symbol = '✗'
+        let g:ycm_warning_symbol = '✗'
 
-    let g:ycm_global_ycm_extra_conf = '$HOME/.dotfiles/home/.ycm_extra_conf.py' 
-    let g:ycm_extra_conf_globlist = '$HOME/.dotfiles/home/.ycm_extra_conf.py'
-    let g:ycm_autoclose_preview_window_after_insertion = 1
-    "let g:ycm_server_python_interpreter = '/usr/bin/python'
-    "let g:ycm_python_binary_path = 'python'
+        let g:ycm_global_ycm_extra_conf = '$HOME/.vim/.ycm_extra_conf.py' 
+        let g:ycm_extra_conf_globlist = '$HOME/.vim/.ycm_extra_conf.py'
+        let g:ycm_autoclose_preview_window_after_insertion = 1
+        "let g:ycm_server_python_interpreter = '/usr/bin/python'
+        "let g:ycm_python_binary_path = 'python'
 
-    let g:ycm_filetype_blacklist = {
-          \ 'tagbar' : 1,
-          \ 'qf' : 1,
-          \ 'notes' : 1,
-          \ 'markdown' : 1,
-          \ 'unite' : 1,
-          \ 'text' : 1,
-          \ 'vimwiki' : 1,
-          \ 'pandoc' : 1,
-          \ 'infolog' : 1,
-          \ 'mail' : 1,
-          \ 'gitcommit' : 1
-          \}
+        let g:ycm_filetype_blacklist = {
+              \ 'tagbar' : 1,
+              \ 'qf' : 1,
+              \ 'notes' : 1,
+              \ 'markdown' : 1,
+              \ 'unite' : 1,
+              \ 'text' : 1,
+              \ 'vimwiki' : 1,
+              \ 'pandoc' : 1,
+              \ 'infolog' : 1,
+              \ 'mail' : 1,
+              \ 'gitcommit' : 1
+              \}
 
-    let g:ycm_semantic_triggers =  {
-      \   'c' : ['->', '.','re![_a-zA-z0-9]'],
-      \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
-      \             're!\[.*\]\s'],
-      \   'ocaml' : ['.', '#'],
-      \   'cpp,objcpp' : ['->', '.', '::','re![_a-zA-Z0-9]'],
-      \   'perl' : ['->'],
-      \   'php' : ['->', '::'],
-      \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
-      \   'ruby' : ['.', '::'],
-      \   'lua' : ['.', ':'],
-      \   'erlang' : [':'],
-      \ }
+        let g:ycm_semantic_triggers =  {
+          \   'c' : ['->', '.','re![_a-zA-z0-9]'],
+          \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+          \             're!\[.*\]\s'],
+          \   'ocaml' : ['.', '#'],
+          \   'cpp,objcpp' : ['->', '.', '::','re![_a-zA-Z0-9]'],
+          \   'perl' : ['->'],
+          \   'php' : ['->', '::'],
+          \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+          \   'ruby' : ['.', '::'],
+          \   'lua' : ['.', ':'],
+          \   'erlang' : [':'],
+          \ }
+    elseif has("unix")
+        let g:deoplete#enable_at_startup = 1
+    endif
 ""}
 
-"vim-easy-align {
-        vmap <leader>ea <Plug>(EasyAlign)
-        nmap <leader>ea <Plug>(EasyAlign)
-        if !exists('g:easy_align_delimiters')
-            let g:easy_align_delimiters = {}
-        endif
+" python-mode {
+    let g:pymode_python = 'python3'
+"}
 
-        let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
-    "}
+"vim-easy-align {
+    if !exists('g:easy_align_delimiters')
+        let g:easy_align_delimiters = {}
+    endif
+
+    let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
+"}

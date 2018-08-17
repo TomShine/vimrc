@@ -36,6 +36,10 @@ if has("mac")
 
     Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
     Plug 'rizzatti/dash.vim'
+elseif has("unix")
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
 " beauty
@@ -43,9 +47,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " python
-Plug 'klen/python-mode'
-Plug 'nvie/vim-flake8'
-" Plug 'kevinw/pyflakes-vim'
+Plug 'klen/python-mode', { 'branch': 'develop' }
 
 " C/C++
 Plug 'octol/vim-cpp-enhanced-highlight'

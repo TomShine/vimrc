@@ -51,35 +51,35 @@ flags = [
 # a "-std=<something>".
 # For a C project, you would set this to something like 'c99' instead of
 # 'c++11'.
-'-std=c++14',
+'-std=c++11',
 # ...and the same thing goes for the magic -x option which specifies the
 # language that the files to be compiled are written in. This is mostly
 # relevant for c++ headers.
 # For a C project, you would set this to 'c' instead of 'c++'.
 '-x',
 'c++',
-
-# c/c++ include path
 '-isystem',
-'/usr/include/c++/4.8',
+'../BoostParts',
 '-isystem',
-'/usr/include/c++/4.8.5',
+# This path will only work on OS X, but extra paths that don't exist are not
+# harmful
+'/System/Library/Frameworks/Python.framework/Headers',
 '-isystem',
-'/usr/include/c++/4.9.3',
+'../llvm/include',
 '-isystem',
-'/usr/include/c++/5',
+'../llvm/tools/clang/include',
+'-I',
+'.',
+'-I',
+'./ClangCompleter',
 '-isystem',
-'/usr/include/c++/6',
+'./tests/gmock/gtest',
 '-isystem',
-'/usr/include/c++/7',
+'./tests/gmock/gtest/include',
 '-isystem',
-'/usr/include/c++/8',
+'./tests/gmock',
 '-isystem',
-'/usr/include',
-'-isystem',
-'/usr/include/x86_64-linux-gnu',
-'-isystem',
-'/usr/local/include',
+'./tests/gmock/include',
 ]
 
 

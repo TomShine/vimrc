@@ -155,7 +155,6 @@ nnoremap <leader>jp :YcmCompleter GetParent<cr>
 nnoremap <leader>jt :YcmCompleter GetType<cr>
 nnoremap <leader>jo :YcmCompleter GetDoc<cr>
     
-
 " Tabularize
 nmap <leader>a& :Tabularize /&<CR>
 nmap <leader>a= :Tabularize /^[^=]*\zs=<CR>
