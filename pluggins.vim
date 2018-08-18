@@ -37,9 +37,7 @@ if has("mac")
     Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
     Plug 'rizzatti/dash.vim'
 elseif has("unix")
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
+    Plug 'shougo/neocomplete.vim'
 endif
 
 " beauty
