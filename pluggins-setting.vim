@@ -168,64 +168,6 @@
     endif
 "}
 
-" leaderF {
-    let g:Lf_MruMaxFiles = 2048
-    "let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
-    "let g:Lf_StlSeparator = { 'left': '►', 'right': '◄', 'font': '' }
-    "let g:Lf_StlSeparator = { 'left': '⮀', 'right': '⮂' }
-    let g:Lf_StlSeparator = { 'left': "\u2b80", 'right': "\u2b82" }
-" }
-
-" ale { 
-    let g:ale_linters = {
-                \ 'c': ['gcc', 'cppcheck'], 
-                \ 'cpp': ['gcc', 'cppcheck'], 
-                \ 'python': ['flake8', 'pylint'], 
-                \ 'lua': ['luac'], 
-                \ 'go': ['go build', 'gofmt'],
-                \ 'java': ['javac'],
-                \ 'javascript': ['eslint'], 
-                \ }
-
-    let g:airline#extensions#ale#enabled = 1
-    let g:ale_python_flake8_options = '--conf=~/.vim/tools/conf/flake8.conf'
-    let g:ale_python_pylint_options = '--rcfile=~/.vim/tools/conf/pylint.conf'
-    let g:ale_python_pylint_options .= ' --disable=W'
-    let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
-    let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
-    let g:ale_c_cppcheck_options = ''
-    let g:ale_cpp_cppcheck_options = ''
-    let g:ale_sign_error = '✗'
-    let g:ale_sign_warning = '⚠'
-    " let g:ale_sign_error = '•'
-    " let g:ale_sign_warning = '•'
-    let g:ale_linters.text = ['textlint', 'write-good', 'languagetool']
-
-    if executable('gcc') == 0 && executable('clang')
-        let g:ale_linters.c += ['clang']
-        let g:ale_linters.cpp += ['clang']
-    endif
-
-    hi link ALEErrorSign    Error
-    hi link ALEWarningSign  Warning
-"}
-
-" vim-choosewin {
-    " if you want to use overlay feature
-    let g:choosewin_overlay_enable = 1
-"}
-
-" echodoc {
-    set noshowmode
-    let g:echodoc#enable_at_startup = 1
-" }
-
-
-" UltiSnips 的 tab 键与 YCM 冲突，重新设定 {
-    " If you want :UltiSnipsEdit to split your window.
-    let g:UltiSnipsEditSplit="vertical"
-"}
-
 " IndentGuide {
     "let g:indent_guides_enable_on_vim_startup = 1  " 随vim 自启动,h默认关闭
     let g:indent_guides_start_level=2               " 从第二层开始可视化显示缩进

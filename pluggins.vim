@@ -14,39 +14,14 @@ Plug 'skywind3000/asyncrun.vim'
 Plug 'wakatime/vim-wakatime'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-Plug 'Shougo/echodoc.vim'
 Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 Plug 'tpope/vim-unimpaired'
-Plug 't9md/vim-choosewin'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'junegunn/vim-easy-align'
 Plug 'godlygeek/tabular' 
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 Plug 'uarun/vim-protobuf'
-"Plug 'lifepillar/vim-mucomplete'
 
-" python
-Plug 'klen/python-mode', { 'branch': 'develop' }
-
-" C/C++
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'chxuan/cpp-mode'
-
-" go
-Plug 'fatih/vim-go'
-
-" python
-Plug 'klen/python-mode', { 'branch': 'develop' }
-
-" C/C++
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'chxuan/cpp-mode'
-Plug 'rhysd/vim-clang-format'
-
-" go
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-
+" theme
 Plug 'altercation/vim-colors-solarized'
 Plug 'dracula/vim'
 Plug 'tomasr/molokai'
