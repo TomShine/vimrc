@@ -18,7 +18,6 @@ Plug 'Shougo/echodoc.vim'
 Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 Plug 'tpope/vim-unimpaired'
 Plug 't9md/vim-choosewin'
-Plug 'rizzatti/dash.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'junegunn/vim-easy-align'
 Plug 'godlygeek/tabular' 
