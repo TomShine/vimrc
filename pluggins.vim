@@ -11,8 +11,6 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'majutsushi/tagbar'
 Plug 'skywind3000/asyncrun.vim'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'skywind3000/gutentags_plus'
 Plug 'wakatime/vim-wakatime'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
@@ -26,23 +24,8 @@ Plug 'junegunn/vim-easy-align'
 Plug 'godlygeek/tabular' 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-
-if has("mac")
-    function! BuildYCM(info)
-        if a:info.status == 'installed' || a:info.force
-            !./install.sh --clang-completer --gocode-completer --tern-completer
-        endif
-    endfunction
-
-    Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-    Plug 'rizzatti/dash.vim'
-elseif has("unix")
-    Plug 'shougo/neocomplete.vim'
-endif
-
-" beauty
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'uarun/vim-protobuf'
+"Plug 'lifepillar/vim-mucomplete'
 
 " python
 Plug 'klen/python-mode', { 'branch': 'develop' }
@@ -52,9 +35,19 @@ Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'chxuan/cpp-mode'
 
 " go
+Plug 'fatih/vim-go'
+
+" python
+Plug 'klen/python-mode', { 'branch': 'develop' }
+
+" C/C++
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'chxuan/cpp-mode'
+Plug 'rhysd/vim-clang-format'
+
+" go
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 
-" theme
 Plug 'altercation/vim-colors-solarized'
 Plug 'dracula/vim'
 Plug 'tomasr/molokai'
