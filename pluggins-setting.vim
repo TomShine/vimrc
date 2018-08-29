@@ -37,7 +37,11 @@ endif
         \ 'kinds' : [
              \ 'c:classes:0:1',
              \ 'd:macros:0:1',
+<<<<<<< HEAD
              \ 'e:enumerators:0:0',
+=======
+             \ 'e:enumerators:0:0', 
+>>>>>>> delete some plugin
              \ 'f:functions:0:1',
              \ 'g:enumeration:0:1',
              \ 'l:local:0:1',
@@ -115,8 +119,13 @@ endif
     let g:NERDTreeFileExtensionHighlightFullName = 1
     let g:NERDTreeExactMatchHighlightFullName = 1
     let g:NERDTreePatternMatchHighlightFullName = 1
+<<<<<<< HEAD
     let g:NERDTreeHighlightFolders = 1
     let g:NERDTreeHighlightFoldersFullName = 1
+=======
+    let g:NERDTreeHighlightFolders = 1         
+    let g:NERDTreeHighlightFoldersFullName = 1 
+>>>>>>> delete some plugin
     let g:NERDTreeDirArrowExpandable='▷'
     let g:NERDTreeDirArrowCollapsible='▼'
 
@@ -136,6 +145,16 @@ endif
 " NerdCommenter(easy comment and uncomment) {
     let NERDSpaceDelims     = 1 " 自动添加前置空格
     let NERDCompactSexyComs = 1
+"}
+
+" quick-run {
+    let g:quickrun_config = {
+      \   "_" : {
+      \       "outputter" : "message",
+      \   },
+      \}
+
+    let g:quickrun_no_default_key_mappings = 1
 "}
 
 " rainbow {
@@ -181,6 +200,66 @@ endif
 "}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+" leaderF {
+    let g:Lf_MruMaxFiles = 2048
+    "let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+    "let g:Lf_StlSeparator = { 'left': '►', 'right': '◄', 'font': '' }
+    "let g:Lf_StlSeparator = { 'left': '⮀', 'right': '⮂' }
+    let g:Lf_StlSeparator = { 'left': "\u2b80", 'right': "\u2b82" }
+" }
+
+" ale { 
+    let g:ale_linters = {
+                \ 'c': ['gcc', 'cppcheck'], 
+                \ 'cpp': ['gcc', 'cppcheck'], 
+                \ 'python': ['flake8', 'pylint'], 
+                \ 'lua': ['luac'], 
+                \ 'go': ['go build', 'gofmt'],
+                \ 'java': ['javac'],
+                \ 'javascript': ['eslint'], 
+                \ }
+
+    let g:airline#extensions#ale#enabled = 1
+    let g:ale_python_flake8_options = '--conf=~/.vim/tools/conf/flake8.conf'
+    let g:ale_python_pylint_options = '--rcfile=~/.vim/tools/conf/pylint.conf'
+    let g:ale_python_pylint_options .= ' --disable=W'
+    let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
+    let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
+    let g:ale_c_cppcheck_options = ''
+    let g:ale_cpp_cppcheck_options = ''
+    let g:ale_sign_error = '✗'
+    let g:ale_sign_warning = '⚠'
+    " let g:ale_sign_error = '•'
+    " let g:ale_sign_warning = '•'
+    let g:ale_linters.text = ['textlint', 'write-good', 'languagetool']
+
+    if executable('gcc') == 0 && executable('clang')
+        let g:ale_linters.c += ['clang']
+        let g:ale_linters.cpp += ['clang']
+    endif
+
+    hi link ALEErrorSign    Error
+    hi link ALEWarningSign  Warning
+"}
+
+" vim-choosewin {
+    " if you want to use overlay feature
+    let g:choosewin_overlay_enable = 1
+"}
+
+" echodoc {
+    set noshowmode
+    let g:echodoc#enable_at_startup = 1
+" }
+
+" UltiSnips 的 tab 键与 YCM 冲突，重新设定 {
+    " If you want :UltiSnipsEdit to split your window.
+    let g:UltiSnipsEditSplit="vertical"
+"}
+
+>>>>>>> delete some plugin
 " IndentGuide {
     "let g:indent_guides_enable_on_vim_startup = 1  " 随vim 自启动,h默认关闭
     let g:indent_guides_start_level=2               " 从第二层开始可视化显示缩进
@@ -547,6 +626,7 @@ endif
     let b:fswitchdst = 'cpp,cxx,C'
 "}
 
+<<<<<<< HEAD
 if g:isMac
     set rtp+=/Library/Python/2.7/site-packages/powerline/bindings/vim
 elseif g:isLinux && g:isGUI
@@ -603,3 +683,100 @@ if g:isMac || (g:isLinux && g:isGUI)
         "}
     "}
 endif
+=======
+"vim-go {
+    let g:go_def_mapping_enabled = 0
+    "Enable goimports to automatically insert import paths instead of gofmt
+    let g:go_fmt_command = "goimports" 
+    let g:go_fmt_fail_silently = 0
+    let g:go_list_type = "quickfix"
+
+    "auto save run GoImports
+    autocmd BufWritePre *.go :GoImports
+
+    "automatically rebalance windows on vim resize
+    autocmd VimResized * :wincmd =
+    
+    au FileType go nmap <leader>grun <Plug>(go-run)
+    au FileType go nmap <leader>gbuild <Plug>(go-build)
+    au FileType go nmap <leader>gtest <Plug>(go-test)
+    au FileType go nmap <leader>tf <Plug>(go-test-func)
+
+    au FileType go nmap <leader>gcov <Plug>(go-coverage)
+    au FileType go nmap <leader>gds <Plug>(go-def-split)
+    au FileType go nmap <leader>gdv <Plug>(go-def-vertical)
+    au FileType go nmap <leader>gdt <Plug>(go-def-tab)
+    au FileType go nmap <leader>grename <Plug>(go-rename)
+    au FileType go nmap <leader>gim <Plug>(go-implements)
+    au FileType go nmap <leader>ginfo <Plug>(go-info)
+    au FileType go nmap <leader>gdoc <Plug>(go-doc)
+    au FileType go nmap <leader>gdocv <Plug>(go-doc-vertical)
+
+    autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+    autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+    autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+    autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+"}
+
+"vim-clang-format {
+    " Auto-enabling auto-formatting
+    "autocmd FileType c ClangFormatAutoEnable
+
+    "llvm, google, chromium, mozilla is supported. The default value is google.
+    " g:clang_format#code_style = google 
+    " let g:clang_format#code_style = 'llvm'
+    let g:clang_format#style_options = {
+        \ "AccessModifierOffset" : -4,
+        \ "AllowShortIfStatementsOnASingleLine" : "true",
+        \ "AlwaysBreakTemplateDeclarations" : "true",
+        \ "Standard" : "C++11",
+        \ "BreakBeforeBraces" : "Stroustrup"}
+
+    " map to <Leader>cf in C++ code
+    autocmd FileType c,cpp,objc nnoremap <buffer><leader>cf :<C-u>ClangFormat<CR>
+    autocmd FileType c,cpp,objc vnoremap <buffer><leader>cf :ClangFormat<CR>
+
+    " if you install vim-operator-user
+    "autocmd FileType c,cpp,objc map <buffer><leader>x <Plug>(operator-clang-format)
+
+    " Toggle auto formatting:
+    nmap <leader>C :ClangFormatAutoToggle<CR>
+"}
+
+" echodoc.vim {
+    let g:echodoc_enable_at_startup = 1
+"}
+
+" UltiSnips 的 tab 键与 YCM 冲突，重新设定 {
+    let g:UltiSnipsExpandTrigger="<leader><tab>"
+    let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
+    let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
+
+    " If you want :UltiSnipsEdit to split your window.
+    let g:UltiSnipsEditSplit="vertical"
+"}
+
+" python-mode {
+    let g:pymode_python = 'python3'
+"}
+
+" vim-easy-align {
+    if !exists('g:easy_align_delimiters')
+        let g:easy_align_delimiters = {}
+    endif
+
+    let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
+"}
+
+" mucomplete{
+    set shortmess+=c   " Shut off completion messages
+    set belloff+=ctrlg " If Vim beeps during completion
+    set completeopt-=preview
+    set completeopt+=longest,menuone,noselect
+
+    let g:mucomplete#enable_auto_at_startup = 1
+    let g:mucomplete#delayed_completion = 1
+    let g:jedi#popup_on_dot = 0  " It may be 1 as well
+    let g:mucomplete#enable_auto_at_startup = 1
+"}
+>>>>>>> delete some plugin

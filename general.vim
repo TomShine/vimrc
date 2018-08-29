@@ -11,9 +11,9 @@ elseif has('unix')
 let g:isWindows = 0
 
 if has('mac')
-    let g:isLinux = 1
-elseif has('linux')
     let g:isMac = 1
+elseif has('unix')
+    let g:isLinux = 1
 else
     let g:isWindows = 1
 >>>>>>> update config
@@ -89,10 +89,14 @@ if g:isMac
         set guifont=Fira\ Code:h14
     endif
 else
+<<<<<<< HEAD
     if g:isGUI 
         set guifont=Fira\ Code\ 10
     endif
 >>>>>>> update config
+=======
+  set guifont=Droid\ Sans\ Mono\ Nerd\ Font\ Complete\ 12
+>>>>>>> delete some plugin
 endif
 
 " 文件格式，默认 ffs=dos,unix
@@ -146,8 +150,13 @@ set foldmethod=marker   " marker 折叠方式
 " au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
 
 " highlight tabs and trailing spaces
+<<<<<<< HEAD
 set list " 显示特殊字符，其中Tab使用高亮~代替，尾部空白使用高亮点号代替
 set listchars=tab:>-,trail:-,extends:>,precedes:<
+=======
+"set list " 显示特殊字符，其中Tab使用高亮~代替，尾部空白使用高亮点号代替
+"set listchars=tab:>-,trail:-,extends:>,precedes:<
+>>>>>>> delete some plugin
 
 " 设置 python 的格式
 au BufNewFile,BufRead *.py

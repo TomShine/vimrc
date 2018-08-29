@@ -1,6 +1,7 @@
 call plug#begin('$HOME/.vim/plugged')
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 " common
 Plug 'jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
@@ -19,9 +20,12 @@ function! BuildYCM(info)
 endfunction
 
 =======
+=======
+" common
+Plug 'w0rp/ale'
+>>>>>>> delete some plugin
 Plug 'rking/ag.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'scrooloose/nerdcommenter'
 Plug 'ervandew/supertab'
 >>>>>>> update config
 Plug 'Valloric/ListToggle'
@@ -71,10 +75,39 @@ Plug 'w0rp/ale'
 >>>>>>> update config
 =======
 Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdcommenter'
 Plug 'kien/rainbow_parentheses.vim'
-Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'majutsushi/tagbar'
+Plug 'skywind3000/asyncrun.vim'
+Plug 'wakatime/vim-wakatime'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+Plug 'Shougo/echodoc.vim'
+Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 Plug 'tpope/vim-unimpaired'
+<<<<<<< HEAD
 >>>>>>> purge vim config
+=======
+Plug 't9md/vim-choosewin'
+Plug 'rizzatti/dash.vim'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'junegunn/vim-easy-align'
+Plug 'godlygeek/tabular' 
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'uarun/vim-protobuf'
+"Plug 'lifepillar/vim-mucomplete'
+
+" python
+Plug 'klen/python-mode', { 'branch': 'develop' }
+
+" C/C++
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'chxuan/cpp-mode'
+
+" go
+Plug 'fatih/vim-go'
+>>>>>>> delete some plugin
 
 " theme
 Plug 'altercation/vim-colors-solarized'
