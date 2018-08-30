@@ -50,15 +50,15 @@ set autoread                    " 当文件在外部被修改，自动更新该�
 " font
 if g:isMac
     if g:isGUI 
-        set macligatures
-        set guifont=Source\ Code\ Pro\ For\ Powerline:h12
+        "set macligatures
+        set guifont=Source\ Code\ Pro:h12
     else
         set guifont=Fira\ Code:h14
     endif
-else
+elseif g:isLinux
     if g:isGUI 
-        set macligatures
-        set guifont=Source\ Code\ Pro\ For\ Powerline\ 12
+        "set macligatures
+        set guifont=Source\ Code\ Pro\ 12
     else
         set guifont=Fira\ Code\ 14
     endif
