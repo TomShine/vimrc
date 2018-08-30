@@ -120,16 +120,6 @@
     let NERDCompactSexyComs = 1
 "}
 
-" quick-run {
-    let g:quickrun_config = {
-      \   "_" : {
-      \       "outputter" : "message",
-      \   },
-      \}
-
-    let g:quickrun_no_default_key_mappings = 1
-"}
-
 " rainbow {
     " Rainbow parentheses for Lisp and variants
     let g:rbpt_colorpairs = [
@@ -178,84 +168,7 @@
     " 0 - 不记录上次的补全方式
     " 1 - 记住上次的补全方式,直到用其他的补全命令改变它
     " 2 - 记住上次的补全方式,直到按ESC退出插入模式为止
-
     let g:SuperTabRetainCompletionType=2
-"}
-
-"vim-go {
-    let g:go_def_mapping_enabled = 0
-    "Enable goimports to automatically insert import paths instead of gofmt
-    let g:go_fmt_command = "goimports" 
-    let g:go_fmt_fail_silently = 0
-    let g:go_list_type = "quickfix"
-
-    "auto save run GoImports
-    autocmd BufWritePre *.go :GoImports
-
-    "automatically rebalance windows on vim resize
-    autocmd VimResized * :wincmd =
-    
-    au FileType go nmap <leader>grun <Plug>(go-run)
-    au FileType go nmap <leader>gbuild <Plug>(go-build)
-    au FileType go nmap <leader>gtest <Plug>(go-test)
-    au FileType go nmap <leader>tf <Plug>(go-test-func)
-
-    au FileType go nmap <leader>gcov <Plug>(go-coverage)
-    au FileType go nmap <leader>gds <Plug>(go-def-split)
-    au FileType go nmap <leader>gdv <Plug>(go-def-vertical)
-    au FileType go nmap <leader>gdt <Plug>(go-def-tab)
-    au FileType go nmap <leader>grename <Plug>(go-rename)
-    au FileType go nmap <leader>gim <Plug>(go-implements)
-    au FileType go nmap <leader>ginfo <Plug>(go-info)
-    au FileType go nmap <leader>gdoc <Plug>(go-doc)
-    au FileType go nmap <leader>gdocv <Plug>(go-doc-vertical)
-
-    autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
-    autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-    autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-    autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
-"}
-
-"vim-clang-format {
-    " Auto-enabling auto-formatting
-    "autocmd FileType c ClangFormatAutoEnable
-
-    "llvm, google, chromium, mozilla is supported. The default value is google.
-    " g:clang_format#code_style = google 
-    " let g:clang_format#code_style = 'llvm'
-    let g:clang_format#style_options = {
-        \ "AccessModifierOffset" : -4,
-        \ "AllowShortIfStatementsOnASingleLine" : "true",
-        \ "AlwaysBreakTemplateDeclarations" : "true",
-        \ "Standard" : "C++11",
-        \ "BreakBeforeBraces" : "Stroustrup"}
-
-    " map to <Leader>cf in C++ code
-    autocmd FileType c,cpp,objc nnoremap <buffer><leader>cf :<C-u>ClangFormat<CR>
-    autocmd FileType c,cpp,objc vnoremap <buffer><leader>cf :ClangFormat<CR>
-
-    " if you install vim-operator-user
-    "autocmd FileType c,cpp,objc map <buffer><leader>x <Plug>(operator-clang-format)
-
-    " Toggle auto formatting:
-    nmap <leader>C :ClangFormatAutoToggle<CR>
-"}
-
-" echodoc.vim {
-    let g:echodoc_enable_at_startup = 1
-"}
-
-" UltiSnips 的 tab 键与 YCM 冲突，重新设定 {
-    let g:UltiSnipsExpandTrigger="<leader><tab>"
-    let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
-    let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
-
-    " If you want :UltiSnipsEdit to split your window.
-    let g:UltiSnipsEditSplit="vertical"
-"}
-
-" python-mode {
-    let g:pymode_python = 'python3'
 "}
 
 "vim-easy-align {
@@ -264,16 +177,4 @@
     endif
 
     let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
-"}
-
-" mucomplete{
-    set shortmess+=c   " Shut off completion messages
-    set belloff+=ctrlg " If Vim beeps during completion
-    set completeopt-=preview
-    set completeopt+=longest,menuone,noselect
-
-    let g:mucomplete#enable_auto_at_startup = 1
-    let g:mucomplete#delayed_completion = 1
-    let g:jedi#popup_on_dot = 0  " It may be 1 as well
-    let g:mucomplete#enable_auto_at_startup = 1
 "}

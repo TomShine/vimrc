@@ -56,7 +56,13 @@ if g:isMac
         set guifont=Fira\ Code:h14
     endif
 else
-  set guifont=Droid\ Sans\ Mono\ Nerd\ Font\ Complete\ 12
+    if g:isGUI 
+        set macligatures
+        set guifont=Source\ Code\ Pro\ For\ Powerline\ 12
+    else
+        set guifont=Fira\ Code\ 14
+    endif
+    " set guifont=Droid\ Sans\ Mono\ Nerd\ Font\ Complete\ 12
 endif
 
 " 文件格式，默认 ffs=dos,unix
@@ -141,13 +147,13 @@ let mapleader = ","
 " Tmux {
     " tmux will only forward escape sequences to the terminal if surrounded by a DCS sequence
     " http://sourceforge.net/mailarchive/forum.php?thread_name=AANLkTinkbdoZ8eNR1X2UobLTeww1jFrvfJxTMfKSq-L%2B%40mail.gmail.com&forum_name=tmux-users
-    if exists('$TMUX')
-      let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-      let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-    else
-      let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-      let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-    endif
+    "if exists('$TMUX')
+    "  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    "  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+    "else
+    "  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    "  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    "endif
 
     " for tmux to automatically set paste and nopaste mode at the time pasting
     " (as happens in VIM UI)

@@ -42,10 +42,6 @@ nnoremap <silent> ]T :tablast<cr>
 nmap <leader>tn :tnext<CR>      " 正向遍历同名标签
 nmap <leader>tp :tprevious<CR>  " 反向遍历同名标签
 
-" quick-run
-nmap <leader>r <Plug>(quickrun)
-map <F10> :QuickRun<CR>
-
 " indentGuide
 nmap <silent> <leader>i :IndentGuidesToggle<cr> " 快捷键 i 开/关缩进可视化
 
