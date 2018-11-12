@@ -18,7 +18,8 @@ sudo yum install -y the-sliver-search
 sudo brew install git
 
 # arch/manjaro
-TODO ...
+sudo pacman -S git
+sudo pacman -S zsh
 ```
 
 ## install
