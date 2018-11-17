@@ -12,6 +12,12 @@ Plug 'justinmk/vim-dirvish'
 Plug 'Shougo/echodoc.vim'
 
 " ide feature
+function! BuildYCM(info)
+    if a:info.status == 'installed' || a:info.force
+        !./install.sh --clang-completer --gocode-completer --system-libclang
+    endif
+endfunction
+
 Plug 'Valloric/ListToggle'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'tpope/vim-unimpaired'
@@ -20,15 +26,7 @@ Plug 'godlygeek/tabular'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'w0rp/ale'
-if has('mac')
-    function! BuildYCM(info)
-        if a:info.status == 'installed' || a:info.force
-            !./install.sh --clang-completer --gocode-completer --system-libclang
-        endif
-    endfunction
-
-    Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') , 'for': [ 'go', 'python' ], 'on': [] }
-endif
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') , 'for': [ 'go', 'python' ], 'on': [] }
 
 "tags
 Plug 'ludovicchabant/vim-gutentags'
@@ -38,7 +36,7 @@ Plug 'skywind3000/gutentags_plus'
 Plug 'elzr/vim-json'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'uarun/vim-protobuf'
-Plug 'vim-scripts/go.vim'
+Plug 'fatih/vim-go'
 
 " tools
 Plug 'rking/ag.vim'
