@@ -18,6 +18,10 @@ Plug 'junegunn/vim-easy-align'
 Plug 'godlygeek/tabular' 
 Plug 'uarun/vim-protobuf'
 
+" lang
+Plug 'elzr/vim-json'
+Plug 'fatih/vim-go'
+
 " theme
 Plug 'altercation/vim-colors-solarized'
 Plug 'dracula/vim'
