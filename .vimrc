@@ -12,3 +12,5 @@ call SourceIfExists('~/.vim/pluggins.vim')
 call SourceIfExists('~/.vim/themes-setting.vim')
 call SourceIfExists('~/.vim/general-keymap.vim')
 call SourceIfExists('~/.vim/pluggins-keymap.vim')
+
+hi! Normal ctermbg=NONE guibg=NONE
