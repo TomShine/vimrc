@@ -12,7 +12,6 @@ if has("gui_running")
     let g:isGUI = 1
 endif
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " plugins settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -170,7 +169,7 @@ endif
     au Syntax * RainbowParenthesesLoadChevrons  " <>
 "}
 
-" search {
+" Ag {
     if executable('ag')
         " Use Ag over Grep
         let g:ackprg='ag --nogroup --nocolor --column'
@@ -303,14 +302,19 @@ endif
     let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
 " }
 
+" vim-choosewin {
+    " if you want to use overlay feature
+    let g:choosewin_overlay_enable = 1
+"}
+
 " echodoc {
     set noshowmode
     let g:echodoc#enable_at_startup = 1
 " }
 
-" vim-choosewin {
-    " if you want to use overlay feature
-    let g:choosewin_overlay_enable = 1
+"UltiSnips 的 tab 键与 YCM 冲突，重新设定 {
+    " If you want :UltiSnipsEdit to split your window.
+    let g:UltiSnipsEditSplit="vertical"
 "}
 
 " ycm {
@@ -512,25 +516,13 @@ endif
     let b:fswitchdst = 'cpp,cxx,C'
 "}
 
-"UltiSnips 的 tab 键与 YCM 冲突，重新设定 {
-    " If you want :UltiSnipsEdit to split your window.
-    let g:UltiSnipsEditSplit="vertical"
-"}
-
-"Ag(finder): Use The Silver Searcher https://github.com/ggreer/the_silver_searcher {
-    if executable('ag')
-        " Use Ag over Grep
-        let g:ackprg='ag --nogroup --nocolor --column'
-    endif
-"}
-
 if g:isMac
     set rtp+=/Library/Python/2.7/site-packages/powerline/bindings/vim
-elseif g:isLinux
+elseif g:isLinux && g:isGUI
     set rtp+=/usr/lib/python3.7/site-packages/powerline/bindings/vim
 endif
 
-if g:isGUI
+if g:isMac || (g:isLinux && g:isGUI)
     "Airline {
         "这个是安装字体后 必须设置此项
         let g:airline_powerline_fonts = 1
@@ -551,32 +543,32 @@ if g:isGUI
 
         let g:airline_symbols.space = "\ua0"
 
-        "Buffer {
-            " 打开tabline功能,方便查看Buffer和切换
-            let g:airline#extensions#tabline#enabled = 1
-            let g:airline#extensions#tabline#show_splits = 1
-            let g:airline#extensions#tabline#show_tabs = 0
-            let g:airline#extensions#tabline#show_buffers = 0
-            let g:airline#extensions#tabline#show_tab_type = 0
-            let g:airline#extensions#tabline#buffer_nr_show = 1
-            let g:airline#extensions#tabline#fnamemod = ':t'
+        " "Buffer {
+        "     " 打开tabline功能,方便查看Buffer和切换
+        "     let g:airline#extensions#tabline#enabled = 1
+        "     let g:airline#extensions#tabline#show_splits = 1
+        "     let g:airline#extensions#tabline#show_tabs = 0
+        "     let g:airline#extensions#tabline#show_buffers = 0
+        "     let g:airline#extensions#tabline#show_tab_type = 0
+        "     let g:airline#extensions#tabline#buffer_nr_show = 1
+        "     let g:airline#extensions#tabline#fnamemod = ':t'
 
-            let g:airline#extensions#tabline#buffer_idx_mode = 1
-            nmap <leader>1 <Plug>AirlineSelectTab1
-            nmap <leader>2 <Plug>AirlineSelectTab2
-            nmap <leader>3 <Plug>AirlineSelectTab3
-            nmap <leader>4 <Plug>AirlineSelectTab4
-            nmap <leader>5 <Plug>AirlineSelectTab5
-            nmap <leader>6 <Plug>AirlineSelectTab6
-            nmap <leader>7 <Plug>AirlineSelectTab7
-            nmap <leader>8 <Plug>AirlineSelectTab8
-            nmap <leader>9 <Plug>AirlineSelectTab9
-            nmap <leader>- <Plug>AirlineSelectPrevTab
-            nmap <leader>+ <Plug>AirlineSelectNextTab
+        "     let g:airline#extensions#tabline#buffer_idx_mode = 1
+        "     nmap <leader>1 <Plug>AirlineSelectTab1
+        "     nmap <leader>2 <Plug>AirlineSelectTab2
+        "     nmap <leader>3 <Plug>AirlineSelectTab3
+        "     nmap <leader>4 <Plug>AirlineSelectTab4
+        "     nmap <leader>5 <Plug>AirlineSelectTab5
+        "     nmap <leader>6 <Plug>AirlineSelectTab6
+        "     nmap <leader>7 <Plug>AirlineSelectTab7
+        "     nmap <leader>8 <Plug>AirlineSelectTab8
+        "     nmap <leader>9 <Plug>AirlineSelectTab9
+        "     nmap <leader>- <Plug>AirlineSelectPrevTab
+        "     nmap <leader>+ <Plug>AirlineSelectNextTab
 
-            " 设置切换Buffer快捷键"
-            nnoremap <leader>bn :bn<CR>
-            nnoremap <leader>bp :bp<CR>
+        "     " 设置切换Buffer快捷键"
+        "     nnoremap <leader>bn :bn<CR>
+        "     nnoremap <leader>bp :bp<CR>
         "}
     "}
 endif

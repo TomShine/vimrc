@@ -120,21 +120,8 @@ set foldmethod=marker   " marker 折叠方式
 " au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
 
 " highlight tabs and trailing spaces
-"set list " 显示特殊字符，其中Tab使用高亮~代替，尾部空白使用高亮点号代替
-"set listchars=tab:>-,trail:-,extends:>,precedes:<
-
-" statusline
-" if has('statusline')
-"    " Broken down into easily includeable segments
-"    set statusline=%<%f\                     " Filename
-"    set statusline+=%w%h%m%r                 " Options
-"    if !exists('g:override_spf13_bundles')
-"        set statusline+=%{fugitive#statusline()} " Git Hotness
-"    endif
-"    set statusline+=\ [%{&ff}/%Y]            " Filetype
-"    set statusline+=\ [%{getcwd()}]          " Current dir
-"    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-"endif
+set list " 显示特殊字符，其中Tab使用高亮~代替，尾部空白使用高亮点号代替
+set listchars=tab:>-,trail:-,extends:>,precedes:<
 
 " 设置 python 的格式
 au BufNewFile,BufRead *.py
@@ -163,23 +150,23 @@ let mapleader = ","
     " for tmux to automatically set paste and nopaste mode at the time pasting
     " (as happens in VIM UI)
     function! WrapForTmux(s)
-      if !exists('$TMUX')
-        return a:s
-      endif
+        if !exists('$TMUX')
+            return a:s
+        endif
 
-      let tmux_start = "\<Esc>Ptmux;"
-      let tmux_end = "\<Esc>\\"
+        let tmux_start = "\<Esc>Ptmux;"
+        let tmux_end = "\<Esc>\\"
 
-      return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+        return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
     endfunction
 
     let &t_SI .= WrapForTmux("\<Esc>[?2004h")
     let &t_EI .= WrapForTmux("\<Esc>[?2004l")
 
     function! XTermPasteBegin()
-      set pastetoggle=<Esc>[201~
-      set paste
-      return ""
+        set pastetoggle=<Esc>[201~
+        set paste
+        return ""
     endfunction
 
     inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
