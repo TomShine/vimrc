@@ -100,3 +100,20 @@ nnoremap gy :YcmCompleter GoToReferences<cr>
 let g:UltiSnipsExpandTrigger="<leader><tab>"
 let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
 let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
+
+" clang format
+" map to <Leader>cf in C++ code
+autocmd FileType c,cpp,objc nnoremap <buffer><leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <buffer><leader>cf :ClangFormat<CR>
+nmap <leader>C :ClangFormatAutoToggle<CR> " Toggle auto formatting:
+
+" FSwtich switch source file and header file in c/c++
+nmap <silent> <Leader>of :FSHere<cr>        " Switch to the file and load it into the current window
+nmap <silent> <Leader>ol :FSRight<cr>       " Switch to the file and load it into the window on the right
+nmap <silent> <Leader>oL :FSSplitRight<cr>  " Switch to the file and load it into a new window split on the right
+nmap <silent> <Leader>oh :FSLeft<cr>        " Switch to the file and load it into the window on the left
+nmap <silent> <Leader>oH :FSSplitLeft<cr>   " Switch to the file and load it into a new window split on the left
+nmap <silent> <Leader>ok :FSAbove<cr>       " Switch to the file and load it into the window above
+nmap <silent> <Leader>oK :FSSplitAbove<cr>  " Switch to the file and load it into a new window split above
+nmap <silent> <Leader>oj :FSBelow<cr>       " Switch to the file and load it into the window below
+nmap <silent> <Leader>oJ :FSSplitBelow<cr>  " Switch to the file and load it into a new window split below

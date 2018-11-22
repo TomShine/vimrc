@@ -495,6 +495,21 @@ endif
     endfunction
 "}
 
+"vim-clang-format {
+    " Auto-enabling auto-formatting
+    "autocmd FileType c ClangFormatAutoEnable
+
+    "llvm, google, chromium, mozilla is supported. The default value is google.
+    " let g:clang_format#code_style = google
+    " let g:clang_format#code_style = 'llvm'
+    let g:clang_format#style_options = {
+          \ "AccessModifierOffset" : -4,
+          \ "AllowShortIfStatementsOnASingleLine" : "true",
+          \ "AlwaysBreakTemplateDeclarations" : "true",
+          \ "Standard" : "C++11",
+          \ "BreakBeforeBraces" : "Stroustrup"}
+"}
+
 if g:isMac
     set rtp+=/Library/Python/2.7/site-packages/powerline/bindings/vim
 elseif g:isLinux

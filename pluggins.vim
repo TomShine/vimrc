@@ -37,13 +37,15 @@ Plug 'elzr/vim-json'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'uarun/vim-protobuf'
 Plug 'fatih/vim-go'
+Plug 'kana/vim-operator-user'
+Plug 'rhysd/vim-clang-format'
+Plug 'derekwyatt/vim-fswitch'
 
 " tools
 Plug 'rking/ag.vim'
 Plug 'wakatime/vim-wakatime'
 Plug 'editorconfig/editorconfig-vim'
 Plug 't9md/vim-choosewin'
-
 
 " theme
 Plug 'altercation/vim-colors-solarized'
