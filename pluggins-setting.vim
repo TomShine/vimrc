@@ -323,8 +323,12 @@ endif
         autocmd InsertEnter * call plug#load('YouCompleteMe','ultisnips') | autocmd! load_ycm
     augroup END
 
-    let g:ycm_global_ycm_extra_conf='~/.vim/tools/conf/ycm_extra_conf.py'
+    " 关闭 ycm 显示函数原型, 他会在上面出现一个单独的 Windows, 会打乱布局,
+    " 我使用 echofunc 可以在 status line 显示
+    set completeopt=menu,menuone
     let g:ycm_add_preview_to_completeopt = 0
+
+    let g:ycm_global_ycm_extra_conf='~/.vim/tools/conf/ycm_extra_conf.py'
     let g:ycm_show_diagnostics_ui = 0
     let g:ycm_server_log_level = 'info'
     let g:ycm_min_num_identifier_candidate_chars = 2
@@ -341,8 +345,6 @@ endif
     " Youcompleteme的默认tab,s-tab 和自动补全冲突
     let g:ycm_key_list_select_completion = ['<Down>']
     let g:ycm_key_list_previous_completion = ['<Up>']
-
-    set completeopt=menu,menuone
 
     " 离开插入模式后自动关闭预览窗口
     autocmd InsertLeave * if pumvisible() == 0|pclose|endif
@@ -415,6 +417,10 @@ endif
                 \ "zimbu":1,
                 \ "ps1":1,
                 \ }
+
+    " 修改弹框为灰色
+    highlight PMenu ctermfg=0 ctermbg=242 guifg=black guibg=darkgrey
+    highlight PMenuSel ctermfg=242 ctermbg=8 guifg=darkgrey guibg=black
 " }
 
 " vim-go {
