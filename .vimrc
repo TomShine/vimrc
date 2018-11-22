@@ -14,4 +14,3 @@ call SourceIfExists('~/.vim/general-keymap.vim')
 call SourceIfExists('~/.vim/pluggins-keymap.vim')
 
 hi! Normal ctermbg=NONE guibg=NONE
-

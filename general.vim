@@ -56,7 +56,7 @@ if g:isMac
     endif
 elseif g:isLinux
     if g:isGUI 
-        set macligatures
+        "set macligatures
         "set guifont=Source\ Code\ Pro\ 12
         set guifont=Fira\ Code\ \ Medium\ 12
     else
