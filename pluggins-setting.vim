@@ -495,13 +495,14 @@ endif
     endfunction
 "}
 
-is g:isMac
+if g:isMac
     set rtp+=/Library/Python/2.7/site-packages/powerline/bindings/vim
 elseif g:isLinux
     set rtp+=/usr/lib/python3.7/site-packages/powerline/bindings/vim
 endif
 
 if g:isGUI
+    echo "gui"
     "Airline {
         "这个是安装字体后 必须设置此项
         let g:airline_powerline_fonts = 1

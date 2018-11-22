@@ -5,6 +5,9 @@ this is my vim confg
 ## install require sofware
 
 ``` sh
+# all platform
+pip install powerline-status
+
 # ubuntu
 sudo apt install -y git
 sudo apt install -y zsh
