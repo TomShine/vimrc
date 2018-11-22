@@ -10,6 +10,8 @@ Plug 'thinca/vim-quickrun'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'justinmk/vim-dirvish'
 Plug 'Shougo/echodoc.vim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " ide feature
 function! BuildYCM(info)
@@ -68,7 +70,7 @@ if has("gui_running")
 endif
 
 if has('mac')
-  Plug 'rizzatti/dash.vim'
+    Plug 'rizzatti/dash.vim'
 endif
 
 call plug#end()

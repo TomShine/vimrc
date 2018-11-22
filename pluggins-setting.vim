@@ -514,6 +514,11 @@ endif
     let b:fswitchdst = 'cpp,cxx,C'
 "}
 
+"UltiSnips 的 tab 键与 YCM 冲突，重新设定 {
+    " If you want :UltiSnipsEdit to split your window.
+    let g:UltiSnipsEditSplit="vertical"
+"}
+
 if g:isMac
     set rtp+=/Library/Python/2.7/site-packages/powerline/bindings/vim
 elseif g:isLinux

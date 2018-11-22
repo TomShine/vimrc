@@ -117,3 +117,8 @@ nmap <silent> <Leader>ok :FSAbove<cr>       " Switch to the file and load it int
 nmap <silent> <Leader>oK :FSSplitAbove<cr>  " Switch to the file and load it into a new window split above
 nmap <silent> <Leader>oj :FSBelow<cr>       " Switch to the file and load it into the window below
 nmap <silent> <Leader>oJ :FSSplitBelow<cr>  " Switch to the file and load it into a new window split below
+
+"UltiSnips 的 tab 键与 YCM 冲突，重新设定
+let g:UltiSnipsExpandTrigger="<leader><tab>"
+let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
+let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
