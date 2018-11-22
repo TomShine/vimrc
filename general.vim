@@ -46,21 +46,20 @@ set autoread                    " 当文件在外部被修改，自动更新该�
 if g:isGUI
     set guioptions-=m  " hide tool menu
     set guioptions-=T  " hide menu
-    set guioptions-=L 
+    set guioptions-=L
     set guioptions-=r
 endif
 
 " font
 if g:isMac
-    if g:isGUI 
+    if g:isGUI
         "set macligatures
         set guifont=Source\ Code\ Pro:h12
     else
         set guifont=Fira\ Code:h14
     endif
 elseif g:isLinux
-    if g:isGUI 
-
+    if g:isGUI
         "set macligatures
         "set guifont=Source\ Code\ Pro\ 12
         set guifont=Fira\ Code\ \ Medium\ 12
