@@ -1,6 +1,7 @@
 let g:isMac = 0
 let g:isLinux = 0
 let g:isWindows = 0
+let g:isGUI = 0
 
 if has('mac')
     let g:isMac = 1
@@ -12,8 +13,6 @@ endif
 
 if has("gui_running")
     let g:isGUI = 1
-else
-    let g:isGUI = 0
 endif
 
 " editor settings
@@ -57,8 +56,9 @@ if g:isMac
     endif
 elseif g:isLinux
     if g:isGUI 
-        "set macligatures
-        set guifont=Source\ Code\ Pro\ 12
+        set macligatures
+        "set guifont=Source\ Code\ Pro\ 12
+        set guifont=Fira\ Code\ \ Medium\ 12
     else
         set guifont=Fira\ Code\ 14
     endif
