@@ -332,10 +332,10 @@ endif
     let g:ycm_complete_in_strings=1
     noremap <c-z> <NOP>
 
-    " let g:ycm_confirm_extra_conf=0                    " 关闭加载.ycm_extra_conf.py提示
-    " let g:ycm_cache_omnifunc=0                        " 禁止缓存匹配项,每次都重新生成匹配项
-    " let g:ycm_seed_identifiers_with_syntax=1          " 语法关键字补全
-    " let g:ycm_autoclose_preview_window_after_insertion = 1
+    let g:ycm_confirm_extra_conf=0                    " 关闭加载.ycm_extra_conf.py提示
+    let g:ycm_cache_omnifunc=0                        " 禁止缓存匹配项,每次都重新生成匹配项
+    let g:ycm_seed_identifiers_with_syntax=1          " 语法关键字补全
+    let g:ycm_autoclose_preview_window_after_insertion = 1
 
     " Youcompleteme的默认tab,s-tab 和自动补全冲突
     let g:ycm_key_list_select_completion = ['<Down>']
@@ -426,11 +426,9 @@ endif
     "automatically rebalance windows on vim resize
     autocmd VimResized * :wincmd =
 
-
     let g:go_fmt_command = "goimports"
     let g:go_autodetect_gopath = 1
     let g:go_list_type = "quickfix"
-
     let g:go_def_mapping_enabled = 0
     let g:go_fmt_fail_silently = 0
     let g:go_highlight_types = 1
@@ -443,7 +441,6 @@ endif
     " Open :GoDeclsDir with ctrl-g
     nmap <C-g> :GoDeclsDir<cr>
     imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
-
 
     augroup go
         autocmd!
@@ -518,6 +515,13 @@ endif
 "UltiSnips 的 tab 键与 YCM 冲突，重新设定 {
     " If you want :UltiSnipsEdit to split your window.
     let g:UltiSnipsEditSplit="vertical"
+"}
+
+"Ag(finder): Use The Silver Searcher https://github.com/ggreer/the_silver_searcher {
+    if executable('ag')
+        " Use Ag over Grep
+        let g:ackprg='ag --nogroup --nocolor --column'
+    endif
 "}
 
 if g:isMac

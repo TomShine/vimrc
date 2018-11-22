@@ -28,7 +28,7 @@ Plug 'godlygeek/tabular'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'w0rp/ale'
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') , 'for': [ 'go', 'python' ], 'on': [] }
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') , 'for': [ 'go', 'python' , 'c' , 'cpp'], 'on': [] }
 
 "tags
 Plug 'ludovicchabant/vim-gutentags'
@@ -42,6 +42,7 @@ Plug 'fatih/vim-go'
 Plug 'kana/vim-operator-user'
 Plug 'rhysd/vim-clang-format'
 Plug 'derekwyatt/vim-fswitch'
+Plug 'vim-scripts/indentpython.vim'
 
 " tools
 Plug 'rking/ag.vim'

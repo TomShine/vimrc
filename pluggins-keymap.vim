@@ -91,11 +91,9 @@ nmap <leader>r <Plug>(quickrun)
 map <F10> :QuickRun<CR>
 
 " ycm
-nnoremap gb :YcmCompleter GoToDeclaration<cr>
-nnoremap gl :YcmCompleter GoToDefinition<cr>
-nnoremap gx :YcmCompleter GoToDefinitionElseDeclaration<cr>
-nnoremap gy :YcmCompleter GoToReferences<cr>
 let g:ycm_key_invoke_completion = '<c-z>' " 默认的 <c-space> 和其他冲突,修改为这个
+nnoremap <space>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <space>jr :YcmCompleter GoToReferences<cr>
 
 " UltiSnips 的 tab 键与 YCM 冲突，重新设定
 let g:UltiSnipsExpandTrigger="<leader><tab>"
