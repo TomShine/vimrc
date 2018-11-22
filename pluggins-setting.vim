@@ -1,3 +1,22 @@
+let g:isMac = 0
+let g:isLinux = 0
+let g:isGUI = 0
+
+if has('mac')
+    let g:isMac = 1
+elseif has('unix')
+    let g:isLinux = 1
+endif
+
+if has("gui_running")
+    let g:isGUI = 1
+endif
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" plugins settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " ListToggle（快速显示和关闭Vim的locationlist和quickfix窗口的插件）{
     let g:lt_height = 10
 "}
@@ -169,6 +188,8 @@
     " 1 - 记住上次的补全方式,直到用其他的补全命令改变它
     " 2 - 记住上次的补全方式,直到按ESC退出插入模式为止
     let g:SuperTabRetainCompletionType=2
+    let g:SuperTabDefaultCompletionType = '<C-X><C-O>'
+    let g:SuperTabRetainCompletionType=2
 "}
 
 "vim-easy-align {
@@ -233,6 +254,7 @@
     " 允许 gutentags 打开一些高级命令和选项
     let g:gutentags_define_advanced_commands = 1
 "}
+
 
 " ale {
     let g:ale_linters = {
@@ -472,3 +494,60 @@
         endif
     endfunction
 "}
+
+is g:isMac
+    set rtp+=/Library/Python/2.7/site-packages/powerline/bindings/vim
+elseif g:isLinux
+    set rtp+=/usr/lib/python3.7/site-packages/powerline/bindings/vim
+endif
+
+if g:isGUI
+    "Airline {
+        "这个是安装字体后 必须设置此项
+        let g:airline_powerline_fonts = 1
+
+        let g:airline_theme="badwolf"
+        "let g:airline_theme="luna"
+        "let g:airline_theme="molokai"
+        "let g:airline_theme="solarized"
+
+        " For patched power-line fonts
+        if !exists('g:airline_symbols')
+            let g:airline_symbols = {}
+        endif
+
+        " 关闭状态显示空白符号计数
+        let g:airline#extensions#whitespace#enabled = 0
+        let g:airline#extensions#whitespace#symbol = '!'
+
+        let g:airline_symbols.space = "\ua0"
+
+        "Buffer {
+            " 打开tabline功能,方便查看Buffer和切换
+            let g:airline#extensions#tabline#enabled = 1
+            let g:airline#extensions#tabline#show_splits = 1           
+            let g:airline#extensions#tabline#show_tabs = 0
+            let g:airline#extensions#tabline#show_buffers = 0
+            let g:airline#extensions#tabline#show_tab_type = 0
+            let g:airline#extensions#tabline#buffer_nr_show = 1
+            let g:airline#extensions#tabline#fnamemod = ':t'
+
+            let g:airline#extensions#tabline#buffer_idx_mode = 1
+            nmap <leader>1 <Plug>AirlineSelectTab1
+            nmap <leader>2 <Plug>AirlineSelectTab2
+            nmap <leader>3 <Plug>AirlineSelectTab3
+            nmap <leader>4 <Plug>AirlineSelectTab4
+            nmap <leader>5 <Plug>AirlineSelectTab5
+            nmap <leader>6 <Plug>AirlineSelectTab6
+            nmap <leader>7 <Plug>AirlineSelectTab7
+            nmap <leader>8 <Plug>AirlineSelectTab8
+            nmap <leader>9 <Plug>AirlineSelectTab9
+            nmap <leader>- <Plug>AirlineSelectPrevTab
+            nmap <leader>+ <Plug>AirlineSelectNextTab
+
+            " 设置切换Buffer快捷键"
+            nnoremap <leader>bn :bn<CR>
+            nnoremap <leader>bp :bp<CR>
+        "}
+    "}
+endif

@@ -44,9 +44,6 @@ Plug 'wakatime/vim-wakatime'
 Plug 'editorconfig/editorconfig-vim'
 Plug 't9md/vim-choosewin'
 
-if has('mac')
-  Plug 'rizzatti/dash.vim'
-endif
 
 " theme
 Plug 'altercation/vim-colors-solarized'
@@ -62,5 +59,14 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'SpaceVim/FlatColor'
 Plug 'chriskempson/tomorrow-theme'
 Plug 'icymind/NeoSolarized'
+
+if has("gui_running")
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+endif
+
+if has('mac')
+  Plug 'rizzatti/dash.vim'
+endif
 
 call plug#end()

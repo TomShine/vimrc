@@ -1,14 +1,11 @@
 let g:isMac = 0
 let g:isLinux = 0
-let g:isWindows = 0
 let g:isGUI = 0
 
 if has('mac')
     let g:isMac = 1
 elseif has('unix')
     let g:isLinux = 1
-else
-    let g:isWindows = 1
 endif
 
 if has("gui_running")
@@ -127,17 +124,18 @@ set foldmethod=marker   " marker 折叠方式
 "set list " 显示特殊字符，其中Tab使用高亮~代替，尾部空白使用高亮点号代替
 "set listchars=tab:>-,trail:-,extends:>,precedes:<
 
-" if has('statusline')
-"     " Broken down into easily includeable segments
-"     set statusline=%<%f\                     " Filename
-"     set statusline+=%w%h%m%r                 " Options
-"     if !exists('g:override_spf13_bundles')
-"         set statusline+=%{fugitive#statusline()} " Git Hotness
-"     endif
-"     set statusline+=\ [%{&ff}/%Y]            " Filetype
-"     set statusline+=\ [%{getcwd()}]          " Current dir
-"     set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-" endif
+" statusline
+if has('statusline')
+    " Broken down into easily includeable segments
+    set statusline=%<%f\                     " Filename
+    set statusline+=%w%h%m%r                 " Options
+    if !exists('g:override_spf13_bundles')
+        set statusline+=%{fugitive#statusline()} " Git Hotness
+    endif
+    set statusline+=\ [%{&ff}/%Y]            " Filetype
+    set statusline+=\ [%{getcwd()}]          " Current dir
+    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+endif
 
 " 设置 python 的格式
 au BufNewFile,BufRead *.py
