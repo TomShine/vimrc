@@ -17,4 +17,3 @@ if has('gui')
 else
     hi! Normal ctermbg=NONE guibg=NONE
 endif
-
