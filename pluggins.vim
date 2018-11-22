@@ -9,9 +9,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'thinca/vim-quickrun'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'justinmk/vim-dirvish'
-Plug 'Shougo/echodoc.vim'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 
 " ide feature
 function! BuildYCM(info)
@@ -29,8 +26,10 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'w0rp/ale'
 Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') , 'for': [ 'go', 'python' , 'c' , 'cpp'], 'on': [] }
+Plug 'Shougo/echodoc.vim'
+Plug 'mhinz/vim-signify'
 
-"tags
+" tags
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
 
