@@ -510,6 +510,10 @@ endif
           \ "BreakBeforeBraces" : "Stroustrup"}
 "}
 
+" fswitch {
+    let b:fswitchdst = 'cpp,cxx,C'
+"}
+
 if g:isMac
     set rtp+=/Library/Python/2.7/site-packages/powerline/bindings/vim
 elseif g:isLinux
