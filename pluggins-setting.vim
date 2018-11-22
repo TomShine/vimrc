@@ -212,13 +212,10 @@ endif
 
 " vim-gutentags {
     set tags=./.tags;,.tags
-
     let $GTAGSLABEL = 'native-pygments'
     " let $GTAGSCONF = '~/.globalrc'
-
     " gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
     let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
-
     " 所生成的数据文件的名称
     let g:gutentags_ctags_tagfile = '.tags'
 
@@ -255,14 +252,13 @@ endif
     let g:gutentags_define_advanced_commands = 1
 "}
 
-
 " ale {
     let g:ale_linters = {
                 \ 'c': ['gcc', 'cppcheck'],
                 \ 'cpp': ['gcc', 'cppcheck'],
                 \ 'python': ['flake8', 'pylint'],
                 \ 'lua': ['luac'],
-                \ 'go': ['go build', 'gofmt'],
+                \ 'go': ['go build', 'goimport'],
                 \ 'java': ['javac'],
                 \ 'javascript': ['eslint'],
                 \ }
@@ -296,7 +292,7 @@ endif
     "let g:Lf_StlSeparator = { 'left': '►', 'right': '◄', 'font': '' }
     "let g:Lf_StlSeparator = { 'left': '⮀', 'right': '⮂' }
 
-   let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
+    let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
     let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git']
     let g:Lf_WorkingDirectoryMode = 'Ac'
     let g:Lf_WindowHeight = 0.30
@@ -334,7 +330,6 @@ endif
     let g:ycm_min_num_identifier_candidate_chars = 2
     let g:ycm_collect_identifiers_from_comments_and_strings = 1
     let g:ycm_complete_in_strings=1
-    let g:ycm_key_invoke_completion = '<c-z>'
     noremap <c-z> <NOP>
 
     " let g:ycm_confirm_extra_conf=0                    " 关闭加载.ycm_extra_conf.py提示
