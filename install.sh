@@ -256,7 +256,7 @@ check_requirements () {
 usage () {
     echo "ShangVim install script : V ${Version}"
     echo ""
-    echo "Usage : curl -sLf https://spacevim.org/install.sh | bash -s -- [option] [target]"
+    echo "Usage : curl -sLf https://github.com/shangzongyu/vimrc/install.sh | bash -s -- [option] [target]"
     echo ""
     echo "  This is bootstrap script for ShangVim."
     echo ""
@@ -271,15 +271,15 @@ usage () {
     echo ""
     echo "    Install ShangVim for vim"
     echo ""
-    echo "        curl -sLf https://spacevim.org/install.sh | bash"
+    echo "        curl -sLf https://github.com/shangzongyu/vimrc/install.sh | bash"
     echo ""
-    echo "    Install SpaceVim for vim only"
+    echo "    Install ShangVim for vim only"
     echo ""
-    echo "        curl -sLf https://spacevim.org/install.sh | bash -s -- --install vim"
+    echo "        curl -sLf https://github.com/shangzongyu/vimrc/install.sh | bash -s -- --install vim"
     echo ""
-    echo "    Uninstall SpaceVim"
+    echo "    Uninstall ShangVim"
     echo ""
-    echo "        curl -sLf https://spacevim.org/install.sh | bash -s -- --uninstall"
+    echo "        curl -sLf https://github.com/shangzongyu/vimrc/install.sh | bash -s -- --uninstall"
 }
 # }}}
 
