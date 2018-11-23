@@ -152,7 +152,7 @@ fetch_repo () {
         success "Successfully update ShangVim"
     else
         info "Trying to clone ShangVim"
-        git clone https://github.com/shangzongyu/vimrc.git -b init "$HOME/.ShangVim"
+        git clone https://github.com/shangzongyu/vimrc.git "$HOME/.ShangVim"
         success "Successfully clone ShangVim"
     fi
 }
