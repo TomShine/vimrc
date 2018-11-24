@@ -467,8 +467,9 @@ noremap <space>fq :q<cr>
 " bufer and tags and
 
 " buffer
-nnoremap <silent> <space>bp :bprevious<cr>
-nnoremap <silent> <space>bn :bnext<cr>
+nnoremap <silent> <space>bb :buffers<cr>
+nnoremap <silent> [b :bprevious<cr>
+nnoremap <silent> ]b :bnext<cr>
 nnoremap <silent> [B :bfirst<cr>
 nnoremap <silent> ]B :blast<cr>
 
