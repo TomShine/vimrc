@@ -128,7 +128,7 @@
 " 2009-12-30  o <1.1.1> Version 1.1.1: debug (stop beeping)
 " 2009-07-04  o <1.1> Version 1.1
 " 2009-07-04  I <1.0> Version 1.0: Initial upload
-" 
+"
 " if exists('loaded_argtextobj') || &cp || version < 700
 "   finish
 " endif

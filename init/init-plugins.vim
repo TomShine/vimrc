@@ -1,6 +1,7 @@
 "======================================================================
 "
 " init-plugins.vim -
+"
 "======================================================================
 
 " vim: set ts=4 sw=4 tw=78 noet :
@@ -9,7 +10,7 @@
 " 默认情况下的分组，可以再前面覆盖之
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
-    let g:bundle_group = ['basic', 'r/tags', 'enhanced', 'filetypes', 'textobj']
+    let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
     let g:bundle_group += ['tags', 'airline', 'ale', 'ycm', 'echodoc']
     let g:bundle_group += ['leaderf', 'tools']
 endif
@@ -92,13 +93,13 @@ let g:SuperTabRetainCompletionType=2
 " 映射快捷键
 Plug 'tpope/vim-unimpaired'
 
+" 代码片段
 Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 "UltiSnips 的 tab 键与 YCM 冲突，重新设定
 let g:UltiSnipsExpandTrigger="<leader><tab>"
 let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
 let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
-
-Plug 'honza/vim-snippets'
 
 Plug 'Valloric/ListToggle'
 let g:lt_location_list_toggle_map = '<leader>lq'
@@ -123,13 +124,13 @@ function! s:setup_dirvish()
     if ! get(g:, 'dirvish_hide_visible', 0)
         exec 'silent keeppatterns g@\v[\/]\.[^\/]+[\/]?$@d _'
     endif
-    " 排序文件名
-    exec 'sort ,^.*[\/],'
-    let name = '^' . escape(text, '.*[]~\') . '[/*|@=|\\*]\=\%($\|\s\+\)'
-    " 定位到之前光标处的文件
-    call search(name, 'wc')
-    noremap <silent><buffer> ~ :Dirvish ~<cr>
-    noremap <buffer> % :e %
+" 排序文件名
+	exec 'sort ,^.*[\/],'
+	let name = '^' . escape(text, '.*[]~\') . '[/*|@=|\\*]\=\%($\|\s\+\)'
+	" 定位到之前光标处的文件
+	call search(name, 'wc')
+	noremap <silent><buffer> ~ :Dirvish ~<cr>
+	noremap <buffer> % :e %
 endfunc
 
 augroup MyPluginSetup
@@ -281,6 +282,7 @@ endif
 " 详细用法见：https://zhuanlan.zhihu.com/p/36279445
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'tags') >= 0
+    set tags=./.tags;,.tags
 
     " 提供 ctags/gtags 后台数据库自动更新功能
     Plug 'ludovicchabant/vim-gutentags'
@@ -311,15 +313,18 @@ if index(g:bundle_group, 'tags') >= 0
 
     " 设置 ctags 的参数
     let g:gutentags_ctags_extra_args = []
-    let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+    let g:gutentags_ctags_extra_args += ['--fields=+niazS', '--extra=+q']
     let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
     let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
     " 使用 universal-ctags 的话需要下面这行，请反注释
-    " let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+    let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 
     " 禁止 gutentags 自动链接 gtags 数据库
     let g:gutentags_auto_add_gtags_cscope = 0
+
+    " 调试
+    let g:gutentags_define_advanced_commands = 1
 endif
 
 
@@ -611,6 +616,8 @@ if index(g:bundle_group, 'ycm') >= 0
     endfunction
     Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') , 'for': [ 'go', 'python' , 'c' , 'cpp'], 'on': [] }
 
+    Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
+
     " UltiSnips 的 tab 键与 YCM 冲突，重新设定, If you want :UltiSnipsEdit to split your window.
     let g:UltiSnipsEditSplit="vertical"
 endif
@@ -627,7 +634,7 @@ endif
 
 
 "----------------------------------------------------------------------
-" LeaderF：CtrlP / FZF 的超级代替者，文件模糊匹配，tags/函数名 选择
+" LeaderF 文件模糊匹配，tags/函数名 选择
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'leaderf') >= 0
     " 如果 vim 支持 python 则启用  Leaderf
@@ -741,7 +748,7 @@ augroup load_ycm
     autocmd InsertEnter * call plug#load('YouCompleteMe','ultisnips') | autocmd! load_ycm
 augroup END
 
-let g:ycm_global_ycm_extra_conf='~/.vim/tools/conf/ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf='~/.ShangVim/tools/conf/ycm_extra_conf.py'
 
 " 禁用预览功能：扰乱视听
 set completeopt=menu,menuone
@@ -754,7 +761,6 @@ let g:ycm_min_num_identifier_candidate_chars = 2
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
 let g:ycm_complete_in_strings=1
 let g:ycm_key_invoke_completion = '<c-z>'
-set completeopt=menu,menuone
 
 let g:ycm_confirm_extra_conf=0                    " 关闭加载.ycm_extra_conf.py提示
 let g:ycm_cache_omnifunc=0                        " 禁止缓存匹配项,每次都重新生成匹配项
