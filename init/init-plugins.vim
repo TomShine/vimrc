@@ -9,8 +9,8 @@
 " 默认情况下的分组，可以再前面覆盖之
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
-    let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
-    let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'ycm', 'echodoc']
+    let g:bundle_group = ['basic', 'r/tags', 'enhanced', 'filetypes', 'textobj']
+    let g:bundle_group += ['tags', 'airline', 'ale', 'ycm', 'echodoc']
     let g:bundle_group += ['leaderf', 'tools']
 endif
 
@@ -89,6 +89,7 @@ let g:SuperTabRetainCompletionType=2
 let g:SuperTabDefaultCompletionType = '<C-X><C-O>'
 let g:SuperTabRetainCompletionType=2
 
+" 映射快捷键
 Plug 'tpope/vim-unimpaired'
 
 Plug 'SirVer/ultisnips'
@@ -118,7 +119,7 @@ function! s:setup_dirvish()
         return
     endif
     " 取得光标所在行的文本（当前选中的文件名）
-    let text = getline('.')
+    let texT = getline('.')
     if ! get(g:, 'dirvish_hide_visible', 0)
         exec 'silent keeppatterns g@\v[\/]\.[^\/]+[\/]?$@d _'
     endif
@@ -174,22 +175,21 @@ if index(g:bundle_group, 'basic') >= 0
     " 根据 quickfix 中匹配到的错误信息，高亮对应文件的错误行
     " 使用 :RemoveErrorMarkers 命令或者 <space>ha 清除错误
     Plug 'mh21/errormarker.vim'
+    " 使用 <space>ha 清除 errormarker 标注的错误
+    noremap <silent><space>ha :RemoveErrorMarkers<cr>
 
     " 使用 SPACE+w+e 会在不同窗口/标签上显示 A/B/C 等编号，然后字母直接跳转
     Plug 't9md/vim-choosewin'
     " if you want to use overlay feature
     let g:choosewin_overlay_enable = 1
     " 使用 ALT+E 来选择窗口
-    nmap <Space>we <Plug>(choosewin)
+    nmap <space>we <plug>(choosewin)
 
     " 提供基于 TAGS 的定义预览，函数参数预览，quickfix 预览
     Plug 'skywind3000/vim-preview'
 
     " Git 支持
     Plug 'tpope/vim-fugitive'
-
-    " 使用 <space>ha 清除 errormarker 标注的错误
-    noremap <silent><Space>ha :RemoveErrorMarkers<cr>
 
     " 括号彩虹
     Plug 'kien/rainbow_parentheses.vim'
@@ -228,84 +228,6 @@ if index(g:bundle_group, 'basic') >= 0
     let g:indent_guides_start_level=2               " 从第二层开始可视化显示缩进
     let g:indent_guides_guide_size            = 1   " 色块宽度(指定对齐线的尺寸)
     nmap <silent> <space>gi :IndentGuidesToggle<cr> " 快捷键 i 开/关缩进可视化
-
-    Plug 'majutsushi/tagbar'
-    let g:tagbar_ctags_bin='/usr/local/bin/ctags'
-    let g:tagbar_width=30
-    let g:tagbar_autofocus = 1 " tagbar 子窗口中不显示冗余帮助信息
-    let g:tagbar_sort = 0
-    let g:tagbar_compact = 1
-    "let g:tagbar_width=30      " 设置宽度，默认为30
-    let g:tagbar_left=1         " 在左侧
-    " let g:tagbar_right=1      " 在右侧
-    "autocmd VimEnter * nested :call tagbar#autoopen(1)    "打开vim时自动打开tagbar
-
-    " 设置 ctags 对哪些代码元素生成标签
-    let g:tagbar_type_cpp = {
-        \ 'ctagstype' : 'c++',
-        \ 'kinds' : [
-             \ 'c:classes:0:1',
-             \ 'd:macros:0:1',
-             \ 'e:enumerators:0:0',
-             \ 'f:functions:0:1',
-             \ 'g:enumeration:0:1',
-             \ 'l:local:0:1',
-             \ 'm:members:0:1',
-             \ 'n:namespaces:0:1',
-             \ 'p:functions_prototypes:0:1',
-             \ 's:structs:0:1',
-             \ 't:typedefs:0:1',
-             \ 'u:unions:0:1',
-             \ 'v:global:0:1',
-             \ 'x:external:0:1'
-         \ ],
-         \ 'sro' : '::',
-         \ 'kind2scope' : {
-             \ 'g' : 'enum',
-             \ 'n' : 'namespace',
-             \ 'c' : 'class',
-             \ 's' : 'struct',
-             \ 'u' : 'union'
-         \ },
-         \ 'scope2kind' : {
-             \ 'enum'      : 'g',
-             \ 'namespace' : 'n',
-             \ 'class'     : 'c',
-             \ 'struct'    : 's',
-             \ 'union'     : 'u'
-         \ }
-    \ }
-
-    let g:tagbar_type_go = {
-        \ 'ctagstype' : 'go',
-        \ 'ctagsbin'  : 'gotags',
-        \ 'ctagsargs' : '-sort -silent',
-        \ 'kinds' : [
-            \ 'p:package',
-            \ 'i:imports:1',
-            \ 'c:constants',
-            \ 'v:variables',
-            \ 't:types',
-            \ 'n:interfaces',
-            \ 'w:fields',
-            \ 'e:embedded',
-            \ 'm:methods',
-            \ 'r:constructor',
-            \ 'f:functions'
-        \ ],
-        \ 'sro' : '.',
-        \ 'kind2scope' : {
-            \ 't' : 'ctype',
-            \ 'n' : 'ntype'
-        \ },
-        \ 'scope2kind' : {
-            \ 'ctype' : 't',
-            \ 'ntype' : 'n'
-        \ }
-    \ }
-
-    " <space>fb(打开tagbar)
-    nmap <Space>fb :TagbarToggle<CR>
 endif
 
 
@@ -317,16 +239,14 @@ if index(g:bundle_group, 'enhanced') >= 0
     " 用 v 选中一个区域后，ALT_+/- 按分隔符扩大/缩小选区
     Plug 'terryma/vim-expand-region'
 
-    " 快速文件搜索
-    Plug 'junegunn/fzf'
-
     " 给不同语言提供字典补全，插入模式下 c-x c-k 触发
     Plug 'asins/vim-dict'
 
     " 使用 :FlyGrep 命令进行实时 grep
     Plug 'wsdjeg/FlyGrep.vim'
-    nnoremap <Space>s/ :FlyGrep<cr>
+    nnoremap <space>s/ :FlyGrep<cr>
 
+    " ag search
     Plug 'rking/ag.vim'
     if executable('ag')
         " Use Ag over Grep
@@ -349,8 +269,9 @@ if index(g:bundle_group, 'enhanced') >= 0
     map <m-=> <Plug>(expand_region_expand)
     map <m--> <Plug>(expand_region_shrink)
 
-    " use wakatime
-    Plug 'wakatime/vim-wakatime'
+    " format
+    Plug 'sbdchd/neoformat'
+
 endif
 
 
@@ -585,51 +506,6 @@ endif
 
 
 "----------------------------------------------------------------------
-" NERDTree
-"----------------------------------------------------------------------
-if index(g:bundle_group, 'nerdtree') >= 0
-    Plug 'scrooloose/nerdtree', {'on': ['NERDTree', 'NERDTreeFocus', 'NERDTreeToggle', 'NERDTreeCWD', 'NERDTreeFind'] }
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-
-    let g:NERDTreeMinimalUI = 1 " NERDTree 子窗口中不显示冗余帮助信息
-    let g:NERDTreeDirArrows = 1
-    let g:NERDTreeHijackNetrw = 0
-    let NERDTreeWinSize = 33       " 设置 NERDTree 子窗口宽度
-    let NERDTreeWinPos = "right"   " 设置 NERDTree 子窗口位置
-    let NERDTreeShowBookmarks = 1  " 显示书签列表
-    let NERDTreeIgnore = ['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '.DS_Store'] " 忽略文件
-    let NERDTreeChDirMode = 0
-    let NERDTreeMouseMode = 2
-    let NERDTreeShowHidden = 1      " 显示隐藏文件
-    let NERDTreeBookmarksFile = expand('$HOME') . '/.vim/NERDTreeBookmarks'
-    let NERDTreeAutoDeleteBuffer = 1 " 删除文件时自动删除文件对应 buffer
-    let NERDTreeShowLineNumbers = 1  " 显示行号
-    let NERDTreeAutoCenter=1
-    let g:NERDTreeFileExtensionHighlightFullName = 1
-    let g:NERDTreeExactMatchHighlightFullName = 1
-    let g:NERDTreePatternMatchHighlightFullName = 1
-    let g:NERDTreeHighlightFolders = 1
-    let g:NERDTreeHighlightFoldersFullName = 1
-    let g:NERDTreeDirArrowExpandable='▷'
-    let g:NERDTreeDirArrowCollapsible='▼'
-
-    let g:NERDTreeIndicatorMapCustom = {
-        \ "Modified"  : "✹",
-        \ "Staged"    : "✚",
-        \ "Untracked" : "✭",
-        \ "Renamed"   : "➜",
-        \ "Unmerged"  : "═",
-        \ "Deleted"   : "✖",
-        \ "Dirty"     : "✗",
-        \ "Clean"     : "✔︎",
-        \ "Unknown"   : "?"
-        \ }
-
-    noremap <space>ft :NERDTreeToggle<cr>
-endif
-
-
-"----------------------------------------------------------------------
 " LanguageTool 语法检查
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'grammer') >= 0
@@ -773,21 +649,20 @@ if index(g:bundle_group, 'leaderf') >= 0
         noremap <space>fr :LeaderfMru<cr>
 
         " ALT+p 打开函数列表，按 i 进入模糊匹配，ESC 退出
-        noremap <m-p> :LeaderfFunction!<cr>
-        " noremap <space>fn :LeaderfFunction!<cr>
-
+        " noremap <m-p> :LeaderfFunction!<cr>
+        noremap <space>fn :LeaderfFunction!<cr>
 
         " ALT+SHIFT+p 打开 tag 列表，i 进入模糊匹配，ESC退出
-        noremap <m-P> :LeaderfBufTag!<cr>
-        " noremap <space>fbt :LeaderfBufTag!<cr>
+        " noremap <m-P> :LeaderfBufTag!<cr>
+        noremap <space>fP :LeaderfBufTag!<cr>
 
         " ALT+n 打开 buffer 列表进行模糊匹配
-        noremap <m-n> :LeaderfBuffer<cr>
-        " noremap<space>fb :LeaderfBuffer<cr>
+        " noremap <m-n> :LeaderfBuffer<cr>
+        noremap<space>fb :LeaderfBuffer<cr>
 
         " 全局 tags 模糊匹配
         noremap <m-m> :LeaderfTag<cr>
-        " noremap <space>ft :LeaderfTag<cr>
+        noremap <space>ft :LeaderfTag<cr>
 
         " 最大历史文件保存 2048 个
         let g:Lf_MruMaxFiles = 2048
@@ -829,66 +704,26 @@ if index(g:bundle_group, 'leaderf') >= 0
                 \ "BufTag": [["<ESC>", ':exec g:Lf_py "bufTagExplManager.quit()"<cr>']],
                 \ "Function": [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<cr>']],
                 \ }
-
-    else
-        " 不支持 python ，使用 CtrlP 代替
-        Plug 'ctrlpvim/ctrlp.vim'
-
-        " 显示函数列表的扩展插件
-        Plug 'tacahiroy/ctrlp-funky'
-
-        " 忽略默认键位
-        let g:ctrlp_map = ''
-
-        " 模糊匹配忽略
-        let g:ctrlp_custom_ignore = {
-          \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-          \ 'file': '\v\.(exe|so|dll|mp3|wav|sdf|suo|mht)$',
-          \ 'link': 'some_bad_symbolic_links',
-          \ }
-
-        " 项目标志
-        let g:ctrlp_root_markers = ['.project', '.root', '.svn', '.git']
-        let g:ctrlp_working_path = 0
-
-        " CTRL+p 打开文件模糊匹配
-        " noremap <c-p> :CtrlP<cr>
-        noremap <c-p> :CtrlP<cr>
-
-        " CTRL+n 打开最近访问过的文件的匹配
-        " noremap <c-n> :CtrlPMRUFiles<cr>
-        noremap <space>fr :CtrlPMRUFiles<cr>
-
-        " ALT+p 显示当前文件的函数列表
-        " noremap <m-p> :CtrlPFunky<cr>
-        noremap <m-p> :CtrlPFunky<cr>
-
-        " ALT+n 匹配 buffer
-        noremap <m-n> :CtrlPBuffer<cr>
     endif
 endif
 
+
 "----------------------------------------------------------------------
-" LeaderF：CtrlP / FZF 的超级代替者，文件模糊匹配，tags/函数名 选择
+" tools 配置
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'tools') >= 0
-    Plug 'wakatime/vim-wakatime'
-
     Plug 'editorconfig/editorconfig-vim'
 
     if has('mac')
         Plug 'rizzatti/dash.vim'
     endif
 
-    Plug 'rhysd/vim-clang-format'
-    " map to <Leader>cf in C++ code
-    autocmd FileType c,cpp,objc nnoremap <buffer><leader>cf :<C-u>ClangFormat<CR>
-    autocmd FileType c,cpp,objc vnoremap <buffer><leader>cf :ClangFormat<CR>
-    nmap <leader>C :ClangFormatAutoToggle<CR> " Toggle auto formatting:
-
     Plug 'vim-scripts/indentpython.vim'
 
     Plug 'kana/vim-operator-user'
+
+    " use wakatime
+    Plug 'wakatime/vim-wakatime'
 endif
 
 
