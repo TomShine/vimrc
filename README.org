@@ -2,11 +2,10 @@
 
 * 安装
 
-将项目克隆到你喜欢的目录内，比如 `~/.vim` 内：
+将项目克隆到你喜欢的目录内，比如 =~/.vim= 内：
 
 #+BEGIN_SRC sh
-cd ~/.vim
-git clone https://github.com/shangzongyu/vimrc.git
+git clone https://github.com/shangzongyu/vimrc.git $HOME/.ShangVim.d
 #+END_SRC
 
 然后创建你的 =~/.vimrc= 文件，里面只有一句话：
