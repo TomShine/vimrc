@@ -387,7 +387,7 @@ if index(g:bundle_group, 'filetypes') >= 0
     " rust 语法增强
     Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
-    " vim org-mode
+    " org-mode
     Plug 'jceb/vim-orgmode', { 'for': 'org' }
 
     " markdown
