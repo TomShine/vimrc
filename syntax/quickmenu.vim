@@ -14,8 +14,8 @@ if exists('b:quickmenu.option_lines')
 endif
 
 execute 'syntax match QuickmenuBracket /.*\%'. (len(s:padding_left) + 5) .'c/ contains=
-      \ QuickmenuNumber,
-      \ QuickmenuSelect'
+    \ QuickmenuNumber,
+    \ QuickmenuSelect'
 
 syntax match QuickmenuNumber  /^\s*\[\zs[^BSVT]\{-}\ze\]/
 syntax match QuickmenuSelect  /^\s*\[\zs[BSVT]\{-}\ze\]/

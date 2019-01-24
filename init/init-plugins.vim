@@ -11,7 +11,7 @@
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
     let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
-    let g:bundle_group += ['tags', 'airline', 'ale', 'ycm', 'echodoc']
+    let g:bundle_group += ['airline', 'ale', 'ycm', 'echodoc']
     let g:bundle_group += ['leaderf', 'tools']
 endif
 
@@ -124,13 +124,13 @@ function! s:setup_dirvish()
     if ! get(g:, 'dirvish_hide_visible', 0)
         exec 'silent keeppatterns g@\v[\/]\.[^\/]+[\/]?$@d _'
     endif
-" 排序文件名
-	exec 'sort ,^.*[\/],'
-	let name = '^' . escape(text, '.*[]~\') . '[/*|@=|\\*]\=\%($\|\s\+\)'
-	" 定位到之前光标处的文件
-	call search(name, 'wc')
-	noremap <silent><buffer> ~ :Dirvish ~<cr>
-	noremap <buffer> % :e %
+    " 排序文件名
+    exec 'sort ,^.*[\/],'
+    let name = '^' . escape(text, '.*[]~\') . '[/*|@=|\\*]\=\%($\|\s\+\)'
+    " 定位到之前光标处的文件
+    call search(name, 'wc')
+    noremap <silent><buffer> ~ :Dirvish ~<cr>
+    noremap <buffer> % :e %
 endfunc
 
 augroup MyPluginSetup
@@ -161,14 +161,14 @@ if index(g:bundle_group, 'basic') >= 0
 
     " 用于在侧边符号栏显示 git/svn 的 diff
     Plug 'mhinz/vim-signify'
-     " signify 调优
+    " signify 调优
     let g:signify_vcs_list = ['git', 'svn']
     let g:signify_sign_add               = '+'
     let g:signify_sign_delete            = '_'
     let g:signify_sign_delete_first_line = '‾'
     let g:signify_sign_change            = '~'
     let g:signify_sign_changedelete      = g:signify_sign_change
-     " git 仓库使用 histogram 算法进行 diff
+    " git 仓库使用 histogram 算法进行 diff
     let g:signify_vcs_cmds = {
             \ 'git': 'git diff --no-color --diff-algorithm=histogram --no-ext-diff -U0 -- %f',
             \}

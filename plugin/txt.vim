@@ -23,9 +23,9 @@
 " For version 5.x: Clear all syntax items
 " For version 6.x: Quit when a syntax file was already loaded
 if version < 600
-  syntax clear
+    syntax clear
 elseif exists("b:current_syntax")
-  finish
+    finish
 endif
 
 syn case ignore
@@ -89,27 +89,27 @@ syn case match
 " Define the default highlighting.
 " For version 5.7 and earlier: only when not done already
 " For version 5.8 and later: only when an item doesn't have highlighting yet
-  if version < 508
+if version < 508
     command -nargs=+ HiLink hi link <args>
-  else
+else
     command -nargs=+ HiLink hi def link <args>
-  endif
+endif
 
-  HiLink txtNumber              Number
-  HiLink txtString              Normal
-  HiLink txtOperator            Operator
-  HiLink txtCite                String
-  HiLink txtComments            Comment
-  HiLink txtComment             Comment
-  HiLink txtDelims              Delimiter
-  HiLink txtLink                Special
-  HiLink txtSmile               PreProc
-  HiLink txtError               Error
-  HiLink txtTodo                Todo
-  HiLink txtDebug               Debug
-  HiLink txtChangelogs          Keyword
+HiLink txtNumber              Number
+HiLink txtString              Normal
+HiLink txtOperator            Operator
+HiLink txtCite                String
+HiLink txtComments            Comment
+HiLink txtComment             Comment
+HiLink txtDelims              Delimiter
+HiLink txtLink                Special
+HiLink txtSmile               PreProc
+HiLink txtError               Error
+HiLink txtTodo                Todo
+HiLink txtDebug               Debug
+HiLink txtChangelogs          Keyword
 
-  delcommand HiLink
+delcommand HiLink
 
 let b:current_syntax = "txt"
 " vim: ts=8

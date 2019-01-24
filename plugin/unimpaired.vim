@@ -4,38 +4,38 @@
 " GetLatestVimScripts: 1590 1 :AutoInstall: unimpaired.vim
 
 if exists("g:loaded_unimpaired") || &cp || v:version < 700
-  finish
+    finish
 endif
 let g:loaded_unimpaired = 1
 
 let s:maps = []
 function! s:map(...) abort
-  call add(s:maps, a:000)
+    call add(s:maps, a:000)
 endfunction
 
 function! s:maps() abort
-  for [mode, head, rhs; rest] in s:maps
-    let flags = get(rest, 0, '') . (rhs =~# '^<Plug>' ? '' : '<script>')
-    let tail = ''
-    let keys = get(g:, mode.'remap', {})
-    if type(keys) != type({})
-      continue
-    endif
-    while !empty(head)
-      if has_key(keys, head)
-        let head = keys[head]
-        if empty(head)
-          let head = '<skip>'
+    for [mode, head, rhs; rest] in s:maps
+        let flags = get(rest, 0, '') . (rhs =~# '^<Plug>' ? '' : '<script>')
+        let tail = ''
+        let keys = get(g:, mode.'remap', {})
+        if type(keys) != type({})
+            continue
         endif
-        break
-      endif
-      let tail = matchstr(head, '<[^<>]*>$\|.$') . tail
-      let head = substitute(head, '<[^<>]*>$\|.$', '', '')
-    endwhile
-    if head !=# '<skip>' && (flags !~? '<unique>' || empty(maparg(head.tail, mode)))
-      exe mode.'map' flags head.tail rhs
-    endif
-  endfor
+        while !empty(head)
+            if has_key(keys, head)
+                let head = keys[head]
+                if empty(head)
+                let head = '<skip>'
+                endif
+                break
+            endif
+            let tail = matchstr(head, '<[^<>]*>$\|.$') . tail
+            let head = substitute(head, '<[^<>]*>$\|.$', '', '')
+        endwhile
+        if head !=# '<skip>' && (flags !~? '<unique>' || empty(maparg(head.tail, mode)))
+            exe mode.'map' flags head.tail rhs
+        endif
+    endfor
 endfunction
 
 " Section: Next and previous
