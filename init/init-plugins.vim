@@ -229,8 +229,34 @@ if index(g:bundle_group, 'basic') >= 0
     let g:indent_guides_start_level=2               " 从第二层开始可视化显示缩进
     let g:indent_guides_guide_size            = 1   " 色块宽度(指定对齐线的尺寸)
     nmap <silent> <space>gi :IndentGuidesToggle<cr> " 快捷键 i 开/关缩进可视化
-endif
 
+    Plug 'scrooloose/nerdtree'
+    let NERDTreeWinSize = 33       " 设置 NERDTree 子窗口宽度
+    let NERDTreeWinPos = "right"   " 设置 NERDTree 子窗口位置
+    let NERDTreeShowBookmarks = 1  " 显示书签列表
+    let NERDTreeIgnore = ['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr', '.DS_Store'] " 忽略文件
+    let NERDTreeChDirMode = 0
+    let NERDTreeMouseMode = 2
+    let NERDTreeShowHidden = 1      " 显示隐藏文件
+    let NERDTreeBookmarksFile = expand('$HOME') . '/.vim/NERDTreeBookmarks'
+    let NERDTreeMinimalUI = 1        " NERDTree 子窗口中不显示冗余帮助信息
+    let NERDTreeAutoDeleteBuffer = 1 " 删除文件时自动删除文件对应 buffer
+    let NERDTreeShowLineNumbers = 1  " 显示行号
+    let NERDTreeAutoCenter=1
+
+    let g:NERDTreeIndicatorMapCustom = {
+        \ "Modified"  : "✹",
+        \ "Staged"    : "✚",
+        \ "Untracked" : "✭",
+        \ "Renamed"   : "➜",
+        \ "Unmerged"  : "═",
+        \ "Deleted"   : "✖",
+        \ "Dirty"     : "✗",
+        \ "Clean"     : "✔︎",
+        \ "Unknown"   : "?"
+        \ }
+    nmap <space>nt :NERDTreeToggle<cr>
+endif
 
 "----------------------------------------------------------------------
 " 增强插件
