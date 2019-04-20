@@ -3,7 +3,7 @@
 * 安装
 
   #+BEGIN_SRC sh
-    curl -sLf https://raw.githubusercontent.com/shangzongyu/vimrc/master/install.sh | bash
+  curl -sLf https://raw.githubusercontent.com/shangzongyu/vimrc/master/install.sh | bash
   #+END_SRC
 
   然后创建你的 =~/.vimrc= 文件，里面只有一句话：
