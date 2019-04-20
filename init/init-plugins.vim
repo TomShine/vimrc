@@ -38,15 +38,14 @@ Plug 'jiangmiao/auto-pairs'
 
 " 全文快速移动，<leader><leader>f{char} 即可触发
 Plug 'easymotion/vim-easymotion'
+
 if !exists('g:easy_align_delimiters')
     let g:easy_align_delimiters = {}
 endif
+
 let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String'] }
 " vmap <leader>ea <Plug>(EasyAlign)
 " nmap <leader>ea <Plug>(EasyAlign)
-
-" 文件浏览器，代替 netrw
-" Plug 'justinmk/vim-dirvish'
 
 " 表格对齐，使用命令 Tabularize
 Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
@@ -97,7 +96,8 @@ Plug 'tpope/vim-unimpaired'
 " 代码片段
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-"UltiSnips 的 tab 键与 YCM 冲突，重新设定
+
+" UltiSnips 的 tab 键与 YCM 冲突，重新设定
 let g:UltiSnipsExpandTrigger="<leader><tab>"
 let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
 let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
@@ -106,38 +106,6 @@ Plug 'Valloric/ListToggle'
 let g:lt_location_list_toggle_map = '<leader>lq'
 let g:lt_quickfix_list_toggle_map = '<leader>oq'
 let g:lt_height = 10
-
-
-" "----------------------------------------------------------------------
-" " Dirvish 设置：自动排序并隐藏文件，同时定位到相关文件
-" " 这个排序函数可以将目录排在前面，文件排在后面，并且按照字母顺序排序
-" " 比默认的纯按照字母排序更友好点。
-" "----------------------------------------------------------------------
-" function! s:setup_dirvish()
-"     if &buftype != 'nofile' && &filetype != 'dirvish'
-"         return
-"     endif
-"     if has('nvim')
-"         return
-"     endif
-"     " 取得光标所在行的文本（当前选中的文件名）
-"     let texT = getline('.')
-"     if ! get(g:, 'dirvish_hide_visible', 0)
-"         exec 'silent keeppatterns g@\v[\/]\.[^\/]+[\/]?$@d _'
-"     endif
-"     " 排序文件名
-"     exec 'sort ,^.*[\/],'
-"     let name = '^' . escape(text, '.*[]~\') . '[/*|@=|\\*]\=\%($\|\s\+\)'
-"     " 定位到之前光标处的文件
-"     call search(name, 'wc')
-"     noremap <silent><buffer> ~ :Dirvish ~<cr>
-"     noremap <buffer> % :e %
-" endfunc
-
-" augroup MyPluginSetup
-"     autocmd!
-"     autocmd FileType dirvish call s:setup_dirvish()
-" augroup END
 
 
 "----------------------------------------------------------------------
@@ -282,9 +250,9 @@ if index(g:bundle_group, 'enhanced') >= 0
 
     Plug 'Chun-Yang/vim-action-ag'
     " use * to search current word in normal mode
-    nmap * <Plug>AgActionWord
+    " nmap * <Plug>AgActionWord
     " use * to search selected text in visual mode
-    vmap * <Plug>AgActionVisual
+    " vmap * <Plug>AgActionVisual
 
     " 配对括号和引号自动补全
     Plug 'Raimondi/delimitMate'
@@ -637,11 +605,11 @@ endif
 if index(g:bundle_group, 'ycm') >= 0
     function! BuildYCM(info)
         if a:info.status == 'installed' || a:info.force
-            !./install.sh --clang-completer --gocode-completer --system-libclang
+            !./install.sh --clang-completer --go-completer --rust-completer --java-completer
         endif
     endfunction
-    Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') , 'for': [ 'go', 'python' , 'c' , 'cpp'], 'on': [] }
 
+    Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') , 'for': [ 'go', 'python' , 'c' , 'cpp'], 'on': [] }
     Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 
     " UltiSnips 的 tab 键与 YCM 冲突，重新设定, If you want :UltiSnipsEdit to split your window.
