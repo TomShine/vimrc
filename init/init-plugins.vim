@@ -107,7 +107,6 @@ let g:lt_location_list_toggle_map = '<leader>lq'
 let g:lt_quickfix_list_toggle_map = '<leader>oq'
 let g:lt_height = 10
 
-
 "----------------------------------------------------------------------
 " 基础插件
 "----------------------------------------------------------------------
@@ -269,7 +268,6 @@ if index(g:bundle_group, 'enhanced') >= 0
 
 endif
 
-
 "----------------------------------------------------------------------
 " 自动生成 ctags/gtags，并提供自动索引功能
 " 不在 git/svn 内的项目，需要在项目根目录 touch 一个空的 .root 文件
@@ -320,7 +318,6 @@ if index(g:bundle_group, 'tags') >= 0
     " 调试
     let g:gutentags_define_advanced_commands = 1
 endif
-
 
 "----------------------------------------------------------------------
 " 文本对象：textobj 全家桶
@@ -435,7 +432,6 @@ endif
     endfunction
 "}
 
-
 "---------------------------------------------------------------------
 " airline
 "----------------------------------------------------------------------
@@ -503,7 +499,6 @@ if index(g:bundle_group, 'airline') >= 0
     "}
 endif
 
-
 "----------------------------------------------------------------------
 " LanguageTool 语法检查
 "----------------------------------------------------------------------
@@ -519,7 +514,6 @@ if index(g:bundle_group, 'grammer') >= 0
     map <space>rn <Plug>(grammarous-move-to-next-error)
     map <space>rp <Plug>(grammarous-move-to-previous-error)
 endif
-
 
 "----------------------------------------------------------------------
 " ale：动态语法检查
@@ -556,7 +550,6 @@ if index(g:bundle_group, 'ale') >= 0
                 \ 'java': ['javac'],
                 \ 'javascript': ['eslint'],
                 \ }
-
 
     " 获取 pylint, flake8 的配置文件，在 vim-init/tools/conf 下面
     function s:lintcfg(name)
@@ -616,7 +609,6 @@ if index(g:bundle_group, 'ycm') >= 0
     let g:UltiSnipsEditSplit="vertical"
 endif
 
-
 "----------------------------------------------------------------------
 " echodoc：搭配 YCM/deoplete 在底部显示函数参数
 "----------------------------------------------------------------------
@@ -625,7 +617,6 @@ if index(g:bundle_group, 'echodoc') >= 0
     set noshowmode
     let g:echodoc#enable_at_startup = 1
 endif
-
 
 "----------------------------------------------------------------------
 " LeaderF 文件模糊匹配，tags/函数名 选择
