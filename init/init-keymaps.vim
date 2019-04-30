@@ -52,7 +52,7 @@ cnoremap <c-_> <c-k>
 
 
 "----------------------------------------------------------------------
-" <leader>+数字键 切换tab
+" <leader>+数字键 切换 tab
 "----------------------------------------------------------------------
 noremap <silent><leader>1 1gt<cr>
 noremap <silent><leader>2 2gt<cr>
@@ -116,6 +116,7 @@ if has("gui_macvim")
     inoremap <silent><d-0> <ESC>:tabn 10<cr>
 endif
 
+
 "----------------------------------------------------------------------
 " 缓存：插件 unimpaired 中定义了 [b, ]b 来切换缓存
 "----------------------------------------------------------------------
@@ -130,7 +131,6 @@ noremap <silent> <leader>tc :tabnew<cr>
 noremap <silent> <leader>tq :tabclose<cr>
 noremap <silent> <leader>tn :tabnext<cr>
 noremap <silent> <leader>tp :tabprev<cr>
-
 
 " 左移 tab
 function! Tab_MoveLeft()
@@ -213,7 +213,6 @@ elseif has('nvim')
 endif
 
 
-
 "----------------------------------------------------------------------
 " 编译运行 C/C++ 项目
 " 详细见：http://www.skywind.me/blog/archives/2084
@@ -250,7 +249,6 @@ nnoremap <silent> <F4> :AsyncRun -cwd=<root> cmake . <cr>
 if has('win32') || has('win64')
     nnoremap <silent> <F8> :AsyncRun -cwd=<root> -mode=4 make run <cr>
 endif
-
 
 "----------------------------------------------------------------------
 " F5 运行当前文件：根据文件类型判断方法，并且输出到 quickfix 窗口

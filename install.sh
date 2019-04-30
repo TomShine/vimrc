@@ -205,14 +205,15 @@ install_package () {
 uninstall_vim () {
     if [[ -d "$HOME/.vim" ]]; then
         if [[ "$(readlink $HOME/.vim)" =~ \.ShangVim$ ]]; then
-        rm "$HOME/.vim"
-        success "Uninstall ShangVim for vim"
-        if [[ -d "$HOME/.vim_back" ]]; then
-            mv "$HOME/.vim_back" "$HOME/.vim"
-            success "Recover from $HOME/.vim_back"
-        fi
+            rm "$HOME/.vim"
+            success "Uninstall ShangVim for vim"
+            if [[ -d "$HOME/.vim_back" ]]; then
+                mv "$HOME/.vim_back" "$HOME/.vim"
+                success "Recover from $HOME/.vim_back"
+            fi
         fi
     fi
+
     if [[ -f "$HOME/.vimrc_back" ]]; then
         mv "$HOME/.vimrc_back" "$HOME/.vimrc"
         success "Recover from $HOME/.vimrc_back"
@@ -229,6 +230,7 @@ check_requirements () {
     else
         warn "Check Requirements : git"
     fi
+
     if hash "vim" &>/dev/null; then
         is_vim8=$(vim --version | grep "Vi IMproved 8.0")
         is_vim74=$(vim --version | grep "Vi IMproved 7.4")
@@ -284,7 +286,6 @@ usage () {
 # }}}
 
 # install_done {{{
-
 install_done () {
     echo_with_color ${Yellow} ""
     echo_with_color ${Yellow} "Almost done!"
@@ -295,7 +296,6 @@ install_done () {
     echo_with_color ${Yellow} "That's it. Thanks for installing ShangVim. Enjoy!"
     echo_with_color ${Yellow} ""
 }
-
 # }}}
 
 welcome () {
@@ -312,18 +312,16 @@ welcome () {
 
 # download_font {{{
 download_font () {
-    url="https://raw.githubusercontent.com/wsdjeg/DotFiles/master/local/share/fonts/$1"
-    path="$HOME/.local/share/fonts/$1"
-    if [[ -f "$path" ]]
-    then
+    URL="https://raw.githubusercontent.com/wsdjeg/DotFiles/master/local/share/fonts/$1"
+    PATH="$HOME/.local/share/fonts/$1"
+    if [[ -f "$path" ]]; then
         success "Downloaded $1"
     else
         info "Downloading $1"
-        curl -s -o "$path" "$url"
+        curl -s -o "$PATH" "$URL"
         success "Downloaded $1"
     fi
 }
-
 # }}}
 
 # install_fonts {{{
@@ -331,6 +329,7 @@ install_fonts () {
     if [[ ! -d "$HOME/.local/share/fonts" ]]; then
         mkdir -p $HOME/.local/share/fonts
     fi
+
     download_font "DejaVu Sans Mono Bold Oblique for Powerline.ttf"
     download_font "DejaVu Sans Mono Bold for Powerline.ttf"
     download_font "DejaVu Sans Mono Oblique for Powerline.ttf"
@@ -346,8 +345,8 @@ install_fonts () {
     download_font "wingding.ttf"
     info "Updating font cache, please wait ..."
     if [ $System == "Darwin" ];then
-        if [ ! -e "$HOME/Library/Fonts" ];then
-        mkdir "$HOME/Library/Fonts"
+        if [ ! -e "$HOME/Library/Fonts" ]; then
+            mkdir "$HOME/Library/Fonts"
         fi
         cp $HOME/.local/share/fonts/* $HOME/Library/Fonts/
     else
@@ -357,40 +356,38 @@ install_fonts () {
     fi
     success "font cache done!"
 }
-
 # }}}
 
 ### main {{{
 main () {
-    if [ $# -gt 0 ]
-    then
+    if [ $# -gt 0 ]; then
         case $1 in
-        --uninstall|-u)
-            info "Trying to uninstall ShangVim"
-            uninstall_vim
-            echo_with_color ${BWhite} "Thanks!"
-            exit 0
-            ;;
-        --checkRequirements|-c)
-            check_requirements
-            exit 0
-            ;;
-        --install|-i)
-            welcome
-            need_cmd 'git'
-            fetch_repo
-            install_vim
-            install_package
-            install_done
-            exit 0
-            ;;
-        --help|-h)
-            usage
-            exit 0
-            ;;
-        --version|-v)
-            msg "${Version}"
-            exit 0
+            --uninstall|-u)
+                info "Trying to uninstall ShangVim"
+                uninstall_vim
+                echo_with_color ${BWhite} "Thanks!"
+                exit 0
+                ;;
+            --checkRequirements|-c)
+                check_requirements
+                exit 0
+                ;;
+            --install|-i)
+                welcome
+                need_cmd 'git'
+                fetch_repo
+                install_vim
+                install_package
+                install_done
+                exit 0
+                ;;
+            --help|-h)
+                usage
+                exit 0
+                ;;
+            --version|-v)
+                msg "${Version}"
+                exit 0
         esac
     else
         welcome
@@ -403,7 +400,6 @@ main () {
         install_done
     fi
 }
-
 # }}}
 
 main $@

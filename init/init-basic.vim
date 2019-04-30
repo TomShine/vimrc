@@ -11,6 +11,7 @@
 set fileformat=unix             "设置新文件的<EOL>格式
 set fileformats=unix,dos,mac    "给出文件的<EOL>格式类型
 
+
 "----------------------------------------------------------------------
 " 基础设置
 "----------------------------------------------------------------------
@@ -123,12 +124,11 @@ set errorformat+=[%f:%l]\ ->\ %m,[%f:%l]:%m
 " 设置分隔符可视
 set listchars=tab:\|\ ,trail:.,extends:>,precedes:<
 
-
 " 设置 tags：当前文件所在目录往上向根目录搜索直到碰到 .tags 文件
 " 或者 Vim 当前目录包含 .tags 文件
 set tags=./.tags;,.tags
 
-" 如遇Unicode值大于255的文本，不必等到空格再折行
+" 如遇 Unicode 值大于255的文本，不必等到空格再折行
 set formatoptions+=m
 
 " 合并两行中文时，不在中间加空格
@@ -155,7 +155,7 @@ if has('folding')
     set foldlevel=99
 
     " set nofoldenable        " 启用 vim 关闭折叠代码
-    "set foldmethod=indent  " indent 折叠方式(基于缩进或语法进行代码折叠)
+    " set foldmethod=indent   " indent 折叠方式(基于缩进或语法进行代码折叠)
     " set foldmethod=syntax   " indent 折叠方式
     " set foldmethod=marker   " marker 折叠方式
 

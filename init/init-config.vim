@@ -60,13 +60,14 @@ set listchars=tab:>-,trail:-,extends:>,precedes:<
 " mapleader
 let mapleader = ","
 
+
 "----------------------------------------------------------------------
 " font
 "----------------------------------------------------------------------
 
 if g:isMac
     if g:isGUI
-        "set macligatures
+        " set macligatures
         set guifont=Source\ Code\ Pro:h12
     else
         set guifont=Fira\ Code:h14
@@ -148,9 +149,10 @@ call s:key_escape('<S-F12>', '[24;2~')
 
 
 "----------------------------------------------------------------------
-" 防止tmux下vim的背景色显示异常
+" 防止 tmux下 vim 的背景色显示异常
 " Refer: http://sunaku.github.io/vim-256color-bce.html
 "----------------------------------------------------------------------
+
 if &term =~ '256color' && $TMUX != ''
     " disable Background Color Erase (BCE) so that color schemes
     " render properly when inside 256-color tmux and GNU screen.
