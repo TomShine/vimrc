@@ -3,7 +3,6 @@
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
 
-
 "----------------------------------------------------------------------
 " 显示设置
 "----------------------------------------------------------------------
@@ -33,6 +32,7 @@ set showcmd
 " 水平切割窗口时，默认在右边显示新窗口
 set splitright
 
+
 "----------------------------------------------------------------------
 " 颜色主题：色彩文件位于 colors 目录中
 "----------------------------------------------------------------------
@@ -52,6 +52,7 @@ syntax enable
 let g:molokai_original = 1
 colorscheme molokai
 colorscheme gruvbox
+
 
 "----------------------------------------------------------------------
 " 状态栏设置
@@ -76,6 +77,7 @@ hi! clear SpellBad
 hi! clear SpellCap
 hi! clear SpellRare
 hi! clear SpellLocal
+
 if has('gui_running')
     hi! SpellBad gui=undercurl guisp=red
     hi! SpellCap gui=undercurl guisp=blue
@@ -168,6 +170,7 @@ endfunc
 "----------------------------------------------------------------------
 " 需要显示到标签上的文件名
 "----------------------------------------------------------------------
+
 function! Vim_NeatBuffer(bufnr, fullname)
     let l:name = bufname(a:bufnr)
     if getbufvar(a:bufnr, '&modifiable')
@@ -251,6 +254,7 @@ function! Vim_NeatGuiTabLabel()
     endif
     return "[".l:num."] ".l:fname
 endfunc
+
 
 "----------------------------------------------------------------------
 " 设置 GUI 标签的 tips: 显示当前标签有哪些窗口

@@ -6,15 +6,16 @@
 
 " vim: set ts=4 sw=4 tw=78 noet :
 
+
 "----------------------------------------------------------------------
 " 默认情况下的分组，可以再前面覆盖之
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
-    " let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
-    let g:bundle_group = ['basic', 'enhanced', 'filetypes', 'textobj']
+    let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
     let g:bundle_group += ['airline', 'ale', 'ycm', 'echodoc']
     let g:bundle_group += ['leaderf', 'tools']
 endif
+
 
 "----------------------------------------------------------------------
 " 计算当前 vim-init 的子路径
@@ -26,10 +27,12 @@ function! s:path(path)
     return substitute(path, '\\', '/', 'g')
 endfunc
 
+
 "----------------------------------------------------------------------
 " 在 ~/.vim/bundles 下安装插件
 "----------------------------------------------------------------------
 call plug#begin(get(g:, 'bundle_home', '~/.vim/bundles'))
+
 
 "----------------------------------------------------------------------
 " 默认插件
@@ -609,6 +612,7 @@ if index(g:bundle_group, 'ycm') >= 0
     let g:UltiSnipsEditSplit="vertical"
 endif
 
+
 "----------------------------------------------------------------------
 " echodoc：搭配 YCM/deoplete 在底部显示函数参数
 "----------------------------------------------------------------------
@@ -617,6 +621,7 @@ if index(g:bundle_group, 'echodoc') >= 0
     set noshowmode
     let g:echodoc#enable_at_startup = 1
 endif
+
 
 "----------------------------------------------------------------------
 " LeaderF 文件模糊匹配，tags/函数名 选择
@@ -713,9 +718,6 @@ if index(g:bundle_group, 'tools') >= 0
     Plug 'vim-scripts/indentpython.vim'
 
     Plug 'kana/vim-operator-user'
-
-    " use wakatime
-    Plug 'wakatime/vim-wakatime'
 endif
 
 

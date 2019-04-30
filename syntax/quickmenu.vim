@@ -41,8 +41,6 @@ if exists('b:quickmenu.header_lines')
 endif
 
 
-
-
 function! s:hllink(name, dest, alternative)
     let tohl = a:dest
     if hlexists(a:alternative)
@@ -66,4 +64,3 @@ HighLink	QuickmenuSpecial		Comment		StartifySpecial
 HighLink	QuickmenuHeader			Title		StartifyHeader
 HighLink	QuickmenuOption			Identifier  StartifyFile
 HighLink	QuickmenuHelp			Comment 	StartifySpecial
-
