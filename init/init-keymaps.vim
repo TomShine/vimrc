@@ -20,7 +20,6 @@ inoremap <c-e> <end>
 inoremap <c-d> <del>
 inoremap <c-_> <c-k>
 
-
 "----------------------------------------------------------------------
 " 设置 CTRL+HJKL 移动光标（INSERT 模式偶尔需要移动的方便些）
 " 使用 SecureCRT/XShell 等终端软件需设置：Backspace sends delete
@@ -34,7 +33,6 @@ inoremap <C-h> <left>
 inoremap <C-j> <down>
 inoremap <C-k> <up>
 inoremap <C-l> <right>
-
 
 "----------------------------------------------------------------------
 " 命令模式的快速移动
@@ -50,7 +48,6 @@ cnoremap <c-b> <left>
 cnoremap <c-d> <del>
 cnoremap <c-_> <c-k>
 
-
 "----------------------------------------------------------------------
 " <leader>+数字键 切换 tab
 "----------------------------------------------------------------------
@@ -64,7 +61,6 @@ noremap <silent><leader>7 7gt<cr>
 noremap <silent><leader>8 8gt<cr>
 noremap <silent><leader>9 9gt<cr>
 noremap <silent><leader>0 10gt<cr>
-
 
 "----------------------------------------------------------------------
 " ALT+N 切换 tab
@@ -90,7 +86,6 @@ inoremap <silent><m-8> <ESC>:tabn 8<cr>
 inoremap <silent><m-9> <ESC>:tabn 9<cr>
 inoremap <silent><m-0> <ESC>:tabn 10<cr>
 
-
 " MacVim 允许 CMD+数字键快速切换标签
 if has("gui_macvim")
     set macmeta
@@ -115,7 +110,6 @@ if has("gui_macvim")
     inoremap <silent><d-9> <ESC>:tabn 9<cr>
     inoremap <silent><d-0> <ESC>:tabn 10<cr>
 endif
-
 
 "----------------------------------------------------------------------
 " 缓存：插件 unimpaired 中定义了 [b, ]b 来切换缓存
@@ -153,7 +147,6 @@ noremap <silent><leader>tr :call Tab_MoveRight()<cr>
 noremap <silent><m-left> :call Tab_MoveLeft()<cr>
 noremap <silent><m-right> :call Tab_MoveRight()<cr>
 
-
 "----------------------------------------------------------------------
 " ALT 键移动增强
 "----------------------------------------------------------------------
@@ -177,7 +170,6 @@ cnoremap <m-l> <c-right>
 " ALT+y 删除到行末
 noremap <m-y> d$
 inoremap <m-y> <c-\><c-o>d$
-
 
 "----------------------------------------------------------------------
 " 窗口切换：ALT+SHIFT+hjkl
@@ -211,7 +203,6 @@ elseif has('nvim')
     tnoremap <m-K> <c-\><c-n><c-w>k
     tnoremap <m-q> <c-\><c-n>
 endif
-
 
 "----------------------------------------------------------------------
 " 编译运行 C/C++ 项目
@@ -295,8 +286,6 @@ function! ExecuteFile()
     endif
 endfunc
 
-
-
 "----------------------------------------------------------------------
 " F2 在项目目录下 Grep 光标下单词，默认 C/C++/Py/Js ，扩展名自己扩充
 " 支持 rg/grep/findstr ，其他类型可以自己扩充
@@ -318,7 +307,6 @@ else
                 \ --include='*.js' --include='*.vim'
                 \ '<root>' <cr>
 endif
-
 
 "----------------------------------------------------------------------
 " 复制和粘贴
@@ -458,7 +446,6 @@ nmap ;ec :e $HOME/.vimrc<cr>
 " 使用 <spapce>fs 在插入和normal模式下保存文件，我经常在 insert 模式下代替 Esc
 inoremap <space>fs <Esc>:w<cr>
 noremap <space>fs :w<cr>
-
 inoremap <space>fq <Esc>:q<cr>
 noremap <space>fq :q<cr>
 

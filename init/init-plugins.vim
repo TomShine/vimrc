@@ -1,6 +1,6 @@
 "======================================================================
 "
-" init-plugins.vim -
+" init-plugins.vim - about plugins
 "
 "======================================================================
 
@@ -287,11 +287,16 @@ if index(g:bundle_group, 'tags') >= 0
     Plug 'skywind3000/gutentags_plus'
 
     " 设定项目目录标志：除了 .git/.svn 外，还有 .root 文件
-    let g:gutentags_project_root = ['.root']
+    let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
     let g:gutentags_ctags_tagfile = '.tags'
 
-    " 默认生成的数据文件集中到 ~/.cache/tags 避免污染项目目录，好清理
-    let g:gutentags_cache_dir = expand('~/.cache/tags')
+    " 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录 "
+    let s:vim_tags = expand('~/.cache/tags')
+    let g:gutentags_cache_dir = s:vim_tags
+    " 检测 ~/.cache/tags 不存在就新建 "
+    if !isdirectory(s:vim_tags)
+        silent! call mkdir(s:vim_tags, 'p')
+    endif
 
     " 默认禁用自动生成
     let g:gutentags_modules = []
@@ -309,11 +314,11 @@ if index(g:bundle_group, 'tags') >= 0
     " 设置 ctags 的参数
     let g:gutentags_ctags_extra_args = []
     let g:gutentags_ctags_extra_args += ['--fields=+niazS', '--extra=+q']
-    let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+    let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
     let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
     " 使用 universal-ctags 的话需要下面这行，请反注释
-    let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+    "let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 
     " 禁止 gutentags 自动链接 gtags 数据库
     let g:gutentags_auto_add_gtags_cscope = 0
@@ -605,13 +610,12 @@ if index(g:bundle_group, 'ycm') >= 0
         endif
     endfunction
 
-    Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') , 'for': [ 'go', 'python' , 'c' , 'cpp'], 'on': [] }
+    Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') , 'for': [ 'go', 'python' , 'c' , 'cpp', 'java'], 'on': [] }
     Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 
     " UltiSnips 的 tab 键与 YCM 冲突，重新设定, If you want :UltiSnipsEdit to split your window.
     let g:UltiSnipsEditSplit="vertical"
 endif
-
 
 "----------------------------------------------------------------------
 " echodoc：搭配 YCM/deoplete 在底部显示函数参数
@@ -621,7 +625,6 @@ if index(g:bundle_group, 'echodoc') >= 0
     set noshowmode
     let g:echodoc#enable_at_startup = 1
 endif
-
 
 "----------------------------------------------------------------------
 " LeaderF 文件模糊匹配，tags/函数名 选择
@@ -704,7 +707,6 @@ if index(g:bundle_group, 'leaderf') >= 0
     endif
 endif
 
-
 "----------------------------------------------------------------------
 " tools 配置
 "----------------------------------------------------------------------
@@ -725,7 +727,6 @@ endif
 " 结束插件安装
 "----------------------------------------------------------------------
 call plug#end()
-
 
 "----------------------------------------------------------------------
 " YouCompleteMe 默认设置：YCM 需要你另外手动编译安装
@@ -784,7 +785,6 @@ let g:ycm_semantic_triggers =  {
 " ycm
 nnoremap <space>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <space>jr :YcmCompleter GoToReferences<cr>
-
 
 "----------------------------------------------------------------------
 " Ycm 白名单（非名单内文件不启用 YCM），避免打开个 1MB 的 txt 分析半天
