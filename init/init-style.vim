@@ -32,7 +32,6 @@ set showcmd
 " 水平切割窗口时，默认在右边显示新窗口
 set splitright
 
-
 "----------------------------------------------------------------------
 " 颜色主题：色彩文件位于 colors 目录中
 "----------------------------------------------------------------------
@@ -51,12 +50,12 @@ syntax enable
 
 let g:molokai_original = 1
 colorscheme molokai
-colorscheme gruvbox
-
+"colorscheme gruvbox
 
 "----------------------------------------------------------------------
 " 状态栏设置
 "----------------------------------------------------------------------
+
 set statusline=                                 " 清空状态了
 set statusline+=\ %F                            " 文件名
 set statusline+=\ [%1*%M%*%n%R%H]               " buffer 编号和状态
@@ -66,11 +65,9 @@ set statusline+=\ %y                            " 文件类型
 " 最右边显示文件编码和行号等信息，并且固定在一个 group 中，优先占位
 set statusline+=\ %0(%{&fileformat}\ [%{(&fenc==\"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %v:%l/%L%)
 
-
 "----------------------------------------------------------------------
 " 更改样式
 "----------------------------------------------------------------------
-
 " 更清晰的错误标注：默认一片红色背景，语法高亮都被搞没了
 " 只显示红色或者蓝色下划线或者波浪线
 hi! clear SpellBad
@@ -101,7 +98,6 @@ highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE
 hi! Pmenu guibg=gray guifg=black ctermbg=gray ctermfg=black
 hi! PmenuSel guibg=gray guifg=brown ctermbg=brown ctermfg=gray
 
-
 "----------------------------------------------------------------------
 " 终端设置，隐藏行号和侧边栏
 "----------------------------------------------------------------------
@@ -113,7 +109,6 @@ if has('terminal') && exists(':terminal') == 2
         augroup END
     endif
 endif
-
 
 "----------------------------------------------------------------------
 " quickfix 设置，隐藏行号
@@ -133,7 +128,6 @@ augroup END
 if has('gui_running')
     let g:config_vim_tab_style = 3
 endif
-
 
 "----------------------------------------------------------------------
 " 终端下的 tabline
@@ -165,7 +159,6 @@ function! Vim_NeatTabLine()
 
     return s
 endfunc
-
 
 "----------------------------------------------------------------------
 " 需要显示到标签上的文件名
@@ -207,7 +200,6 @@ function! Vim_NeatBuffer(bufnr, fullname)
     endif
 endfunc
 
-
 "----------------------------------------------------------------------
 " 标签栏文字，使用 [1] filename 的模式
 "----------------------------------------------------------------------
@@ -230,7 +222,6 @@ function! Vim_NeatTabLabel(n)
     endif
     return "[".l:num."] ".l:fname
 endfunc
-
 
 "----------------------------------------------------------------------
 " GUI 下的标签文字，使用 [1] filename 的模式
@@ -280,7 +271,6 @@ function! Vim_NeatGuiTabTip()
     endfor
     return tip
 endfunc
-
 
 "----------------------------------------------------------------------
 " 标签栏最终设置

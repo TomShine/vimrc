@@ -480,6 +480,9 @@ nnoremap <silent> ]T :tablast<cr>
 nmap <leader>tn :tnext<CR>      " 正向遍历同名标签
 nmap <leader>tp :tprevious<CR>  " 反向遍历同名标签
 
+" tagbar
+nmap <space>tb :TagbarToggle<CR>
+
 " gtags-cscope
 noremap <silent> <leader>tcs :GscopeFind s <C-R><C-W><cr>
 noremap <silent> <leader>tcg :GscopeFind g <C-R><C-W><cr>
