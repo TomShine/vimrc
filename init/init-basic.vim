@@ -153,7 +153,7 @@ if has('folding')
     " set foldmethod=marker   " marker 折叠方式
 
     " 用空格键来开关折叠
-    nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
+    "nnoremap <space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR>
 endif
 
 "----------------------------------------------------------------------
