@@ -49,8 +49,8 @@ syntax enable
 "set background=dark "背景使用黑色
 
 let g:molokai_original = 1
-colorscheme molokai
-"colorscheme gruvbox
+"colorscheme molokai
+colorscheme gruvbox
 
 "----------------------------------------------------------------------
 " 状态栏设置

@@ -62,7 +62,6 @@ set incsearch
 " 编码设置
 "----------------------------------------------------------------------
 if has('multi_byte')
-
     " 内部工作编码
     set encoding=utf-8
 
@@ -177,3 +176,18 @@ set wildignore+=*.ppt,*.pptx,*.docx,*.xlt,*.xls,*.xlsx,*.odt,*.wps
 set wildignore+=*.msi,*.crx,*.deb,*.vfd,*.apk,*.ipa,*.bin,*.msu
 set wildignore+=*.gba,*.sfc,*.078,*.nds,*.smd,*.smc
 set wildignore+=*.linux2,*.win32,*.darwin,*.freebsd,*.linux,*.android
+
+"----------------------------------------------------------------------
+" Gtags 设置
+"----------------------------------------------------------------------
+"let $GTAGSLABEL = 'native'
+let $GTAGSLABEL = 'native-pygments'
+let $GTAGSCONF = '$HOME/.globalrc'
+
+"----------------------------------------------------------------------
+" Python 设置
+"----------------------------------------------------------------------
+"let g:syntastic_python_python_exec = 'python3'
+if exists('py2') && has('python')
+elseif has('python3')
+endif

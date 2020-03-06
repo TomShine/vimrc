@@ -225,7 +225,7 @@ if index(g:bundle_group, 'basic') >= 0
         \ "Clean"     : "✔︎",
         \ "Unknown"   : "?"
         \ }
-    nmap <space>nt :NERDTreeToggle<cr>
+    nmap <leader>nt :NERDTreeToggle<cr>
 endif
 
 "----------------------------------------------------------------------
@@ -268,7 +268,24 @@ if index(g:bundle_group, 'enhanced') >= 0
 
     " format
     Plug 'sbdchd/neoformat'
+    let g:neoformat_enabled_python = ['autopep8', 'yapf', 'docformatter']
+    " Enable alignment
+    let g:neoformat_basic_format_align = 1
 
+    " Enable tab to spaces conversion
+    let g:neoformat_basic_format_retab = 1
+
+    " Enable trimmming of trailing whitespace
+    let g:neoformat_basic_format_trim = 1
+    let g:neoformat_run_all_formatters = 1
+
+    augroup fmt
+      autocmd!
+      autocmd BufWritePre * undojoin | Neoformat
+    augroup END
+
+    " windows chooose
+    Plug 't9md/vim-choosewin'
 endif
 
 "----------------------------------------------------------------------
@@ -318,7 +335,7 @@ if index(g:bundle_group, 'tags') >= 0
     let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
     " 使用 universal-ctags 的话需要下面这行，请反注释
-    "let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+    let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 
     " 禁止 gutentags 自动链接 gtags 数据库
     let g:gutentags_auto_add_gtags_cscope = 0
@@ -413,8 +430,52 @@ if index(g:bundle_group, 'filetypes') >= 0
     " protobuf 的语法高亮
     Plug 'uarun/vim-protobuf'
 
-    " go 语法高亮增强
+    " 支持 go
     Plug 'fatih/vim-go'
+    " vim-go {
+        "auto save run GoImports
+        autocmd BufWritePre *.go :GoImports
+
+        "automatically rebalance windows on vim resize
+        autocmd VimResized * :wincmd =
+
+        let g:go_fmt_command = "goimports"
+        let g:go_autodetect_gopath = 1
+        let g:go_list_type = "quickfix"
+        let g:go_def_mapping_enabled = 0
+        let g:go_fmt_fail_silently = 0
+        let g:go_highlight_types = 1
+        let g:go_highlight_fields = 1
+        let g:go_highlight_functions = 1
+        let g:go_highlight_function_calls = 1
+        let g:go_highlight_extra_types = 1
+        let g:go_highlight_generate_tags = 1
+
+        " Open :GoDeclsDir with ctrl-g
+        nmap <C-g> :GoDeclsDir<cr>
+        imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
+
+        augroup go
+            autocmd!
+            " :GoAlternate  commands :A, :AV, :AS and :AT
+            autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+            autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+            autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+            autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+        augroup END
+
+        " build_go_files is a custom function that builds or compiles the test file.
+        " It calls :GoBuild if its a Go file, or :GoTestCompile if it's a test file
+        function! s:build_go_files()
+            let l:file = expand('%')
+            if l:file =~# '^\f\+_test\.go$'
+                call go#test#Test(0, 1)
+            elseif l:file =~# '^\f\+\.go$'
+                call go#cmd#Build(0)
+            endif
+        endfunction
+    "}
+
 
     " powershell 脚本文件的语法高亮
     Plug 'pprovost/vim-ps1', { 'for': 'ps1' }
@@ -444,50 +505,6 @@ if index(g:bundle_group, 'filetypes') >= 0
     Plug 'vim-scripts/nginx.vim'
 endif
 
-" vim-go {
-    "auto save run GoImports
-    autocmd BufWritePre *.go :GoImports
-
-    "automatically rebalance windows on vim resize
-    autocmd VimResized * :wincmd =
-
-    let g:go_fmt_command = "goimports"
-    let g:go_autodetect_gopath = 1
-    let g:go_list_type = "quickfix"
-    let g:go_def_mapping_enabled = 0
-    let g:go_fmt_fail_silently = 0
-    let g:go_highlight_types = 1
-    let g:go_highlight_fields = 1
-    let g:go_highlight_functions = 1
-    let g:go_highlight_function_calls = 1
-    let g:go_highlight_extra_types = 1
-    let g:go_highlight_generate_tags = 1
-
-    " Open :GoDeclsDir with ctrl-g
-    nmap <C-g> :GoDeclsDir<cr>
-    imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
-
-    augroup go
-        autocmd!
-        " :GoAlternate  commands :A, :AV, :AS and :AT
-        autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
-        autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-        autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-        autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
-    augroup END
-
-    " build_go_files is a custom function that builds or compiles the test file.
-    " It calls :GoBuild if its a Go file, or :GoTestCompile if it's a test file
-    function! s:build_go_files()
-        let l:file = expand('%')
-        if l:file =~# '^\f\+_test\.go$'
-            call go#test#Test(0, 1)
-        elseif l:file =~# '^\f\+\.go$'
-            call go#cmd#Build(0)
-        endif
-    endfunction
-"}
-
 "---------------------------------------------------------------------
 " airline
 "----------------------------------------------------------------------
@@ -495,15 +512,11 @@ if index(g:bundle_group, 'airline') >= 0
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
 
-    if has('darwin')
-        set rtp+=/Library/Python/2.7/site-packages/powerline/bindings/vim
-    elseif has("unix") && has("gui_running")
-        set rtp+=/usr/lib/python3.7/site-packages/powerline/bindings/vim
-    endif
+    set rtp+="/Users/tomshine/Library/Python/3.7/lib/python/site-packages/powerline/bindings/vim"
 
     "这个是安装字体后 必须设置此项
     let g:airline_powerline_fonts = 1
-    let g:airline_left_sep = ''
+    " let g:airline_left_sep = ''
     let g:airline_left_alt_sep = ''
     let g:airline_right_sep = ''
     let g:airline_right_alt_sep = ''
@@ -514,6 +527,34 @@ if index(g:bundle_group, 'airline') >= 0
     " let g:airline_theme="luna"
     " let g:airline_theme="molokai"
     " let g:airline_theme="solarized"
+
+    if !exists('g:airline_symbols')
+        let g:airline_symbols = {}
+    endif
+
+    " unicode symbols
+    " " let g:airline_left_sep = '»'
+    " let g:airline_left_sep = '▶'
+    " let g:airline_right_sep = '«'
+    " " let g:airline_right_sep = '◀'
+    " let g:airline_symbols.linenr = '␊'
+    " let g:airline_symbols.linenr = '␤'
+    " let g:airline_symbols.linenr = '¶'
+    " let g:airline_symbols.branch = '⎇'
+    " let g:airline_symbols.paste = 'ρ'
+    " let g:airline_symbols.paste = 'Þ'
+    " let g:airline_symbols.paste = '∥'
+    " let g:airline_symbols.whitespace = 'Ξ'
+
+    " airline symbols
+    let g:airline_left_sep = ''
+    let g:airline_left_alt_sep = ''
+    let g:airline_right_sep = ''
+    let g:airline_right_alt_sep = ''
+    let g:airline_symbols.branch = ''
+    let g:airline_symbols.readonly = ''
+    let g:airline_symbols.linenr = ''
+
     " 关闭状态显示空白符号计数
     let g:airline#extensions#whitespace#enabled = 0
     let g:airline#extensions#whitespace#symbol = '!'
@@ -654,15 +695,133 @@ endif
 if index(g:bundle_group, 'ycm') >= 0
     function! BuildYCM(info)
         if a:info.status == 'installed' || a:info.force
-            !./install.sh --clang-completer --go-completer --rust-completer --java-completer
+            "!./install.sh --clang-completer --go-completer --rust-completer --java-completer
+            !./install.sh --clang-completer --go-completer --rust-completer
         endif
     endfunction
 
-    Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') , 'for': [ 'go', 'python' , 'c' , 'cpp', 'java'], 'on': [] }
+    Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') , 'for': [ 'go', 'python' , 'c' , 'cpp'], 'on': [] }
     Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 
     " UltiSnips 的 tab 键与 YCM 冲突，重新设定, If you want :UltiSnipsEdit to split your window.
     let g:UltiSnipsEditSplit="vertical"
+
+    "----------------------------------------------------------------------
+    " YouCompleteMe 默认设置：YCM 需要你另外手动编译安装
+    "----------------------------------------------------------------------
+    augroup load_ycm
+        autocmd!
+        autocmd InsertEnter * call plug#load('YouCompleteMe','ultisnips') | autocmd! load_ycm
+    augroup END
+
+    let g:ycm_server_python_interpreter='python3'
+    let g:ycm_global_ycm_extra_conf='~/.ShangVim/tools/conf/ycm_extra_conf.py'
+
+    " 禁用预览功能：扰乱视听
+    set completeopt=menu,menuone
+    let g:ycm_add_preview_to_completeopt = 0
+
+    " 禁用诊断功能：我们用前面更好用的 ALE 代替
+    let g:ycm_show_diagnostics_ui = 0
+    let g:ycm_server_log_level = 'info'
+    let g:ycm_min_num_identifier_candidate_chars = 2
+    let g:ycm_collect_identifiers_from_comments_and_strings = 1
+    let g:ycm_complete_in_strings=1
+    let g:ycm_key_invoke_completion = '<c-z>'
+
+    let g:ycm_confirm_extra_conf=0                    " 关闭加载.ycm_extra_conf.py提示
+    let g:ycm_cache_omnifunc=0                        " 禁止缓存匹配项,每次都重新生成匹配项
+    let g:ycm_seed_identifiers_with_syntax=1          " 语法关键字补全let g:ycm_autoclose_preview_window_after_insertion = 1
+
+    " 离开插入模式后自动关闭预览窗口
+    autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+    " 回车即选中当前项
+    inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+
+    "上下左右键的行为 会显示其他信息
+    inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+    inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+    inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+    inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
+
+    " noremap <c-z> <NOP>
+
+    " Youcompleteme的默认tab,s-tab 和自动补全冲突
+    let g:ycm_key_list_select_completion = ['<Down>']
+    let g:ycm_key_list_previous_completion = ['<Up>']
+
+    " 修改弹框为灰色
+    highlight PMenu ctermfg=0 ctermbg=242 guifg=black guibg=darkgrey
+    highlight PMenuSel ctermfg=242 ctermbg=8 guifg=darkgrey guibg=black
+
+    " 两个字符自动触发语义补全
+    let g:ycm_semantic_triggers =  {
+                \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+                \ 'cs,lua,javascript': ['re!\w{2}'],
+                \ }
+
+    " ycm
+    nnoremap <space>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    nnoremap <space>jr :YcmCompleter GoToReferences<cr>
+
+    "----------------------------------------------------------------------
+    " Ycm 白名单（非名单内文件不启用 YCM），避免打开个 1MB 的 txt 分析半天
+    "----------------------------------------------------------------------
+    let g:ycm_filetype_whitelist = {
+                \ "c":1,
+                \ "cpp":1,
+                \ "objc":1,
+                \ "objcpp":1,
+                \ "python":1,
+                \ "java":1,
+                \ "javascript":1,
+                \ "coffee":1,
+                \ "vim":1,
+                \ "go":1,
+                \ "cs":1,
+                \ "lua":1,
+                \ "perl":1,
+                \ "perl6":1,
+                \ "php":1,
+                \ "ruby":1,
+                \ "rust":1,
+                \ "erlang":1,
+                \ "asm":1,
+                \ "nasm":1,
+                \ "masm":1,
+                \ "tasm":1,
+                \ "asm68k":1,
+                \ "asmh8300":1,
+                \ "asciidoc":1,
+                \ "basic":1,
+                \ "vb":1,
+                \ "make":1,
+                \ "cmake":1,
+                \ "html":1,
+                \ "css":1,
+                \ "less":1,
+                \ "json":1,
+                \ "cson":1,
+                \ "typedscript":1,
+                \ "haskell":1,
+                \ "lhaskell":1,
+                \ "lisp":1,
+                \ "scheme":1,
+                \ "sdl":1,
+                \ "sh":1,
+                \ "zsh":1,
+                \ "bash":1,
+                \ "man":1,
+                \ "markdown":1,
+                \ "matlab":1,
+                \ "maxima":1,
+                \ "dosini":1,
+                \ "conf":1,
+                \ "config":1,
+                \ "zimbu":1,
+                \ "ps1":1,
+                \ }
 endif
 
 "----------------------------------------------------------------------
@@ -753,6 +912,8 @@ if index(g:bundle_group, 'leaderf') >= 0
                 \ "Function": [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<cr>']],
                 \ }
     endif
+
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 endif
 
 "----------------------------------------------------------------------
@@ -775,120 +936,4 @@ endif
 " 结束插件安装
 "----------------------------------------------------------------------
 call plug#end()
-
-"----------------------------------------------------------------------
-" YouCompleteMe 默认设置：YCM 需要你另外手动编译安装
-"----------------------------------------------------------------------
-augroup load_ycm
-    autocmd!
-    autocmd InsertEnter * call plug#load('YouCompleteMe','ultisnips') | autocmd! load_ycm
-augroup END
-
-let g:ycm_global_ycm_extra_conf='~/.ShangVim/tools/conf/ycm_extra_conf.py'
-
-" 禁用预览功能：扰乱视听
-set completeopt=menu,menuone
-let g:ycm_add_preview_to_completeopt = 0
-
-" 禁用诊断功能：我们用前面更好用的 ALE 代替
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_server_log_level = 'info'
-let g:ycm_min_num_identifier_candidate_chars = 2
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_complete_in_strings=1
-let g:ycm_key_invoke_completion = '<c-z>'
-
-let g:ycm_confirm_extra_conf=0                    " 关闭加载.ycm_extra_conf.py提示
-let g:ycm_cache_omnifunc=0                        " 禁止缓存匹配项,每次都重新生成匹配项
-let g:ycm_seed_identifiers_with_syntax=1          " 语法关键字补全let g:ycm_autoclose_preview_window_after_insertion = 1
-
-" 离开插入模式后自动关闭预览窗口
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
-
-" 回车即选中当前项
-inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-
-"上下左右键的行为 会显示其他信息
-inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
-
-" noremap <c-z> <NOP>
-
-" Youcompleteme的默认tab,s-tab 和自动补全冲突
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-
-" 修改弹框为灰色
-highlight PMenu ctermfg=0 ctermbg=242 guifg=black guibg=darkgrey
-highlight PMenuSel ctermfg=242 ctermbg=8 guifg=darkgrey guibg=black
-
-" 两个字符自动触发语义补全
-let g:ycm_semantic_triggers =  {
-            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-            \ 'cs,lua,javascript': ['re!\w{2}'],
-            \ }
-
-" ycm
-nnoremap <space>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <space>jr :YcmCompleter GoToReferences<cr>
-
-"----------------------------------------------------------------------
-" Ycm 白名单（非名单内文件不启用 YCM），避免打开个 1MB 的 txt 分析半天
-"----------------------------------------------------------------------
-let g:ycm_filetype_whitelist = {
-            \ "c":1,
-            \ "cpp":1,
-            \ "objc":1,
-            \ "objcpp":1,
-            \ "python":1,
-            \ "java":1,
-            \ "javascript":1,
-            \ "coffee":1,
-            \ "vim":1,
-            \ "go":1,
-            \ "cs":1,
-            \ "lua":1,
-            \ "perl":1,
-            \ "perl6":1,
-            \ "php":1,
-            \ "ruby":1,
-            \ "rust":1,
-            \ "erlang":1,
-            \ "asm":1,
-            \ "nasm":1,
-            \ "masm":1,
-            \ "tasm":1,
-            \ "asm68k":1,
-            \ "asmh8300":1,
-            \ "asciidoc":1,
-            \ "basic":1,
-            \ "vb":1,
-            \ "make":1,
-            \ "cmake":1,
-            \ "html":1,
-            \ "css":1,
-            \ "less":1,
-            \ "json":1,
-            \ "cson":1,
-            \ "typedscript":1,
-            \ "haskell":1,
-            \ "lhaskell":1,
-            \ "lisp":1,
-            \ "scheme":1,
-            \ "sdl":1,
-            \ "sh":1,
-            \ "zsh":1,
-            \ "bash":1,
-            \ "man":1,
-            \ "markdown":1,
-            \ "matlab":1,
-            \ "maxima":1,
-            \ "dosini":1,
-            \ "conf":1,
-            \ "config":1,
-            \ "zimbu":1,
-            \ "ps1":1,
-            \ }
 
