@@ -75,7 +75,7 @@ On_ICyan='\033[0;106m'   # Cyan
 On_IWhite='\033[0;107m'  # White
 # }}}
 
-#S ystem name
+#System name
 System="$(uname -s)"
 
 # }}}
@@ -350,6 +350,8 @@ install_fonts() {
             mkdir "$HOME/Library/Fonts"
         fi
         cp $HOME/.local/share/fonts/* $HOME/Library/Fonts/
+    elif [ $System == "FreeBSD" ]; then
+        echo "FreeBSD..."
     else
         fc-cache -fv >/dev/null
         mkfontdir "$HOME/.local/share/fonts" >/dev/null
