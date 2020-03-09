@@ -78,10 +78,10 @@ map ;cu <plug>NERDCommenterUncomment
 " 快速运行
 Plug 'thinca/vim-quickrun'
 let g:quickrun_config = {
-        \   "_" : {
-        \       "outputter" : "message",
-        \   },
-        \}
+            \   "_" : {
+            \       "outputter" : "message",
+            \   },
+            \}
 let g:quickrun_no_default_key_mappings = 1
 map <space>R :QuickRun<CR>
 
@@ -140,8 +140,8 @@ if index(g:bundle_group, 'basic') >= 0
     let g:signify_sign_changedelete      = g:signify_sign_change
     " git 仓库使用 histogram 算法进行 diff
     let g:signify_vcs_cmds = {
-            \ 'git': 'git diff --no-color --diff-algorithm=histogram --no-ext-diff -U0 -- %f',
-            \}
+                \ 'git': 'git diff --no-color --diff-algorithm=histogram --no-ext-diff -U0 -- %f',
+                \}
 
     " 根据 quickfix 中匹配到的错误信息，高亮对应文件的错误行
     " 使用 :RemoveErrorMarkers 命令或者 <space>ha 清除错误
@@ -166,23 +166,23 @@ if index(g:bundle_group, 'basic') >= 0
     Plug 'kien/rainbow_parentheses.vim'
     " Rainbow parentheses for Lisp and variants
     let g:rbpt_colorpairs = [
-        \ ['brown',       'RoyalBlue3'],
-        \ ['Darkblue',    'SeaGreen3'],
-        \ ['darkgray',    'DarkOrchid3'],
-        \ ['darkgreen',   'firebrick3'],
-        \ ['darkcyan',    'RoyalBlue3'],
-        \ ['darkred',     'SeaGreen3'],
-        \ ['darkmagenta', 'DarkOrchid3'],
-        \ ['brown',       'firebrick3'],
-        \ ['gray',        'RoyalBlue3'],
-        \ ['black',       'SeaGreen3'],
-        \ ['darkmagenta', 'DarkOrchid3'],
-        \ ['Darkblue',    'firebrick3'],
-        \ ['darkgreen',   'RoyalBlue3'],
-        \ ['darkcyan',    'SeaGreen3'],
-        \ ['darkred',     'DarkOrchid3'],
-        \ ['red',         'firebrick3'],
-        \ ]
+                \ ['brown',       'RoyalBlue3'],
+                \ ['Darkblue',    'SeaGreen3'],
+                \ ['darkgray',    'DarkOrchid3'],
+                \ ['darkgreen',   'firebrick3'],
+                \ ['darkcyan',    'RoyalBlue3'],
+                \ ['darkred',     'SeaGreen3'],
+                \ ['darkmagenta', 'DarkOrchid3'],
+                \ ['brown',       'firebrick3'],
+                \ ['gray',        'RoyalBlue3'],
+                \ ['black',       'SeaGreen3'],
+                \ ['darkmagenta', 'DarkOrchid3'],
+                \ ['Darkblue',    'firebrick3'],
+                \ ['darkgreen',   'RoyalBlue3'],
+                \ ['darkcyan',    'SeaGreen3'],
+                \ ['darkred',     'DarkOrchid3'],
+                \ ['red',         'firebrick3'],
+                \ ]
 
     let g:rbpt_max = 16
     let g:rbpt_loadcmd_toggle = 0
@@ -215,16 +215,16 @@ if index(g:bundle_group, 'basic') >= 0
     let NERDTreeAutoCenter=1
 
     let g:NERDTreeIndicatorMapCustom = {
-        \ "Modified"  : "✹",
-        \ "Staged"    : "✚",
-        \ "Untracked" : "✭",
-        \ "Renamed"   : "➜",
-        \ "Unmerged"  : "═",
-        \ "Deleted"   : "✖",
-        \ "Dirty"     : "✗",
-        \ "Clean"     : "✔︎",
-        \ "Unknown"   : "?"
-        \ }
+                \ "Modified"  : "✹",
+                \ "Staged"    : "✚",
+                \ "Untracked" : "✭",
+                \ "Renamed"   : "➜",
+                \ "Unmerged"  : "═",
+                \ "Deleted"   : "✖",
+                \ "Dirty"     : "✗",
+                \ "Clean"     : "✔︎",
+                \ "Unknown"   : "?"
+                \ }
     nmap <leader>nt :NERDTreeToggle<cr>
 endif
 
@@ -268,7 +268,7 @@ if index(g:bundle_group, 'enhanced') >= 0
 
     " format
     Plug 'sbdchd/neoformat'
-    let g:neoformat_enabled_python = ['autopep8', 'yapf', 'docformatter']
+    let g:neoformat_enabled_python = ['blank', 'autopep8', 'yapf', 'docformatter']
     " Enable alignment
     let g:neoformat_basic_format_align = 1
 
@@ -280,8 +280,8 @@ if index(g:bundle_group, 'enhanced') >= 0
     let g:neoformat_run_all_formatters = 1
 
     augroup fmt
-      autocmd!
-      autocmd BufWritePre * undojoin | Neoformat
+        autocmd!
+        autocmd BufWritePre * undojoin | Neoformat
     augroup END
 
     " windows chooose
@@ -433,47 +433,47 @@ if index(g:bundle_group, 'filetypes') >= 0
     " 支持 go
     Plug 'fatih/vim-go'
     " vim-go {
-        "auto save run GoImports
-        autocmd BufWritePre *.go :GoImports
+    "auto save run GoImports
+    autocmd BufWritePre *.go :GoImports
 
-        "automatically rebalance windows on vim resize
-        autocmd VimResized * :wincmd =
+    "automatically rebalance windows on vim resize
+    autocmd VimResized * :wincmd =
 
-        let g:go_fmt_command = "goimports"
-        let g:go_autodetect_gopath = 1
-        let g:go_list_type = "quickfix"
-        let g:go_def_mapping_enabled = 0
-        let g:go_fmt_fail_silently = 0
-        let g:go_highlight_types = 1
-        let g:go_highlight_fields = 1
-        let g:go_highlight_functions = 1
-        let g:go_highlight_function_calls = 1
-        let g:go_highlight_extra_types = 1
-        let g:go_highlight_generate_tags = 1
+    let g:go_fmt_command = "goimports"
+    let g:go_autodetect_gopath = 1
+    let g:go_list_type = "quickfix"
+    let g:go_def_mapping_enabled = 0
+    let g:go_fmt_fail_silently = 0
+    let g:go_highlight_types = 1
+    let g:go_highlight_fields = 1
+    let g:go_highlight_functions = 1
+    let g:go_highlight_function_calls = 1
+    let g:go_highlight_extra_types = 1
+    let g:go_highlight_generate_tags = 1
 
-        " Open :GoDeclsDir with ctrl-g
-        nmap <C-g> :GoDeclsDir<cr>
-        imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
+    " Open :GoDeclsDir with ctrl-g
+    nmap <C-g> :GoDeclsDir<cr>
+    imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
 
-        augroup go
-            autocmd!
-            " :GoAlternate  commands :A, :AV, :AS and :AT
-            autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
-            autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-            autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-            autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
-        augroup END
+    augroup go
+        autocmd!
+        " :GoAlternate  commands :A, :AV, :AS and :AT
+        autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+        autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+        autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+        autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+    augroup END
 
-        " build_go_files is a custom function that builds or compiles the test file.
-        " It calls :GoBuild if its a Go file, or :GoTestCompile if it's a test file
-        function! s:build_go_files()
-            let l:file = expand('%')
-            if l:file =~# '^\f\+_test\.go$'
-                call go#test#Test(0, 1)
-            elseif l:file =~# '^\f\+\.go$'
-                call go#cmd#Build(0)
-            endif
-        endfunction
+    " build_go_files is a custom function that builds or compiles the test file.
+    " It calls :GoBuild if its a Go file, or :GoTestCompile if it's a test file
+    function! s:build_go_files()
+        let l:file = expand('%')
+        if l:file =~# '^\f\+_test\.go$'
+            call go#test#Test(0, 1)
+        elseif l:file =~# '^\f\+\.go$'
+            call go#cmd#Build(0)
+        endif
+    endfunction
     "}
 
 
@@ -904,13 +904,13 @@ if index(g:bundle_group, 'leaderf') >= 0
 
         " 使用 ESC 键可以直接退出 leaderf 的 normal 模式
         let g:Lf_NormalMap = {
-                \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
-                \ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<cr>']],
-                \ "Mru": [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<cr>']],
-                \ "Tag": [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<cr>']],
-                \ "BufTag": [["<ESC>", ':exec g:Lf_py "bufTagExplManager.quit()"<cr>']],
-                \ "Function": [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<cr>']],
-                \ }
+                    \ "File":   [["<ESC>", ':exec g:Lf_py "fileExplManager.quit()"<CR>']],
+                    \ "Buffer": [["<ESC>", ':exec g:Lf_py "bufExplManager.quit()"<cr>']],
+                    \ "Mru": [["<ESC>", ':exec g:Lf_py "mruExplManager.quit()"<cr>']],
+                    \ "Tag": [["<ESC>", ':exec g:Lf_py "tagExplManager.quit()"<cr>']],
+                    \ "BufTag": [["<ESC>", ':exec g:Lf_py "bufTagExplManager.quit()"<cr>']],
+                    \ "Function": [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<cr>']],
+                    \ }
     endif
 
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
