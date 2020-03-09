@@ -377,15 +377,15 @@ vmap ;rm <ESC>:%s/<c-v><c-m>//g<CR>
 " 一键替换全部Tab为空格[全模式可用]
 func! RemoveTabs()
     if &shiftwidth == 2
-        exec "%s/	/  /g"
+        exec "%s/   /  /g"
     elseif &shiftwidth == 4
-        exec "%s/	/    /g"
+        exec "%s/   /    /g"
     elseif &shiftwidth == 6
-        exec "%s/	/      /g"
+        exec "%s/   /      /g"
     elseif &shiftwidth == 8
-        exec "%s/	/        /g"
+        exec "%s/   /        /g"
     else
-        exec "%s/	/ /g"
+        exec "%s/   / /g"
     end
 endfunc
 
@@ -482,6 +482,10 @@ nmap <leader>tp :tprevious<CR>  " 反向遍历同名标签
 
 " tagbar
 nmap <space>tb :TagbarToggle<CR>
+
+" ycm
+nnoremap <space>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <space>jr :YcmCompleter GoToReferences<cr>
 
 " gtags-cscope
 noremap <silent> <leader>tcs :GscopeFind s <C-R><C-W><cr>

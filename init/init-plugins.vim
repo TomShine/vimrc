@@ -345,6 +345,8 @@ if index(g:bundle_group, 'tags') >= 0
 
     " tagbar
     Plug 'majutsushi/tagbar'
+
+    let g:tagbar_left = 1
     " 启动时自动focus
     let g:tagbar_autofocus = 1
     let g:tagbar_type_elixir = {
@@ -760,10 +762,6 @@ if index(g:bundle_group, 'ycm') >= 0
                 \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
                 \ 'cs,lua,javascript': ['re!\w{2}'],
                 \ }
-
-    " ycm
-    nnoremap <space>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-    nnoremap <space>jr :YcmCompleter GoToReferences<cr>
 
     "----------------------------------------------------------------------
     " Ycm 白名单（非名单内文件不启用 YCM），避免打开个 1MB 的 txt 分析半天
