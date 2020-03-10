@@ -5,6 +5,8 @@
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
 
+let g:asynctasks_system = 'bsd'
+
 let g:isMac = 0
 let g:isLinux = 0
 let g:isGUI = 0

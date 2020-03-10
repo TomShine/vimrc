@@ -264,10 +264,10 @@ if index(g:bundle_group, 'enhanced') >= 0
     let g:neoformat_basic_format_trim = 1
     let g:neoformat_run_all_formatters = 1
 
-    augroup fmt
-        autocmd!
-        autocmd BufWritePre * undojoin | Neoformat
-    augroup END
+    " augroup fmt
+        " autocmd!
+        " autocmd BufWritePre * undojoin | Neoformat
+    " augroup END
 
 endif
 
