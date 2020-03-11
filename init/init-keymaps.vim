@@ -1,6 +1,6 @@
 "======================================================================
 "
-" init-keymaps.vim - 按键设置，按你喜欢更改
+" init-keymaps.vim - 按键设置
 "
 "    - 快速移动
 "    - 标签切换
@@ -498,6 +498,14 @@ noremap <silent> <leader>tci :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
 noremap <silent> <leader>tcd :GscopeFind d <C-R><C-W><cr>
 noremap <silent> <leader>tca :GscopeFind a <C-R><C-W><cr>
 noremap <silent> <leader>tck :GscopeKill<cr>
+
+" 注释
+map ;cc <plug>NERDCommenterComment
+map ;cu <plug>NERDCommenterUncomment
+" NERDTree
+nmap <space>nt :NERDTreeToggle<cr>
+
+
 
 " 安装、更新、删除插件
 nnoremap <space><space>i :PlugInstall<cr>

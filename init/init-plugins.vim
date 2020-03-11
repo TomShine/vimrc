@@ -72,8 +72,6 @@ Plug 'chrisbra/vim-diff-enhanced'
 Plug 'scrooloose/nerdcommenter'
 let NERDSpaceDelims     = 1 " 自动添加前置空格
 let NERDCompactSexyComs = 1
-map ;cc <plug>NERDCommenterComment
-map ;cu <plug>NERDCommenterUncomment
 
 " 快速运行
 Plug 'thinca/vim-quickrun'
@@ -225,7 +223,6 @@ if index(g:bundle_group, 'basic') >= 0
                 \ "Clean"     : "✔︎",
                 \ "Unknown"   : "?"
                 \ }
-    nmap <leader>nt :NERDTreeToggle<cr>
 endif
 
 "----------------------------------------------------------------------
@@ -478,6 +475,13 @@ if index(g:bundle_group, 'filetypes') >= 0
     endfunction
     "}
 
+    " Python 支持
+    Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+    " python 语法文件增强
+    Plug 'vim-python/python-syntax', { 'for': ['python'] }
+
+    " rust 语法增强
+    Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
     " powershell 脚本文件的语法高亮
     Plug 'pprovost/vim-ps1', { 'for': 'ps1' }
@@ -488,14 +492,6 @@ if index(g:bundle_group, 'filetypes') >= 0
     " C++ 语法高亮增强，支持 11/14/17 标准
     Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['c', 'cpp'] }
 
-    " 额外语法文件
-    Plug 'justinmk/vim-syntax-extra', { 'for': ['c', 'bison', 'flex', 'cpp'] }
-
-    " python 语法文件增强
-    Plug 'vim-python/python-syntax', { 'for': ['python'] }
-
-    " rust 语法增强
-    Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
     " org-mode
     Plug 'jceb/vim-orgmode', { 'for': 'org' }
@@ -505,6 +501,9 @@ if index(g:bundle_group, 'filetypes') >= 0
 
     " nginx
     Plug 'vim-scripts/nginx.vim'
+
+    " 额外语法文件
+    Plug 'justinmk/vim-syntax-extra', { 'for': ['c', 'bison', 'flex', 'cpp'] }
 endif
 
 "---------------------------------------------------------------------

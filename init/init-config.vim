@@ -209,14 +209,14 @@ endif
 
 " 打开文件时恢复上一次光标所在位置
 autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \	 exe "normal! g`\"" |
-    \ endif
+            \ if line("'\"") > 1 && line("'\"") <= line("$") |
+            \    exe "normal! g`\"" |
+            \ endif
 
 " 定义一个 DiffOrig 命令用于查看文件改动
 if !exists(":DiffOrig")
     command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
-        \ | wincmd p | diffthis
+                \ | wincmd p | diffthis
 endif
 
 
