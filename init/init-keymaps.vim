@@ -212,6 +212,21 @@ let g:Lf_ShortcutF = '<leader>ff'
 " 打开最近使用的文件 MRU，进行模糊匹配
 noremap <leader>fr :LeaderfMru<cr>
 noremap <leader>fP :LeaderfBufTag!<cr>
+" 打开 buffer 模糊匹配
+let g:Lf_ShortcutB = '<leader>fb'
+" 打开 buffer 列表进行模糊匹配
+noremap <leader>fb :LeaderfBuffer<cr>
+" 全局 tags 模糊匹配
+noremap <m-m> :LeaderfTag<cr>
+noremap <leader>ft :LeaderfTag<cr>
+" 打开函数列表，按 i 进入模糊匹配，ESC 退出
+noremap <leader>fF :LeaderfFunction!<cr>
+
+noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
+noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
+noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
 
 
 "----------------------------------------------------------------------
@@ -220,20 +235,6 @@ noremap <leader>fP :LeaderfBufTag!<cr>
 
 nmap <leader>tn :tnext<CR>      " 正向遍历同名标签
 nmap <leader>tp :tprevious<CR>  " 反向遍历同名标签
-
-" Plugin: tagbar
-nmap <leader>tb :TagbarToggle<CR>
-
-" Plugin: leaderf
-" 全局 tags 模糊匹配
-noremap <m-m> :LeaderfTag<cr>
-noremap <leader>ft :LeaderfTag<cr>
-
-noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
-noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
-noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
-noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
-noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
 
 " Plugin: gtags-cscope
 noremap <silent> <leader>tcs :GscopeFind s <C-R><C-W><cr>
@@ -258,12 +259,6 @@ nnoremap <silent> <leader>bn :bnext<cr>
 nnoremap <silent> <leader>bf :bfirst<cr>
 nnoremap <silent> <leader>bl :blast<cr>
 
-" Plugin: leaderf
-" 打开 buffer 模糊匹配
-let g:Lf_ShortcutB = '<leader>fb'
-" 打开 buffer 列表进行模糊匹配
-noremap <leader>fb :LeaderfBuffer<cr>
-
 
 "----------------------------------------------------------------------
 " Quickfix
@@ -279,7 +274,7 @@ let g:lt_quickfix_list_toggle_map = '<leader>qt'
 
 " Plugin: mh21/errormarker.vim
 " 清除 errormarker 标注的错误
-noremap <silent><space>ha :RemoveErrorMarkers<cr>
+noremap <silent><leader>ha :RemoveErrorMarkers<cr>
 
 "----------------------------------------------------------------------
 " Location
@@ -292,6 +287,22 @@ nnoremap <silent> <leader>ll :llast<cr>
 
 " Plugin: Valloric/ListToggle
 let g:lt_location_list_toggle_map = '<leader>lt'
+
+
+"----------------------------------------------------------------------
+" 会话: Session
+"----------------------------------------------------------------------
+
+" 设置环境保存项
+set sessionoptions="blank,globals,localoptions,tabpages,sesdir,flolds,help,options,resize,winpos,winsize"
+
+" 保存快捷键
+"map ;ss :mksession! my.vim<cr> :wviminfo! my.viminfo<cr>
+map ;ss :mksession! my.vim<cr>
+
+" 恢复快捷键
+map ;rs :source my.vim<cr> :rviminfo my.viminfo<cr>
+map ;rs :source my.vim<cr>
 
 
 "----------------------------------------------------------------------
@@ -322,6 +333,7 @@ endif
 nnoremap <leader>s/ :FlyGrep<cr>
 
 " Plugin: Chun-Yang/vim-action-ag
+" use * to search current word in normal mode
 nmap * <Plug>AgActionWord
 " use * to search selected text in visual mode
 vmap * <Plug>AgActionVisual
@@ -353,22 +365,6 @@ nmap ;ga <ESC>ggVG"+y<ESC>
 imap ;gp <ESC>"+p
 nmap ;gp "+p
 vmap ;gp "+p
-
-
-"----------------------------------------------------------------------
-" 会话: Session
-"----------------------------------------------------------------------
-
-" 设置环境保存项
-set sessionoptions="blank,globals,localoptions,tabpages,sesdir,flolds,help,options,resize,winpos,winsize"
-
-" 保存快捷键
-"map ;ss :mksession! my.vim<cr> :wviminfo! my.viminfo<cr>
-map ;ss :mksession! my.vim<cr>
-
-" 恢复快捷键
-map ;rs :source my.vim<cr> :rviminfo my.viminfo<cr>
-map ;rs :source my.vim<cr>
 
 
 "----------------------------------------------------------------------
@@ -425,25 +421,21 @@ inoremap <m-y> <c-\><c-o>d$
 " Plugin: quick run
 map <leader>R :QuickRun<CR>
 
-" Plugin: leaderf
-" 打开函数列表，按 i 进入模糊匹配，ESC 退出
-noremap <leader>fF :LeaderfFunction!<cr>
-
 " Plugin: NerdComment 注释
 map ;cc <plug>NERDCommenterComment
 map ;cu <plug>NERDCommenterUncomment
 
 " 语法检查
 " Plugin: rhysd/vim-grammarous
-noremap <space>rg :GrammarousCheck --lang=en-US --no-move-to-first-error --no-preview<cr>
-map <space>rr <Plug>(grammarous-open-info-window)
-map <space>rv <Plug>(grammarous-move-to-info-window)
-map <space>rs <Plug>(grammarous-reset)
-map <space>rx <Plug>(grammarous-close-info-window)
-map <space>rm <Plug>(grammarous-remove-error)
-map <space>rd <Plug>(grammarous-disable-rule)
-map <space>rn <Plug>(grammarous-move-to-next-error)
-map <space>rp <Plug>(grammarous-move-to-previous-error)
+"noremap <space>rg :GrammarousCheck --lang=en-US --no-move-to-first-error --no-preview<cr>
+"map <space>rr <Plug>(grammarous-open-info-window)
+"map <space>rv <Plug>(grammarous-move-to-info-window)
+"map <space>rs <Plug>(grammarous-reset)
+"map <space>rx <Plug>(grammarous-close-info-window)
+"map <space>rm <Plug>(grammarous-remove-error)
+"map <space>rd <Plug>(grammarous-disable-rule)
+"map <space>rn <Plug>(grammarous-move-to-next-error)
+"map <space>rp <Plug>(grammarous-move-to-previous-error)
 
 " Plugin: 'w0rp/ale'
 " 普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
@@ -470,9 +462,9 @@ imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
 "----------------------------------------------------------------------
 
 " Plugin 安装、更新、删除插件
-nnoremap <space><space>i :PlugInstall<cr>
-nnoremap <space><space>u :PlugUpdate<cr>
-nnoremap <space><space>c :PlugClean<cr>
+nnoremap <leader><leader>i :PlugInstall<cr>
+nnoremap <leader><leader>u :PlugUpdate<cr>
+nnoremap <leader><leader>c :PlugClean<cr>
 
 " 常规模式下输入 cS 清除行尾空格
 nmap ;cS :%s/\s\+$//g<CR>:noh<CR>

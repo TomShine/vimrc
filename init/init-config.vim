@@ -58,7 +58,8 @@ set list " 显示特殊字符，其中Tab使用高亮~代替，尾部空白使�
 set listchars=tab:>-,trail:-,extends:>,precedes:<
 
 " mapleader
-let mapleader = ","
+"let mapleader = ","
+let mapleader = "<space>"
 
 
 "----------------------------------------------------------------------

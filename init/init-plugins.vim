@@ -243,7 +243,7 @@ if index(g:bundle_group, 'enhanced') >= 0
         let g:ackprg='ag --nogroup --nocolor --column'
     endif
 
-    " use * to search current word in normal mode
+    " Ag search current word in normal mode
     Plug 'Chun-Yang/vim-action-ag'
 
     " 配对括号和引号自动补全
@@ -251,7 +251,6 @@ if index(g:bundle_group, 'enhanced') >= 0
 
     " 提供 gist 接口
     Plug 'lambdalisue/vim-gista', { 'on': 'Gista' }
-
 
     " format
     Plug 'sbdchd/neoformat'
@@ -329,153 +328,6 @@ if index(g:bundle_group, 'tags') >= 0
 
     " 调试
     let g:gutentags_define_advanced_commands = 1
-
-    " tagbar
-    "Plug 'majutsushi/tagbar'
-
-    let g:tagbar_left = 1
-    " 启动时自动focus
-    let g:tagbar_autofocus = 1
-    let g:tagbar_type_coffee = {
-                \ 'ctagstype' : 'coffee',
-                \ 'kinds'     : [
-                \ 'c:classes',
-                \ 'm:methods',
-                \ 'f:functions',
-                \ 'v:variables',
-                \ 'f:fields',
-                \ ]
-                \ }
-    let g:tagbar_type_css = {
-                \ 'ctagstype' : 'Css',
-                \ 'kinds'     : [
-                \ 'c:classes',
-                \ 's:selectors',
-                \ 'i:identities'
-                \ ]
-                \ }
-    let g:tagbar_type_elixir = {
-                \ 'ctagstype' : 'elixir',
-                \ 'kinds' : [
-                \ 'p:protocols',
-                \ 'm:modules',
-                \ 'e:exceptions',
-                \ 'y:types',
-                \ 'd:delegates',
-                \ 'f:functions',
-                \ 'c:callbacks',
-                \ 'a:macros',
-                \ 't:tests',
-                \ 'i:implementations',
-                \ 'o:operators',
-                \ 'r:records'
-                \ ],
-                \ 'sro' : '.',
-                \ 'kind2scope' : {
-                \ 'p' : 'protocol',
-                \ 'm' : 'module'
-                \ },
-                \ 'scope2kind' : {
-                \ 'protocol' : 'p',
-                \ 'module' : 'm'
-                \ },
-                \ 'sort' : 0
-                \ }
-    let g:tagbar_type_go = {
-                \ 'ctagstype': 'go',
-                \ 'kinds' : [
-                \'p:package',
-                \'f:function',
-                \'v:variables',
-                \'t:type',
-                \'c:const'
-                \]
-                \}
-    let g:tagbar_type_javascript = {
-                \ 'ctagstype': 'javascript',
-                \ 'kinds': [
-                \ 'A:arrays',
-                \ 'P:properties',
-                \ 'T:tags',
-                \ 'O:objects',
-                \ 'G:generator functions',
-                \ 'F:functions',
-                \ 'C:constructors/classes',
-                \ 'M:methods',
-                \ 'V:variables',
-                \ 'I:imports',
-                \ 'E:exports',
-                \ 'S:styled components'
-                \ ]}
-    let g:tagbar_type_json = {
-                \ 'ctagstype' : 'json',
-                \ 'kinds' : [
-                \ 'o:objects',
-                \ 'a:arrays',
-                \ 'n:numbers',
-                \ 's:strings',
-                \ 'b:booleans',
-                \ 'z:nulls'
-                \ ],
-                \ 'sro' : '.',
-                \ 'scope2kind': {
-                \ 'object': 'o',
-                \ 'array': 'a',
-                \ 'number': 'n',
-                \ 'string': 's',
-                \ 'boolean': 'b',
-                \ 'null': 'z'
-                \ },
-                \ 'kind2scope': {
-                \ 'o': 'object',
-                \ 'a': 'array',
-                \ 'n': 'number',
-                \ 's': 'string',
-                \ 'b': 'boolean',
-                \ 'z': 'null'
-                \ },
-                \ 'sort' : 0
-                \ }
-    let g:tagbar_type_make = {
-                \ 'kinds':[
-                \ 'm:macros',
-                \ 't:targets'
-                \ ]
-                \}
-    let g:rust_use_custom_ctags_defs = 1  " if using rust.vim
-    let g:tagbar_type_rust = {
-                \ 'ctagsbin' : '/path/to/your/universal/ctags',
-                \ 'ctagstype' : 'rust',
-                \ 'kinds' : [
-                \ 'n:modules',
-                \ 's:structures:1',
-                \ 'i:interfaces',
-                \ 'c:implementations',
-                \ 'f:functions:1',
-                \ 'g:enumerations:1',
-                \ 't:type aliases:1:0',
-                \ 'v:constants:1:0',
-                \ 'M:macros:1',
-                \ 'm:fields:1:0',
-                \ 'e:enum variants:1:0',
-                \ 'P:methods:1',
-                \ ],
-                \ 'sro': '::',
-                \ 'kind2scope' : {
-                \ 'n': 'module',
-                \ 's': 'struct',
-                \ 'i': 'interface',
-                \ 'c': 'implementation',
-                \ 'f': 'function',
-                \ 'g': 'enum',
-                \ 't': 'typedef',
-                \ 'v': 'variable',
-                \ 'M': 'macro',
-                \ 'm': 'field',
-                \ 'e': 'enumerator',
-                \ 'P': 'method',
-                \ },
-                \ }
 
 endif
 
