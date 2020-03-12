@@ -5,7 +5,6 @@
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
 
-let g:asynctasks_system = 'bsd'
 
 let g:isMac = 0
 let g:isLinux = 0
@@ -13,8 +12,11 @@ let g:isGUI = 0
 
 if has('mac')
     let g:isMac = 1
+    let g:asynctasks_system = 'macos'
 elseif has('unix')
     let g:isLinux = 1
+elseif has('bsd')
+    "let g:asynctasks_system = 'bsd'
 endif
 
 if has("gui_running")
