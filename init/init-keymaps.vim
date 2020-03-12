@@ -314,7 +314,7 @@ map ;rs :source my.vim<cr>
 " 不是在当前目录 grep，而是会去到当前文件所属的项目目录 project root
 " 下面进行 grep，这样能方便的对相关项目进行搜索
 if executable('rg')
-    noremap <silent><F2> :AsyncRun! -cwd=<root> rg -n --no-heading
+    noremap <silent><leader>sf :AsyncRun! -cwd=<root> rg -n --no-heading
                 \ --color never -g *.h -g *.c* -g *.py -g *.js -g *.vim
                 \ <C-R><C-W> "<root>" <cr>
 elseif has('win32') || has('win64')
@@ -328,15 +328,6 @@ else
                 \ --include='*.js' --include='*.vim'
                 \ '<root>' <cr>
 endif
-
-" Plugin: wsdjeg/FlyGrep.vim
-nnoremap <leader>s/ :FlyGrep<cr>
-
-" Plugin: Chun-Yang/vim-action-ag
-" use * to search current word in normal mode
-nmap * <Plug>AgActionWord
-" use * to search selected text in visual mode
-vmap * <Plug>AgActionVisual
 
 
 "----------------------------------------------------------------------

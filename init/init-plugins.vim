@@ -232,9 +232,6 @@ if index(g:bundle_group, 'enhanced') >= 0
     " 给不同语言提供字典补全，插入模式下 c-x c-k 触发
     Plug 'asins/vim-dict'
 
-    " 使用 :FlyGrep 命令进行实时 grep
-    Plug 'wsdjeg/FlyGrep.vim'
-
     " grep search: support rg, ag, ack, grep etc.
     Plug 'yegappan/grep'
     if executable('rg')
@@ -242,9 +239,6 @@ if index(g:bundle_group, 'enhanced') >= 0
     elseif executable('ag')
         let g:ackprg='ag --nogroup --nocolor --column'
     endif
-
-    " Ag search current word in normal mode
-    Plug 'Chun-Yang/vim-action-ag'
 
     " 配对括号和引号自动补全
     Plug 'Raimondi/delimitMate'
