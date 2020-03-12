@@ -102,6 +102,7 @@ let g:lt_height = 10
 
 " 异步运行
 Plug 'skywind3000/asyncrun.vim'
+Plug 'skywind3000/asynctasks.vim'
 " 自动打开 quickfix window ，高度为 6
 let g:asyncrun_open = 6
 " 任务结束时候响铃提醒
@@ -825,7 +826,8 @@ if index(g:bundle_group, 'leaderf') >= 0
     endif
 
     " fuzzy finder
-    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf', { 'do': './install --bin' }
+    Plug 'junegunn/fzf.vim'
 
 endif
 
