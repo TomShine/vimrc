@@ -240,10 +240,11 @@ if index(g:bundle_group, 'enhanced') >= 0
     Plug 'wsdjeg/FlyGrep.vim'
     nnoremap <space>s/ :FlyGrep<cr>
 
-    " ag search
-    Plug 'rking/ag.vim'
-    if executable('ag')
-        " Use Ag over Grep
+    " grep search: support rg, ag, ack, grep etc.
+    Plug 'yegappan/grep'
+    if executable('rg')
+        let g:ackprg='rg --nogroup --nocolor --column'
+    elseif executable('ag')
         let g:ackprg='ag --nogroup --nocolor --column'
     endif
 
@@ -933,4 +934,3 @@ endif
 " 结束插件安装
 "----------------------------------------------------------------------
 call plug#end()
-
