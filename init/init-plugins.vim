@@ -14,7 +14,7 @@ if has('mac')
     let g:isMac = 1
 elseif has('unix')
     let g:isLinux = 1
-elseif has('frebsd')
+elseif has('bsd')
     leg g:isFreeBSD = 1
 endif
 
@@ -107,6 +107,10 @@ Plug 'skywind3000/asynctasks.vim'
 let g:asyncrun_open = 6
 " 任务结束时候响铃提醒
 let g:asyncrun_bell = 1
+let g:asynctasks_extra_config = [
+            \ '~/.ShangVim/tasks.ini',
+            \ '~/.config/tasks/local_tasks.ini',
+            \ ]
 
 " Undotree
 Plug 'mbbill/undotree'
