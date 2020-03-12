@@ -22,8 +22,6 @@ inoremap <c-_> <c-k>
 
 "----------------------------------------------------------------------
 " 设置 CTRL+HJKL 移动光标（INSERT 模式偶尔需要移动的方便些）
-" 使用 SecureCRT/XShell 等终端软件需设置：Backspace sends delete
-" 详见：http://www.skywind.me/blog/archives/2021
 "----------------------------------------------------------------------
 noremap <C-h> <left>
 noremap <C-j> <down>
@@ -48,9 +46,12 @@ cnoremap <c-b> <left>
 cnoremap <c-d> <del>
 cnoremap <c-_> <c-k>
 
+
 "----------------------------------------------------------------------
+" Tab 快捷键
+"----------------------------------------------------------------------
+
 " <leader>+数字键 切换 tab
-"----------------------------------------------------------------------
 noremap <silent><leader>1 1gt<cr>
 noremap <silent><leader>2 2gt<cr>
 noremap <silent><leader>3 3gt<cr>
@@ -62,9 +63,7 @@ noremap <silent><leader>8 8gt<cr>
 noremap <silent><leader>9 9gt<cr>
 noremap <silent><leader>0 10gt<cr>
 
-"----------------------------------------------------------------------
 " ALT+N 切换 tab
-"----------------------------------------------------------------------
 noremap <silent><m-1> :tabn 1<cr>
 noremap <silent><m-2> :tabn 2<cr>
 noremap <silent><m-3> :tabn 3<cr>
@@ -85,6 +84,7 @@ inoremap <silent><m-7> <ESC>:tabn 7<cr>
 inoremap <silent><m-8> <ESC>:tabn 8<cr>
 inoremap <silent><m-9> <ESC>:tabn 9<cr>
 inoremap <silent><m-0> <ESC>:tabn 10<cr>
+
 
 " MacVim 允许 CMD+数字键快速切换标签
 if has("gui_macvim")
@@ -111,16 +111,8 @@ if has("gui_macvim")
     inoremap <silent><d-0> <ESC>:tabn 10<cr>
 endif
 
-"----------------------------------------------------------------------
-" 缓存：插件 unimpaired 中定义了 [b, ]b 来切换缓存
-"----------------------------------------------------------------------
-noremap <silent> <leader>bn :bn<cr>
-noremap <silent> <leader>bp :bp<cr>
-
-"----------------------------------------------------------------------
 " TAB：创建，关闭，上一个，下一个，左移，右移
 " 其实还可以用原生的 CTRL+PageUp, CTRL+PageDown 来切换标签
-"----------------------------------------------------------------------
 noremap <silent> <leader>tc :tabnew<cr>
 noremap <silent> <leader>tq :tabclose<cr>
 noremap <silent> <leader>tn :tabnext<cr>
@@ -147,32 +139,28 @@ noremap <silent><leader>tr :call Tab_MoveRight()<cr>
 noremap <silent><m-left> :call Tab_MoveLeft()<cr>
 noremap <silent><m-right> :call Tab_MoveRight()<cr>
 
-"----------------------------------------------------------------------
-" ALT 键移动增强
-"----------------------------------------------------------------------
+nnoremap <silent> [t :tabprevious<cr>
+nnoremap <silent> ]t :tabnext<cr>
+nnoremap <silent> [T :tabfirst<cr>
+nnoremap <silent> ]T :tablast<cr>
 
-" ALT+h/l 快速左右按单词移动（正常模式+插入模式）
-noremap <m-h> b
-noremap <m-l> w
-inoremap <m-h> <c-left>
-inoremap <m-l> <c-right>
+" Tabularize
+" nnoremap <space>a= :Tabularize /=<CR>
+" vnoremap <space>a= :Tabularize /=<CR>
+" nnoremap <space>a/ :Tabularize /\/\//l2c1l0<CR>
+" vnoremap <space>a/ :Tabularize /\/\//l2c1l0<CR>
+" nnoremap <space>a, :Tabularize /,/l0r1<CR>
+" vnoremap <space>a, :Tabularize /,/l0r1<CR>
+" nnoremap <space>al :Tabularize /\|<cr>
+" vnoremap <space>al :Tabularize /\|<cr>
+" nnoremap <space>a<bar> :Tabularize /\|<cr>
+" vnoremap <space>a<bar> :Tabularize /\|<cr>
+" nnoremap <space>ar :Tabularize /\|/r0<cr>
+" vnoremap <space>ar :Tabularize /\|/r0<cr>
 
-" ALT+j/k 逻辑跳转下一行/上一行（按 wrap 逻辑换行进行跳转）
-noremap <m-j> gj
-noremap <m-k> gk
-inoremap <m-j> <c-\><c-o>gj
-inoremap <m-k> <c-\><c-o>gk
-
-" 命令模式下的相同快捷
-cnoremap <m-h> <c-left>
-cnoremap <m-l> <c-right>
-
-" ALT+y 删除到行末
-noremap <m-y> d$
-inoremap <m-y> <c-\><c-o>d$
 
 "----------------------------------------------------------------------
-" 窗口切换：ALT+SHIFT+hjkl
+" Window 窗口切换：ALT+SHIFT+hjkl
 " 传统的 CTRL+hjkl 移动窗口不适用于 vim 8.1 的终端模式，CTRL+hjkl 在
 " bash/zsh 及带文本界面的程序中都是重要键位需要保留，不能 tnoremap 的
 "----------------------------------------------------------------------
@@ -204,94 +192,116 @@ elseif has('nvim')
     tnoremap <m-q> <c-\><c-n>
 endif
 
-"----------------------------------------------------------------------
-" 编译运行 C/C++ 项目
-" 详细见：http://www.skywind.me/blog/archives/2084
-"----------------------------------------------------------------------
-
-" 自动打开 quickfix window ，高度为 6
-let g:asyncrun_open = 6
-
-" 任务结束时候响铃提醒
-let g:asyncrun_bell = 1
-
-" 设置 F10 打开/关闭 Quickfix 窗口
-nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
-
-" F9 编译 C/C++ 文件
-nnoremap <silent> <F9> :AsyncRun gcc -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
-
-" F5 运行文件
-nnoremap <silent> <F5> :call ExecuteFile()<cr>
-
-" F7 编译项目
-nnoremap <silent> <F7> :AsyncRun -cwd=<root> make <cr>
-
-" F8 运行项目
-nnoremap <silent> <F8> :AsyncRun -cwd=<root> -raw make run <cr>
-
-" F6 测试项目
-nnoremap <silent> <F6> :AsyncRun -cwd=<root> -raw make test <cr>
-
-" 更新 cmake
-nnoremap <silent> <F4> :AsyncRun -cwd=<root> cmake . <cr>
-
-" Windows 下支持直接打开新 cmd 窗口运行
-if has('win32') || has('win64')
-    nnoremap <silent> <F8> :AsyncRun -cwd=<root> -mode=4 make run <cr>
-endif
 
 "----------------------------------------------------------------------
-" F5 运行当前文件：根据文件类型判断方法，并且输出到 quickfix 窗口
+" 文件
 "----------------------------------------------------------------------
-function! ExecuteFile()
-    let cmd = ''
-    if index(['c', 'cpp', 'rs', 'go'], &ft) >= 0
-        " native 语言，把当前文件名去掉扩展名后作为可执行运行
-        " 写全路径名是因为后面 -cwd=? 会改变运行时的当前路径，所以写全路径
-        " 加双引号是为了避免路径中包含空格
-        let cmd = '"$(VIM_FILEDIR)/$(VIM_FILENOEXT)"'
-    elseif &ft == 'python'
-        let $PYTHONUNBUFFERED=1 " 关闭 python 缓存，实时看到输出
-        let cmd = 'python "$(VIM_FILEPATH)"'
-    elseif &ft == 'javascript'
-        let cmd = 'node "$(VIM_FILEPATH)"'
-    elseif &ft == 'perl'
-        let cmd = 'perl "$(VIM_FILEPATH)"'
-    elseif &ft == 'ruby'
-        let cmd = 'ruby "$(VIM_FILEPATH)"'
-    elseif &ft == 'php'
-        let cmd = 'php "$(VIM_FILEPATH)"'
-    elseif &ft == 'lua'
-        let cmd = 'lua "$(VIM_FILEPATH)"'
-    elseif &ft == 'zsh'
-        let cmd = 'zsh "$(VIM_FILEPATH)"'
-    elseif &ft == 'ps1'
-        let cmd = 'powershell -file "$(VIM_FILEPATH)"'
-    elseif &ft == 'vbs'
-        let cmd = 'cscript -nologo "$(VIM_FILEPATH)"'
-    elseif &ft == 'sh'
-        let cmd = 'bash "$(VIM_FILEPATH)"'
-    else
-        return
-    endif
-    " Windows 下打开新的窗口 (-mode=4) 运行程序，其他系统在 quickfix 运行
-    " -raw: 输出内容直接显示到 quickfix window 不匹配 errorformat
-    " -save=2: 保存所有改动过的文件
-    " -cwd=$(VIM_FILEDIR): 运行初始化目录为文件所在目录
-    if has('win32') || has('win64')
-        exec 'AsyncRun -cwd=$(VIM_FILEDIR) -raw -save=2 -mode=4 '. cmd
-    else
-        exec 'AsyncRun -cwd=$(VIM_FILEDIR) -raw -save=2 -mode=0 '. cmd
-    endif
-endfunc
+
+" 使用 <spapce>fs 在插入和normal模式下保存文件，我经常在 insert 模式下代替 Esc
+inoremap <leader>fs <Esc>:w<cr>
+noremap <leader>fs :w<cr>
+inoremap <leader>fq <Esc>:q<cr>
+noremap <leader>fq :q<cr>
+
+" Plugin: NERDTree
+nmap <leader>nt :NERDTreeToggle<cr>
+
+" Plugin: leaderf
+" 打开文件模糊匹配
+let g:Lf_ShortcutF = '<leader>ff'
+" 打开最近使用的文件 MRU，进行模糊匹配
+noremap <leader>fr :LeaderfMru<cr>
+noremap <leader>fP :LeaderfBufTag!<cr>
+
 
 "----------------------------------------------------------------------
+" Tags:  ctags 和 gtags
+"----------------------------------------------------------------------
+
+nmap <leader>tn :tnext<CR>      " 正向遍历同名标签
+nmap <leader>tp :tprevious<CR>  " 反向遍历同名标签
+
+" Plugin: tagbar
+nmap <leader>tb :TagbarToggle<CR>
+
+" Plugin: leaderf
+" 全局 tags 模糊匹配
+noremap <m-m> :LeaderfTag<cr>
+noremap <leader>ft :LeaderfTag<cr>
+
+noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
+noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
+noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
+noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
+
+" Plugin: gtags-cscope
+noremap <silent> <leader>tcs :GscopeFind s <C-R><C-W><cr>
+noremap <silent> <leader>tcg :GscopeFind g <C-R><C-W><cr>
+noremap <silent> <leader>tcc :GscopeFind c <C-R><C-W><cr>
+noremap <silent> <leader>tct :GscopeFind t <C-R><C-W><cr>
+noremap <silent> <leader>tce :GscopeFind e <C-R><C-W><cr>
+noremap <silent> <leader>tcf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+noremap <silent> <leader>tci :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+noremap <silent> <leader>tcd :GscopeFind d <C-R><C-W><cr>
+noremap <silent> <leader>tca :GscopeFind a <C-R><C-W><cr>
+noremap <silent> <leader>tck :GscopeKill<cr>
+
+
+"----------------------------------------------------------------------
+" Buffers
+"----------------------------------------------------------------------
+
+nnoremap <silent> <leader>bb :buffers<cr>
+nnoremap <silent> <leader>bp :bprevious<cr>
+nnoremap <silent> <leader>bn :bnext<cr>
+nnoremap <silent> <leader>bf :bfirst<cr>
+nnoremap <silent> <leader>bl :blast<cr>
+
+" Plugin: leaderf
+" 打开 buffer 模糊匹配
+let g:Lf_ShortcutB = '<leader>fb'
+" 打开 buffer 列表进行模糊匹配
+noremap <leader>fb :LeaderfBuffer<cr>
+
+
+"----------------------------------------------------------------------
+" Quickfix
+"----------------------------------------------------------------------
+
+nnoremap <silent> <leader>qp :cprevious<cr> " 跳到上一个错误
+nnoremap <silent> <leader>qn :cnext<cr>     " 跳到下一个错误
+nnoremap <silent> <leader>qf :cfirst<cr>
+nnoremap <silent> <leader>ql :clast<cr>
+
+" Plugin: Valloric/ListToggle
+let g:lt_quickfix_list_toggle_map = '<leader>qt'
+
+" Plugin: mh21/errormarker.vim
+" 清除 errormarker 标注的错误
+noremap <silent><space>ha :RemoveErrorMarkers<cr>
+
+"----------------------------------------------------------------------
+" Location
+"----------------------------------------------------------------------
+
+nnoremap <silent> <leader>lp :lprevious<cr>
+nnoremap <silent> <leader>ln :lnext<cr>
+nnoremap <silent> <leader>lf :lfirst<cr>
+nnoremap <silent> <leader>ll :llast<cr>
+
+" Plugin: Valloric/ListToggle
+let g:lt_location_list_toggle_map = '<leader>lt'
+
+
+"----------------------------------------------------------------------
+" 搜索
+"----------------------------------------------------------------------
+
 " F2 在项目目录下 Grep 光标下单词，默认 C/C++/Py/Js ，扩展名自己扩充
 " 支持 rg/grep/findstr ，其他类型可以自己扩充
 " 不是在当前目录 grep，而是会去到当前文件所属的项目目录 project root
 " 下面进行 grep，这样能方便的对相关项目进行搜索
-"----------------------------------------------------------------------
 if executable('rg')
     noremap <silent><F2> :AsyncRun! -cwd=<root> rg -n --no-heading
                 \ --color never -g *.h -g *.c* -g *.py -g *.js -g *.vim
@@ -308,9 +318,19 @@ else
                 \ '<root>' <cr>
 endif
 
+" Plugin: wsdjeg/FlyGrep.vim
+nnoremap <leader>s/ :FlyGrep<cr>
+
+" Plugin: Chun-Yang/vim-action-ag
+nmap * <Plug>AgActionWord
+" use * to search selected text in visual mode
+vmap * <Plug>AgActionVisual
+
+
 "----------------------------------------------------------------------
 " 复制和粘贴
 "----------------------------------------------------------------------
+"
 " Paste mode avoids auto-indent
 " set pastetoggle=<leader>p
 
@@ -334,8 +354,9 @@ imap ;gp <ESC>"+p
 nmap ;gp "+p
 vmap ;gp "+p
 
+
 "----------------------------------------------------------------------
-" session
+" 会话: Session
 "----------------------------------------------------------------------
 
 " 设置环境保存项
@@ -349,9 +370,109 @@ map ;ss :mksession! my.vim<cr>
 map ;rs :source my.vim<cr> :rviminfo my.viminfo<cr>
 map ;rs :source my.vim<cr>
 
+
 "----------------------------------------------------------------------
-" ohters
+" 补全
 "----------------------------------------------------------------------
+
+" Plugin: SuperTab
+let g:SuperTabDefaultCompletionType = '<C-X><C-O>'
+
+" Plugin: YCM
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>jr :YcmCompleter GoToReferences<cr>
+
+" UltiSnips 的 tab 键与 YCM 冲突，重新设定
+let g:UltiSnipsExpandTrigger="<leader><tab>"
+let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
+let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
+
+
+"----------------------------------------------------------------------
+" ALT 键移动增强
+"----------------------------------------------------------------------
+
+" Plugin: terryma/vim-expand-region
+" 用 v 选中一个区域后，ALT_+/- 按分隔符扩大/缩小选区
+map <m-=> <Plug>(expand_region_expand)
+map <m--> <Plug>(expand_region_shrink)
+
+" ALT+h/l 快速左右按单词移动（正常模式+插入模式）
+noremap <m-h> b
+noremap <m-l> w
+inoremap <m-h> <c-left>
+inoremap <m-l> <c-right>
+
+" ALT+j/k 逻辑跳转下一行/上一行（按 wrap 逻辑换行进行跳转）
+noremap <m-j> gj
+noremap <m-k> gk
+inoremap <m-j> <c-\><c-o>gj
+inoremap <m-k> <c-\><c-o>gk
+
+" 命令模式下的相同快捷
+cnoremap <m-h> <c-left>
+cnoremap <m-l> <c-right>
+
+" ALT+y 删除到行末
+noremap <m-y> d$
+inoremap <m-y> <c-\><c-o>d$
+
+
+"----------------------------------------------------------------------
+" 编程语言
+"----------------------------------------------------------------------
+
+" Plugin: quick run
+map <leader>R :QuickRun<CR>
+
+" Plugin: leaderf
+" 打开函数列表，按 i 进入模糊匹配，ESC 退出
+noremap <leader>fF :LeaderfFunction!<cr>
+
+" Plugin: NerdComment 注释
+map ;cc <plug>NERDCommenterComment
+map ;cu <plug>NERDCommenterUncomment
+
+" 语法检查
+" Plugin: rhysd/vim-grammarous
+noremap <space>rg :GrammarousCheck --lang=en-US --no-move-to-first-error --no-preview<cr>
+map <space>rr <Plug>(grammarous-open-info-window)
+map <space>rv <Plug>(grammarous-move-to-info-window)
+map <space>rs <Plug>(grammarous-reset)
+map <space>rx <Plug>(grammarous-close-info-window)
+map <space>rm <Plug>(grammarous-remove-error)
+map <space>rd <Plug>(grammarous-disable-rule)
+map <space>rn <Plug>(grammarous-move-to-next-error)
+map <space>rp <Plug>(grammarous-move-to-previous-error)
+
+" Plugin: 'w0rp/ale'
+" 普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
+nmap sp <Plug>(ale_previous_wrap)
+nmap sn <Plug>(ale_next_wrap)
+
+" 给不同语言提供字典补全，插入模式下 c-x c-k 触发
+" Plugin: 'asins/vim-dict'
+
+" Plugin: IndentGuiles
+nmap <silent> <leader>gi :IndentGuidesToggle<cr> " 快捷键 i 开/关缩进可视化
+
+" Plugin: vim-go
+" Open :GoDeclsDir with ctrl-g
+nmap <C-g> :GoDeclsDir<cr>
+imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
+
+" Python
+" TODO...
+
+
+"----------------------------------------------------------------------
+" 其他配置
+"----------------------------------------------------------------------
+
+" Plugin 安装、更新、删除插件
+nnoremap <space><space>i :PlugInstall<cr>
+nnoremap <space><space>u :PlugUpdate<cr>
+nnoremap <space><space>c :PlugClean<cr>
 
 " 常规模式下输入 cS 清除行尾空格
 nmap ;cS :%s/\s\+$//g<CR>:noh<CR>
@@ -360,7 +481,6 @@ nmap ;cM :%s/\r$//g<CR>:noh<CR>
 
 " 十六进制格式查看
 nmap ;16 <ESC>:%!xxd<ESC>
-
 " 返回普通格式
 nmap ;r16 <ESC>:%!xxd -r<ESC>
 
@@ -443,72 +563,72 @@ map ;ec :e $HOME/.vimrc<cr>
 imap ;ec :e $HOME/.vimrc<cr>
 nmap ;ec :e $HOME/.vimrc<cr>
 
-" 使用 <spapce>fs 在插入和normal模式下保存文件，我经常在 insert 模式下代替 Esc
-inoremap <space>fs <Esc>:w<cr>
-noremap <space>fs :w<cr>
-inoremap <space>fq <Esc>:q<cr>
-noremap <space>fq :q<cr>
+"----------------------------------------------------------------------
+" 编译运行 C/C++ 项目
+" 详细见：http://www.skywind.me/blog/archives/2084
+"----------------------------------------------------------------------
 
-" bufer and tags and
+" 设置 F10 打开/关闭 Quickfix 窗口
+nnoremap <F10> :call asyncrun#quickfix_toggle(6)<cr>
+" F9 编译 C/C++ 文件
+nnoremap <silent> <F9> :AsyncRun gcc -Wall -O2 "$(VIM_FILEPATH)" -o "$(VIM_FILEDIR)/$(VIM_FILENOEXT)" <cr>
+" F5 运行文件
+nnoremap <silent> <F5> :call ExecuteFile()<cr>
+" F7 编译项目
+nnoremap <silent> <F7> :AsyncRun -cwd=<root> make <cr>
+" F8 运行项目
+nnoremap <silent> <F8> :AsyncRun -cwd=<root> -raw make run <cr>
+" F6 测试项目
+nnoremap <silent> <F6> :AsyncRun -cwd=<root> -raw make test <cr>
+" 更新 cmake
+nnoremap <silent> <F4> :AsyncRun -cwd=<root> cmake . <cr>
 
-" buffer
-nnoremap <silent> <space>bb :buffers<cr>
-nnoremap <silent> [b :bprevious<cr>
-nnoremap <silent> ]b :bnext<cr>
-nnoremap <silent> [B :bfirst<cr>
-nnoremap <silent> ]B :blast<cr>
+" Windows 下支持直接打开新 cmd 窗口运行
+if has('win32') || has('win64')
+    nnoremap <silent> <F8> :AsyncRun -cwd=<root> -mode=4 make run <cr>
+endif
 
-" quickfix
-nnoremap <silent> [q :cprevious<cr> " 跳到上一个错误
-nnoremap <silent> ]q :cnext<cr>     " 跳到下一个错误
-nnoremap <silent> [Q :cfirst<cr>
-nnoremap <silent> ]Q :clast<cr>
-
-" location
-nnoremap <silent> [l :lprevious<cr>
-nnoremap <silent> ]l :lnext<cr>
-nnoremap <silent> [L :lfirst<cr>
-nnoremap <silent> ]L :llast<cr>
-
-" tabs
-nnoremap <silent> [t :tabprevious<cr>
-nnoremap <silent> ]t :tabnext<cr>
-nnoremap <silent> [T :tabfirst<cr>
-nnoremap <silent> ]T :tablast<cr>
-
-" tags
-nmap <leader>tn :tnext<CR>      " 正向遍历同名标签
-nmap <leader>tp :tprevious<CR>  " 反向遍历同名标签
-
-" tagbar
-nmap <space>tb :TagbarToggle<CR>
-
-" ycm
-nnoremap <space>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <space>jr :YcmCompleter GoToReferences<cr>
-
-" gtags-cscope
-noremap <silent> <leader>tcs :GscopeFind s <C-R><C-W><cr>
-noremap <silent> <leader>tcg :GscopeFind g <C-R><C-W><cr>
-noremap <silent> <leader>tcc :GscopeFind c <C-R><C-W><cr>
-noremap <silent> <leader>tct :GscopeFind t <C-R><C-W><cr>
-noremap <silent> <leader>tce :GscopeFind e <C-R><C-W><cr>
-noremap <silent> <leader>tcf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
-noremap <silent> <leader>tci :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
-noremap <silent> <leader>tcd :GscopeFind d <C-R><C-W><cr>
-noremap <silent> <leader>tca :GscopeFind a <C-R><C-W><cr>
-noremap <silent> <leader>tck :GscopeKill<cr>
-
-" 注释
-map ;cc <plug>NERDCommenterComment
-map ;cu <plug>NERDCommenterUncomment
-" NERDTree
-nmap <space>nt :NERDTreeToggle<cr>
-
-
-
-" 安装、更新、删除插件
-nnoremap <space><space>i :PlugInstall<cr>
-nnoremap <space><space>u :PlugUpdate<cr>
-nnoremap <space><space>c :PlugClean<cr>
-
+"----------------------------------------------------------------------
+" F5 运行当前文件：根据文件类型判断方法，并且输出到 quickfix 窗口
+"----------------------------------------------------------------------
+function! ExecuteFile()
+    let cmd = ''
+    if index(['c', 'cpp', 'rs', 'go'], &ft) >= 0
+        " native 语言，把当前文件名去掉扩展名后作为可执行运行
+        " 写全路径名是因为后面 -cwd=? 会改变运行时的当前路径，所以写全路径
+        " 加双引号是为了避免路径中包含空格
+        let cmd = '"$(VIM_FILEDIR)/$(VIM_FILENOEXT)"'
+    elseif &ft == 'python'
+        let $PYTHONUNBUFFERED=1 " 关闭 python 缓存，实时看到输出
+        let cmd = 'python "$(VIM_FILEPATH)"'
+    elseif &ft == 'javascript'
+        let cmd = 'node "$(VIM_FILEPATH)"'
+    elseif &ft == 'perl'
+        let cmd = 'perl "$(VIM_FILEPATH)"'
+    elseif &ft == 'ruby'
+        let cmd = 'ruby "$(VIM_FILEPATH)"'
+    elseif &ft == 'php'
+        let cmd = 'php "$(VIM_FILEPATH)"'
+    elseif &ft == 'lua'
+        let cmd = 'lua "$(VIM_FILEPATH)"'
+    elseif &ft == 'zsh'
+        let cmd = 'zsh "$(VIM_FILEPATH)"'
+    elseif &ft == 'ps1'
+        let cmd = 'powershell -file "$(VIM_FILEPATH)"'
+    elseif &ft == 'vbs'
+        let cmd = 'cscript -nologo "$(VIM_FILEPATH)"'
+    elseif &ft == 'sh'
+        let cmd = 'bash "$(VIM_FILEPATH)"'
+    else
+        return
+    endif
+    " Windows 下打开新的窗口 (-mode=4) 运行程序，其他系统在 quickfix 运行
+    " -raw: 输出内容直接显示到 quickfix window 不匹配 errorformat
+    " -save=2: 保存所有改动过的文件
+    " -cwd=$(VIM_FILEDIR): 运行初始化目录为文件所在目录
+    if has('win32') || has('win64')
+        exec 'AsyncRun -cwd=$(VIM_FILEDIR) -raw -save=2 -mode=4 '. cmd
+    else
+        exec 'AsyncRun -cwd=$(VIM_FILEDIR) -raw -save=2 -mode=0 '. cmd
+    endif
+endfunc

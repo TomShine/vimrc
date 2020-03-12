@@ -6,6 +6,18 @@
 
 " vim: set ts=4 sw=4 tw=78 noet :
 
+let g:isMac = 0
+let g:isLinux = 0
+let g:isFreeBSD = 0
+
+if has('mac')
+    let g:isMac = 1
+elseif has('unix')
+    let g:isLinux = 1
+elseif has('frebsd')
+    leg g:isFreeBSD = 1
+endif
+
 
 "----------------------------------------------------------------------
 " 默认情况下的分组，可以再前面覆盖之
@@ -52,18 +64,6 @@ let g:easy_align_delimiters['#'] = { 'pattern': '#', 'ignore_groups': ['String']
 
 " 表格对齐，使用命令 Tabularize
 Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
-" nnoremap <space>a= :Tabularize /=<CR>
-" vnoremap <space>a= :Tabularize /=<CR>
-" nnoremap <space>a/ :Tabularize /\/\//l2c1l0<CR>
-" vnoremap <space>a/ :Tabularize /\/\//l2c1l0<CR>
-" nnoremap <space>a, :Tabularize /,/l0r1<CR>
-" vnoremap <space>a, :Tabularize /,/l0r1<CR>
-" nnoremap <space>al :Tabularize /\|<cr>
-" vnoremap <space>al :Tabularize /\|<cr>
-" nnoremap <space>a<bar> :Tabularize /\|<cr>
-" vnoremap <space>a<bar> :Tabularize /\|<cr>
-" nnoremap <space>ar :Tabularize /\|/r0<cr>
-" vnoremap <space>ar :Tabularize /\|/r0<cr>
 
 " Diff 增强，支持 histogram / patience 等更科学的 diff 算法
 Plug 'chrisbra/vim-diff-enhanced'
@@ -81,37 +81,41 @@ let g:quickrun_config = {
             \   },
             \}
 let g:quickrun_no_default_key_mappings = 1
-map <space>R :QuickRun<CR>
 
 Plug 'ervandew/supertab'
 " 0 - 不记录上次的补全方式
 " 1 - 记住上次的补全方式,直到用其他的补全命令改变它
 " 2 - 记住上次的补全方式,直到按ESC退出插入模式为止
 let g:SuperTabRetainCompletionType=2
-let g:SuperTabDefaultCompletionType = '<C-X><C-O>'
 let g:SuperTabRetainCompletionType=2
 
 " 映射快捷键
-Plug 'tpope/vim-unimpaired'
+" Plug 'tpope/vim-unimpaired'
 
 " 代码片段
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
-" UltiSnips 的 tab 键与 YCM 冲突，重新设定
-let g:UltiSnipsExpandTrigger="<leader><tab>"
-let g:UltiSnipsJumpForwardTrigger="<leader><tab>"
-let g:UltiSnipsJumpBackwardTrigger="<leader><s-tab>"
-
+" 显示 quickfix list 和 location-list
 Plug 'Valloric/ListToggle'
-let g:lt_location_list_toggle_map = '<leader>lq'
-let g:lt_quickfix_list_toggle_map = '<leader>oq'
 let g:lt_height = 10
+
+" 异步运行
+Plug 'skywind3000/asyncrun.vim'
+" 自动打开 quickfix window ，高度为 6
+let g:asyncrun_open = 6
+" 任务结束时候响铃提醒
+let g:asyncrun_bell = 1
+
+" Undotree
+Plug 'mbbill/undotree'
+
 
 "----------------------------------------------------------------------
 " 基础插件
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'basic') >= 0
+
     " 展示开始画面，显示最近编辑过的文件
     Plug 'mhinz/vim-startify'
     " 默认不显示 startify
@@ -144,15 +148,6 @@ if index(g:bundle_group, 'basic') >= 0
     " 根据 quickfix 中匹配到的错误信息，高亮对应文件的错误行
     " 使用 :RemoveErrorMarkers 命令或者 <space>ha 清除错误
     Plug 'mh21/errormarker.vim'
-    " 使用 <space>ha 清除 errormarker 标注的错误
-    noremap <silent><space>ha :RemoveErrorMarkers<cr>
-
-    " 使用 SPACE+w+e 会在不同窗口/标签上显示 A/B/C 等编号，然后字母直接跳转
-    Plug 't9md/vim-choosewin'
-    " if you want to use overlay feature
-    let g:choosewin_overlay_enable = 1
-    " 使用 ALT+E 来选择窗口
-    nmap <space>we <plug>(choosewin)
 
     " 提供基于 TAGS 的定义预览，函数参数预览，quickfix 预览
     Plug 'skywind3000/vim-preview'
@@ -196,8 +191,8 @@ if index(g:bundle_group, 'basic') >= 0
     "let g:indent_guides_enable_on_vim_startup = 1  " 随vim 自启动,h默认关闭
     let g:indent_guides_start_level=2               " 从第二层开始可视化显示缩进
     let g:indent_guides_guide_size            = 1   " 色块宽度(指定对齐线的尺寸)
-    nmap <silent> <space>gi :IndentGuidesToggle<cr> " 快捷键 i 开/关缩进可视化
 
+    " 文件树
     Plug 'scrooloose/nerdtree'
     let NERDTreeWinSize = 33       " 设置 NERDTree 子窗口宽度
     let NERDTreeWinPos = "right"   " 设置 NERDTree 子窗口位置
@@ -225,6 +220,7 @@ if index(g:bundle_group, 'basic') >= 0
                 \ }
 endif
 
+
 "----------------------------------------------------------------------
 " 增强插件
 "----------------------------------------------------------------------
@@ -238,7 +234,6 @@ if index(g:bundle_group, 'enhanced') >= 0
 
     " 使用 :FlyGrep 命令进行实时 grep
     Plug 'wsdjeg/FlyGrep.vim'
-    nnoremap <space>s/ :FlyGrep<cr>
 
     " grep search: support rg, ag, ack, grep etc.
     Plug 'yegappan/grep'
@@ -248,11 +243,8 @@ if index(g:bundle_group, 'enhanced') >= 0
         let g:ackprg='ag --nogroup --nocolor --column'
     endif
 
-    Plug 'Chun-Yang/vim-action-ag'
     " use * to search current word in normal mode
-    " nmap * <Plug>AgActionWord
-    " use * to search selected text in visual mode
-    " vmap * <Plug>AgActionVisual
+    Plug 'Chun-Yang/vim-action-ag'
 
     " 配对括号和引号自动补全
     Plug 'Raimondi/delimitMate'
@@ -260,9 +252,6 @@ if index(g:bundle_group, 'enhanced') >= 0
     " 提供 gist 接口
     Plug 'lambdalisue/vim-gista', { 'on': 'Gista' }
 
-    " ALT_+/- 用于按分隔符扩大缩小 v 选区
-    map <m-=> <Plug>(expand_region_expand)
-    map <m--> <Plug>(expand_region_shrink)
 
     " format
     Plug 'sbdchd/neoformat'
@@ -282,9 +271,8 @@ if index(g:bundle_group, 'enhanced') >= 0
         autocmd BufWritePre * undojoin | Neoformat
     augroup END
 
-    " windows chooose
-    Plug 't9md/vim-choosewin'
 endif
+
 
 "----------------------------------------------------------------------
 " 自动生成 ctags/gtags，并提供自动索引功能
@@ -292,6 +280,7 @@ endif
 " 详细用法见：https://zhuanlan.zhihu.com/p/36279445
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'tags') >= 0
+
     set tags=./.tags;,.tags
 
     " 提供 ctags/gtags 后台数据库自动更新功能
@@ -342,11 +331,29 @@ if index(g:bundle_group, 'tags') >= 0
     let g:gutentags_define_advanced_commands = 1
 
     " tagbar
-    Plug 'majutsushi/tagbar'
+    "Plug 'majutsushi/tagbar'
 
     let g:tagbar_left = 1
     " 启动时自动focus
     let g:tagbar_autofocus = 1
+    let g:tagbar_type_coffee = {
+                \ 'ctagstype' : 'coffee',
+                \ 'kinds'     : [
+                \ 'c:classes',
+                \ 'm:methods',
+                \ 'f:functions',
+                \ 'v:variables',
+                \ 'f:fields',
+                \ ]
+                \ }
+    let g:tagbar_type_css = {
+                \ 'ctagstype' : 'Css',
+                \ 'kinds'     : [
+                \ 'c:classes',
+                \ 's:selectors',
+                \ 'i:identities'
+                \ ]
+                \ }
     let g:tagbar_type_elixir = {
                 \ 'ctagstype' : 'elixir',
                 \ 'kinds' : [
@@ -384,13 +391,94 @@ if index(g:bundle_group, 'tags') >= 0
                 \'c:const'
                 \]
                 \}
+    let g:tagbar_type_javascript = {
+                \ 'ctagstype': 'javascript',
+                \ 'kinds': [
+                \ 'A:arrays',
+                \ 'P:properties',
+                \ 'T:tags',
+                \ 'O:objects',
+                \ 'G:generator functions',
+                \ 'F:functions',
+                \ 'C:constructors/classes',
+                \ 'M:methods',
+                \ 'V:variables',
+                \ 'I:imports',
+                \ 'E:exports',
+                \ 'S:styled components'
+                \ ]}
+    let g:tagbar_type_json = {
+                \ 'ctagstype' : 'json',
+                \ 'kinds' : [
+                \ 'o:objects',
+                \ 'a:arrays',
+                \ 'n:numbers',
+                \ 's:strings',
+                \ 'b:booleans',
+                \ 'z:nulls'
+                \ ],
+                \ 'sro' : '.',
+                \ 'scope2kind': {
+                \ 'object': 'o',
+                \ 'array': 'a',
+                \ 'number': 'n',
+                \ 'string': 's',
+                \ 'boolean': 'b',
+                \ 'null': 'z'
+                \ },
+                \ 'kind2scope': {
+                \ 'o': 'object',
+                \ 'a': 'array',
+                \ 'n': 'number',
+                \ 's': 'string',
+                \ 'b': 'boolean',
+                \ 'z': 'null'
+                \ },
+                \ 'sort' : 0
+                \ }
     let g:tagbar_type_make = {
                 \ 'kinds':[
                 \ 'm:macros',
                 \ 't:targets'
                 \ ]
                 \}
+    let g:rust_use_custom_ctags_defs = 1  " if using rust.vim
+    let g:tagbar_type_rust = {
+                \ 'ctagsbin' : '/path/to/your/universal/ctags',
+                \ 'ctagstype' : 'rust',
+                \ 'kinds' : [
+                \ 'n:modules',
+                \ 's:structures:1',
+                \ 'i:interfaces',
+                \ 'c:implementations',
+                \ 'f:functions:1',
+                \ 'g:enumerations:1',
+                \ 't:type aliases:1:0',
+                \ 'v:constants:1:0',
+                \ 'M:macros:1',
+                \ 'm:fields:1:0',
+                \ 'e:enum variants:1:0',
+                \ 'P:methods:1',
+                \ ],
+                \ 'sro': '::',
+                \ 'kind2scope' : {
+                \ 'n': 'module',
+                \ 's': 'struct',
+                \ 'i': 'interface',
+                \ 'c': 'implementation',
+                \ 'f': 'function',
+                \ 'g': 'enum',
+                \ 't': 'typedef',
+                \ 'v': 'variable',
+                \ 'M': 'macro',
+                \ 'm': 'field',
+                \ 'e': 'enumerator',
+                \ 'P': 'method',
+                \ },
+                \ }
+
 endif
+
 
 "----------------------------------------------------------------------
 " 文本对象：textobj 全家桶
@@ -417,6 +505,7 @@ if index(g:bundle_group, 'textobj')
 
     " 提供 uri/url 的文本对象，iu/au 表示
     Plug 'jceb/vim-textobj-uri'
+
 endif
 
 
@@ -424,6 +513,7 @@ endif
 " 文件类型扩展
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'filetypes') >= 0
+
     " json 的语法高亮
     Plug 'elzr/vim-json'
 
@@ -432,11 +522,10 @@ if index(g:bundle_group, 'filetypes') >= 0
 
     " 支持 go
     Plug 'fatih/vim-go'
-    " vim-go {
-    "auto save run GoImports
+    " auto save run GoImports
     autocmd BufWritePre *.go :GoImports
 
-    "automatically rebalance windows on vim resize
+    " automatically rebalance windows on vim resize
     autocmd VimResized * :wincmd =
 
     let g:go_fmt_command = "goimports"
@@ -450,10 +539,6 @@ if index(g:bundle_group, 'filetypes') >= 0
     let g:go_highlight_function_calls = 1
     let g:go_highlight_extra_types = 1
     let g:go_highlight_generate_tags = 1
-
-    " Open :GoDeclsDir with ctrl-g
-    nmap <C-g> :GoDeclsDir<cr>
-    imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
 
     augroup go
         autocmd!
@@ -474,12 +559,11 @@ if index(g:bundle_group, 'filetypes') >= 0
             call go#cmd#Build(0)
         endif
     endfunction
-    "}
 
     " Python 支持
     Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
     " python 语法文件增强
-    Plug 'vim-python/python-syntax', { 'for': ['python'] }
+    "Plug 'vim-python/python-syntax', { 'for': ['python'] }
 
     " rust 语法增强
     Plug 'rust-lang/rust.vim', { 'for': 'rust' }
@@ -493,7 +577,6 @@ if index(g:bundle_group, 'filetypes') >= 0
     " C++ 语法高亮增强，支持 11/14/17 标准
     Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['c', 'cpp'] }
 
-
     " org-mode
     Plug 'jceb/vim-orgmode', { 'for': 'org' }
 
@@ -505,16 +588,22 @@ if index(g:bundle_group, 'filetypes') >= 0
 
     " 额外语法文件
     Plug 'justinmk/vim-syntax-extra', { 'for': ['c', 'bison', 'flex', 'cpp'] }
+
 endif
 
 "---------------------------------------------------------------------
 " airline
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'airline') >= 0
+
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
 
-    set rtp+="/Users/tomshine/Library/Python/3.7/lib/python/site-packages/powerline/bindings/vim"
+    if g:isMac
+        set rtp+="/Users/tomshine/Library/Python/3.7/lib/python/site-packages/powerline/bindings/vim"
+    elseif g:isLinux
+    elseif g:isFreeBSD
+    endif
 
     "这个是安装字体后 必须设置此项
     let g:airline_powerline_fonts = 1
@@ -573,7 +662,7 @@ if index(g:bundle_group, 'airline') >= 0
     let g:airline#extensions#csv#enabled = 0
     let g:airline#extensions#vimagit#enabled = 0
 
-    " Buffer {
+    " Buffer
     "     " 打开tabline功能,方便查看Buffer和切换
     "     let g:airline#extensions#tabline#enabled = 1
     "     let g:airline#extensions#tabline#show_splits = 1
@@ -595,29 +684,23 @@ if index(g:bundle_group, 'airline') >= 0
     "     nmap <leader>9 <Plug>AirlineSelectTab9
     "     nmap <leader>- <Plug>AirlineSelectPrevTab
     "     nmap <leader>+ <Plug>AirlineSelectNextTab
-    "}
+
 endif
 
 "----------------------------------------------------------------------
 " LanguageTool 语法检查
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'grammer') >= 0
+
     Plug 'rhysd/vim-grammarous'
-    noremap <space>rg :GrammarousCheck --lang=en-US --no-move-to-first-error --no-preview<cr>
-    map <space>rr <Plug>(grammarous-open-info-window)
-    map <space>rv <Plug>(grammarous-move-to-info-window)
-    map <space>rs <Plug>(grammarous-reset)
-    map <space>rx <Plug>(grammarous-close-info-window)
-    map <space>rm <Plug>(grammarous-remove-error)
-    map <space>rd <Plug>(grammarous-disable-rule)
-    map <space>rn <Plug>(grammarous-move-to-next-error)
-    map <space>rp <Plug>(grammarous-move-to-previous-error)
+
 endif
 
 "----------------------------------------------------------------------
 " ale：动态语法检查
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'ale') >= 0
+
     Plug 'w0rp/ale'
 
     " 设定延迟和提示信息
@@ -687,17 +770,16 @@ if index(g:bundle_group, 'ale') >= 0
     hi link ALEErrorSign    Error
     hi link ALEWarningSign  Warning
 
-    nmap sp <Plug>(ale_previous_wrap) "普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
-    nmap sn <Plug>(ale_next_wrap)
 endif
+
 
 "----------------------------------------------------------------------
 " YCM : 补全
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'ycm') >= 0
+
     function! BuildYCM(info)
         if a:info.status == 'installed' || a:info.force
-            "!./install.sh --clang-completer --go-completer --rust-completer --java-completer
             !./install.sh --clang-completer --go-completer --rust-completer
         endif
     endfunction
@@ -820,54 +902,35 @@ if index(g:bundle_group, 'ycm') >= 0
                 \ "zimbu":1,
                 \ "ps1":1,
                 \ }
+
 endif
+
 
 "----------------------------------------------------------------------
 " echodoc：搭配 YCM/deoplete 在底部显示函数参数
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'echodoc') >= 0
+
     Plug 'Shougo/echodoc.vim'
     set noshowmode
     let g:echodoc#enable_at_startup = 1
+
 endif
+
 
 "----------------------------------------------------------------------
 " LeaderF 文件模糊匹配，tags/函数名 选择
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'leaderf') >= 0
+
     " 如果 vim 支持 python 则启用  Leaderf
     if has('python') || has('python3')
         Plug 'Yggdroot/LeaderF'
 
         let g:Lf_CommandMap = {'<Tab>': ['<ESC>']}
 
-        " CTRL+p 打开文件模糊匹配
-        " let g:Lf_ShortcutF = '<c-p>'
-        let g:Lf_ShortcutF = '<space>ff'
-
-        " ALT+n 打开 buffer 模糊匹配
-        " let g:Lf_ShortcutB = '<m-n>'
-        let g:Lf_ShortcutB = '<space>fb'
-
-        " CTRL+n 打开最近使用的文件 MRU，进行模糊匹配
-        " noremap <c-n> :LeaderfMru<cr>
-        noremap <space>fr :LeaderfMru<cr>
-
-        " ALT+p 打开函数列表，按 i 进入模糊匹配，ESC 退出
-        " noremap <m-p> :LeaderfFunction!<cr>
-        noremap <space>fn :LeaderfFunction!<cr>
-
-        " ALT+SHIFT+p 打开 tag 列表，i 进入模糊匹配，ESC退出
-        " noremap <m-P> :LeaderfBufTag!<cr>
-        noremap <space>fP :LeaderfBufTag!<cr>
-
-        " ALT+n 打开 buffer 列表进行模糊匹配
-        " noremap <m-n> :LeaderfBuffer<cr>
-        noremap<space>fb :LeaderfBuffer<cr>
-
-        " 全局 tags 模糊匹配
-        noremap <m-m> :LeaderfTag<cr>
-        noremap <space>ft :LeaderfTag<cr>
+        " let g:Lf_WindowPosition = 'popup'
+        " let g:Lf_PreviewInPopup = 1
 
         " 最大历史文件保存 2048 个
         let g:Lf_MruMaxFiles = 2048
@@ -909,24 +972,33 @@ if index(g:bundle_group, 'leaderf') >= 0
                     \ "BufTag": [["<ESC>", ':exec g:Lf_py "bufTagExplManager.quit()"<cr>']],
                     \ "Function": [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<cr>']],
                     \ }
+
+        " should use `Leaderf gtags --update` first
+        let g:Lf_GtagsAutoGenerate = 0
+        let g:Lf_Gtagslabel = 'native-pygments'
     endif
 
+    " fuzzy finder
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
 endif
+
 
 "----------------------------------------------------------------------
 " tools 配置
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'tools') >= 0
+
     Plug 'editorconfig/editorconfig-vim'
 
-    if has('mac')
+    if g:isMac
         Plug 'rizzatti/dash.vim'
     endif
 
     Plug 'vim-scripts/indentpython.vim'
 
     Plug 'kana/vim-operator-user'
+
 endif
 
 
