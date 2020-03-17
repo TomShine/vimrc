@@ -261,13 +261,13 @@ nnoremap <silent> <leader>bl :blast<cr>
 
 
 "----------------------------------------------------------------------
-" Quickfix
+" Quickfix 和 Location
 "----------------------------------------------------------------------
 
-nnoremap <silent> <leader>qp :cprevious<cr> " 跳到上一个错误
-nnoremap <silent> <leader>qn :cnext<cr>     " 跳到下一个错误
-nnoremap <silent> <leader>qf :cfirst<cr>
-nnoremap <silent> <leader>ql :clast<cr>
+nnoremap <silent> <leader>cp :cprevious<cr> " 跳到上一个错误
+nnoremap <silent> <leader>cn :cnext<cr>     " 跳到下一个错误
+nnoremap <silent> <leader>cf :cfirst<cr>
+nnoremap <silent> <leader>cl :clast<cr>
 
 " Plugin: Valloric/ListToggle
 let g:lt_quickfix_list_toggle_map = '<leader>qt'
@@ -275,10 +275,6 @@ let g:lt_quickfix_list_toggle_map = '<leader>qt'
 " Plugin: mh21/errormarker.vim
 " 清除 errormarker 标注的错误
 noremap <silent><leader>ha :RemoveErrorMarkers<cr>
-
-"----------------------------------------------------------------------
-" Location
-"----------------------------------------------------------------------
 
 nnoremap <silent> <leader>lp :lprevious<cr>
 nnoremap <silent> <leader>ln :lnext<cr>

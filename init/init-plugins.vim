@@ -631,11 +631,11 @@ if index(g:bundle_group, 'ycm') >= 0
 
     function! BuildYCM(info)
         if a:info.status == 'installed' || a:info.force
-            !./install.sh --clang-completer --go-completer --rust-completer
+            !./install.sh --clang-completer --go-completer --rust-completer --ts-completer --system-libclang
         endif
     endfunction
 
-    Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') , 'for': [ 'go', 'python' , 'c' , 'cpp'], 'on': [] }
+    Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') , 'for': [ 'go', 'python' , 'c' , 'cpp', 'rust', 'javascript'], 'on': [] }
     Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 
     " UltiSnips 的 tab 键与 YCM 冲突，重新设定, If you want :UltiSnipsEdit to split your window.
