@@ -2,8 +2,18 @@
 
 ## 安装
 
+### curl
+
 ```sh
 curl -sLf https://raw.githubusercontent.com/shangzongyu/vimrc/master/install.sh | bash
+```
+
+### git
+
+```sh
+git clone https://github.com/shangzongyu/vimrc.git ~/.ShangVim
+cd ~/.ShangVim
+bash install.sh
 ```
 
 然后创建你的 `~/.vimrc` 文件，里面只有一句话：
