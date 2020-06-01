@@ -13,7 +13,7 @@ sudo apt install -y fontconfig xfonts-utils
 ## Prepare Requirement
 
 * tags
-  * `GNU tags` 
+  * `GNU tags`
   * `ctags`
 * c/cpp
   * `cppcheck`
@@ -51,3 +51,8 @@ source ~/.ShangVim/init.vim
 * `init-plugin.vim` : 插件，使用 `vim-plug`，按照设定的插件分组进行配置
 * `init-style.vim` : 色彩主题，高亮优化，状态栏，更紧凑的标签栏文字等和显示相关的东西
 * `init-keymaps.vim` : 快捷键定义
+
+## Thanks
+
+* <https://github.com/skywind3000/vim>
+* <https://github.com/PegasusWang/vim-config>
