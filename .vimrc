@@ -1,0 +1,44 @@
+let s:home = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+
+exec 'so '.fnameescape(s:home).'/asc.vim'
+exec 'so '.fnameescape(s:home).'/shine.vim'
+exec 'so '.fnameescape(s:home).'/shine.vim'
+
+set t_Co=256
+color desert256
+
+let g:vimmake_cflags = ["-lstdc++"]
+let g:vimmake_build_name = "make"
+let g:escope_gtags_label = 'pygments'
+
+if !exists('g:bundle_group')
+    let g:bundle_group = []
+endif
+
+let g:vim_startup = get(g:, 'vim_startup', '')
+
+if g:vim_startup != ''
+    call Tools_SwitchLayout()
+endif
+
+if get(g:, 'vim_manual', 0) == 0
+    let g:bundle_group += ['simple', 'basic']
+    if g:vim_startup == 'nvim'
+        let g:bundle_group += ['inter']
+    elseif g:vim_startup == 'mvim'
+        let g:bundle_group += ['inter', 'high', 'opt']
+        let g:bundle_group += ['ale']
+        let g:bundle_group += ['echodoc']
+    endif
+endif
+
+if len(g:bundle_group) > 0
+    IncScript bundle.vim
+endif
+
+hi LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+hi SignColumn ctermbg=0
+
+
+
+
