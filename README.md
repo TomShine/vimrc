@@ -1,5 +1,13 @@
 # README
 
+## Requirement
+
+```sh
+# ubuntu
+sudo apt install -y fontconfig xfonts-utils
+```
+
+
 ## 安装
 
 ### curl
@@ -19,7 +27,7 @@ bash install.sh
 然后创建你的 `~/.vimrc` 文件，里面只有一句话：
 
  ```sh
-source ~/.vim/vim-init/init.vim
+source ~/.ShangVim/init.vim
 ```
 
 ## 结构
