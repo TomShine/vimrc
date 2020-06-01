@@ -46,3 +46,6 @@ LoadScript init/init-keymaps.vim
 
 " helpers
 LoadScript init/init-helpers.vim
+
+" quickui
+LoadScript init/init-quickui.vim

@@ -182,7 +182,8 @@ set wildignore+=*.linux2,*.win32,*.darwin,*.freebsd,*.linux,*.android
 "----------------------------------------------------------------------
 "let $GTAGSLABEL = 'native'
 let $GTAGSLABEL = 'native-pygments'
-let $GTAGSCONF = '$HOME/.globalrc'
+"let $GTAGSCONF = '$HOME/.globalrc'
+let $GTAGSCONF = '/Users/tomshine/.dotfiles/home/.globalrc'
 
 "----------------------------------------------------------------------
 " Python 设置

@@ -10,6 +10,7 @@ let g:isMac = 0
 let g:isLinux = 0
 let g:isFreeBSD = 0
 
+
 if has('mac')
     let g:isMac = 1
 elseif has('unix')
@@ -111,6 +112,11 @@ let g:asynctasks_extra_config = [
             \ '~/.ShangVim/tasks.ini',
             \ '~/.config/tasks/local_tasks.ini',
             \ ]
+
+""let g:asynctasks_term_pos = 'bottom'
+let g:asynctasks_term_pos = 'tab'
+
+Plug 'skywind3000/vim-quickui'
 
 " Undotree
 Plug 'mbbill/undotree'
@@ -223,6 +229,9 @@ if index(g:bundle_group, 'basic') >= 0
                 \ "Clean"     : "✔︎",
                 \ "Unknown"   : "?"
                 \ }
+
+    Plug 'skywind3000/vim-terminal-help'
+
 endif
 
 
@@ -248,10 +257,10 @@ if index(g:bundle_group, 'enhanced') >= 0
     " 配对括号和引号自动补全
     Plug 'Raimondi/delimitMate'
 
-    " 提供 gist 接口
+    " vim-gista 提供 gist 接口
     Plug 'lambdalisue/vim-gista', { 'on': 'Gista' }
 
-    " format
+    " Neoformat
     Plug 'sbdchd/neoformat'
     let g:neoformat_enabled_python = ['blank', 'autopep8', 'yapf', 'docformatter']
     " Enable alignment
@@ -265,8 +274,8 @@ if index(g:bundle_group, 'enhanced') >= 0
     let g:neoformat_run_all_formatters = 1
 
     " augroup fmt
-        " autocmd!
-        " autocmd BufWritePre * undojoin | Neoformat
+    " autocmd!
+    " autocmd BufWritePre * undojoin | Neoformat
     " augroup END
 
 endif
@@ -313,13 +322,14 @@ if index(g:bundle_group, 'tags') >= 0
         let g:gutentags_modules += ['gtags_cscope']
     endif
 
-    " 设置 ctags 的参数
+    " 配置 ctags 的参数，老的 Exuberant-ctags 不能有 --extra=+q，注意
     let g:gutentags_ctags_extra_args = []
-    let g:gutentags_ctags_extra_args += ['--fields=+niazS', '--extra=+q']
-    let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+    let g:gutentags_ctags_extra_args += ['--fields=+niazS']
+    let g:gutentags_ctags_extra_args += ['--extras=+q']
+    let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
     let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
-    " 使用 universal-ctags 的话需要下面这行，请反注释
+    " 如果使用 universal-ctags 需要增加下面一行，老的 Exuberant-ctags 不能加下一行
     let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 
     " 禁止 gutentags 自动链接 gtags 数据库
@@ -327,6 +337,10 @@ if index(g:bundle_group, 'tags') >= 0
 
     " 调试
     let g:gutentags_define_advanced_commands = 1
+    let g:gutentags_trace = 0
+
+    Plug 'skywind3000/tagbar'
+    let g:tagbar_left = 1
 
 endif
 
@@ -365,25 +379,31 @@ endif
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'filetypes') >= 0
 
-    " json 的语法高亮
-    Plug 'elzr/vim-json'
-
-    " protobuf 的语法高亮
-    Plug 'uarun/vim-protobuf'
 
     " 支持 go
-    Plug 'fatih/vim-go'
+    Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
     " auto save run GoImports
     autocmd BufWritePre *.go :GoImports
 
     " automatically rebalance windows on vim resize
     autocmd VimResized * :wincmd =
 
-    let g:go_fmt_command = "goimports"
-    let g:go_autodetect_gopath = 1
-    let g:go_list_type = "quickfix"
+    let g:go_autodetect_gopath = 0
+    let g:go_imports_autosave = 0
     let g:go_def_mapping_enabled = 0
+    let g:go_list_type = "quickfix"
+
+    let g:go_fmt_command = "goreturns"
+    let g:go_fmt_autosave = 1
     let g:go_fmt_fail_silently = 0
+
+    let g:go_build_tags = '-v'
+    let g:go_bin_path = "/usr/local/go/bin"
+    let g:go_info_mode = 'gopls'
+
+    let g:go_test_show_name = 0
+    let g:go_test_timeout= '10s'
+
     let g:go_highlight_types = 1
     let g:go_highlight_fields = 1
     let g:go_highlight_functions = 1
@@ -411,10 +431,21 @@ if index(g:bundle_group, 'filetypes') >= 0
         endif
     endfunction
 
+    " C++ 语法高亮增强，支持 11/14/17 标准
+    Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['c', 'cpp'] }
+    " cppman
+    Plug 'skywind3000/vim-cppman'
+
     " Python 支持
     Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
     " python 语法文件增强
     "Plug 'vim-python/python-syntax', { 'for': ['python'] }
+
+    " json 的语法高亮
+    Plug 'elzr/vim-json'
+
+    " protobuf 的语法高亮
+    Plug 'uarun/vim-protobuf'
 
     " rust 语法增强
     Plug 'rust-lang/rust.vim', { 'for': 'rust' }
@@ -424,9 +455,6 @@ if index(g:bundle_group, 'filetypes') >= 0
 
     " lua 语法高亮增强
     Plug 'tbastos/vim-lua', { 'for': 'lua' }
-
-    " C++ 语法高亮增强，支持 11/14/17 标准
-    Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['c', 'cpp'] }
 
     " org-mode
     Plug 'jceb/vim-orgmode', { 'for': 'org' }
@@ -630,8 +658,12 @@ endif
 if index(g:bundle_group, 'ycm') >= 0
 
     function! BuildYCM(info)
+        " info is a dictionary with 3 fields
+        " - name:   name of the plugin
+        " - status: 'installed', 'updated', or 'unchanged'
+        " - force:  set on PlugInstall! or PlugUpdate!
         if a:info.status == 'installed' || a:info.force
-            !./install.sh --clang-completer --go-completer --rust-completer --ts-completer --system-libclang
+            !./install.py --clang-completer --go-completer --rust-completer --ts-completer --system-libclang
         endif
     endfunction
 
@@ -644,17 +676,17 @@ if index(g:bundle_group, 'ycm') >= 0
     "----------------------------------------------------------------------
     " YouCompleteMe 默认设置：YCM 需要你另外手动编译安装
     "----------------------------------------------------------------------
-    augroup load_ycm
-        autocmd!
-        autocmd InsertEnter * call plug#load('YouCompleteMe','ultisnips') | autocmd! load_ycm
-    augroup END
+    "augroup load_ycm
+    "    autocmd!
+    "    autocmd InsertEnter * call plug#load('YouCompleteMe','ultisnips') | autocmd! load_ycm
+    "augroup END
 
     let g:ycm_server_python_interpreter='python3'
     let g:ycm_global_ycm_extra_conf='~/.ShangVim/tools/conf/ycm_extra_conf.py'
 
     " 禁用预览功能：扰乱视听
-    set completeopt=menu,menuone
-    let g:ycm_add_preview_to_completeopt = 0
+    "set completeopt=menu,menuone
+    "let g:ycm_add_preview_to_completeopt = 1
 
     " 禁用诊断功能：我们用前面更好用的 ALE 代替
     let g:ycm_show_diagnostics_ui = 0
@@ -662,7 +694,7 @@ if index(g:bundle_group, 'ycm') >= 0
     let g:ycm_min_num_identifier_candidate_chars = 2
     let g:ycm_collect_identifiers_from_comments_and_strings = 1
     let g:ycm_complete_in_strings=1
-    let g:ycm_key_invoke_completion = '<c-z>'
+    "let g:ycm_key_invoke_completion = '<c-z>'
 
     let g:ycm_confirm_extra_conf=0                    " 关闭加载.ycm_extra_conf.py提示
     let g:ycm_cache_omnifunc=0                        " 禁止缓存匹配项,每次都重新生成匹配项
@@ -774,7 +806,7 @@ endif
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'leaderf') >= 0
 
-    " 如果 vim 支持 python 则启用  Leaderf
+    " 如果 vim 支持 python 则启用 Leaderf
     if has('python') || has('python3')
         Plug 'Yggdroot/LeaderF'
 
@@ -850,6 +882,9 @@ if index(g:bundle_group, 'tools') >= 0
     Plug 'vim-scripts/indentpython.vim'
 
     Plug 'kana/vim-operator-user'
+
+    " xmake
+    Plug 'shangzongyu/xmake.vim'
 
 endif
 

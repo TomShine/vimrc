@@ -206,6 +206,9 @@ noremap <leader>fq :q<cr>
 " Plugin: NERDTree
 nmap <leader>nt :NERDTreeToggle<cr>
 
+" Plugin: Tagbar
+nmap <leader>tb :TagbarToggle<cr>
+
 " Plugin: leaderf
 " 打开文件模糊匹配
 let g:Lf_ShortcutF = '<leader>ff'

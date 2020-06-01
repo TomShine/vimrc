@@ -10,6 +10,7 @@ let g:isMac = 0
 let g:isLinux = 0
 let g:isGUI = 0
 
+
 if has('mac')
     let g:isMac = 1
     let g:asynctasks_system = 'macos'
