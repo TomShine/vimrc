@@ -118,29 +118,6 @@ echo_with_color() {
 }
 # }}}
 
-# install_vim {{{
-install_vim() {
-    if [[ -f "$HOME/.vimrc" ]]; then
-        mv "$HOME/.vimrc" "$HOME/.vimrc_back"
-        success "Backup $HOME/.vimrc to $HOME/.vimrc_back"
-    fi
-
-    if [[ -d "$HOME/.vim" ]]; then
-        if [[ "$(readlink $HOME/.vim)" =~ \.ShangVim$ ]]; then
-            success "Installed ShangVim for vim"
-        else
-            mv "$HOME/.vim" "$HOME/.vim_back"
-            success "BackUp $HOME/.vim to $HOME/.vim_back"
-            ln -s "$HOME/.ShangVim" "$HOME/.vim"
-            success "Installed ShangVim for vim"
-        fi
-    else
-        ln -s "$HOME/.ShangVim" "$HOME/.vim"
-        success "Installed ShangVim for vim"
-    fi
-}
-# }}}
-
 # fetch_repo {{{
 fetch_repo() {
     if [[ -d "$HOME/.ShangVim" ]]; then
@@ -166,19 +143,43 @@ install_vim() {
         touch $HOME/.vimrc
     fi
 
-    echo "source $HOME/.ShangVim/init.vim" >"$HOME/.vimrc"
-
     if [[ -d "$HOME/.vim" ]]; then
         if [[ "$(readlink $HOME/.vim)" =~ \.ShangVim$ ]]; then
             success "Installed ShangVim for vim"
         else
             mv "$HOME/.vim" "$HOME/.vim_back"
-            success "BackUp $HOME/.vim to $HOME/.vim_back"
+            success "Backup $HOME/.vim to $HOME/.vim_back"
         fi
-    else
-        mkdir "$HOME/.vim"
-        success "Installed ShangVim for vim"
     fi
+
+    mkdir "$HOME/.vim"
+    success "Installed ShangVim for vim"
+}
+# }}}
+
+# install_nvim {{{
+install_neovim() {
+    if [[ -f "$HOME/.config/nvim/init.vim" ]]; then
+        mv "$HOME/.config/nvim/init.vim" "$HOME/.config/nvim/init_back.vim"
+        success "Backup $HOME/.config/nvim/init.vim to $HOME/.config/nvim/init_back.vim"
+    else
+        touch $HOME/.config/nvim/init.vim
+    fi
+
+    echo "source $HOME/.ShangVim/init.vim" > "$HOME/.config/nvim/init.vim"
+
+    if [[ -d "$HOME/.vim" ]]; then
+        if [[ "$(readlink $HOME/.vim)" =~ \.ShangVim$ ]]; then
+            success "Installed ShangVim for neovim"
+        else
+            mv "$HOME/.vim" "$HOME/.vim_back"
+            success "Backup $HOME/.vim to $HOME/.vim_back"
+            mkdir "$HOME/.vim"
+        fi
+    fi
+
+    mkdir "$HOME/.vim"
+    success "Installed ShangVim for neovim"
 }
 # }}}
 
@@ -196,6 +197,13 @@ install_package_manager() {
 # install_package {{{
 install_package() {
     vim +PlugInstall +qall
+    success "vim install plugin sucess"
+}
+# }}}
+
+# install_neovim_package {{{
+install_neovim_package() {
+    nvim +PlugInstall +qall
     success "vim install plugin sucess"
 }
 # }}}
@@ -223,8 +231,7 @@ uninstall_vim() {
 # check_requirements {{{
 check_requirements() {
     info "Checking Requirements for ShangVim"
-    if hash "git" &>/dev/null; then
-        git_version=$(git --version)
+    if hash "git" &>/dev/null; then git_version=$(git --version)
         success "Check Requirements: ${git_version}"
     else
         warn "Check Requirements : git"
@@ -233,21 +240,16 @@ check_requirements() {
     if hash "vim" &>/dev/null; then
         is_vim8=$(vim --version | grep "Vi IMproved 8.0")
         is_vim74=$(vim --version | grep "Vi IMproved 7.4")
-        if [ -n "$is_vim8" ]; then
-            success "Check Requirements: vim 8.0"
+        if [ -n "$is_vim8" ]; then success "Check Requirements: vim 8.0"
         elif [ -n "$is_vim74" ]; then
             success "Check Requirements: vim 7.4"
-        else
-            if hash "nvim" &>/dev/null; then
-                success "Check Requirements: nvim"
-            else
-                warn "ShangVim need vim 7.4 or above"
-            fi
-        fi
-        if hash "nvim" &>/dev/null; then
-            success "Check Requirements: nvim"
         fi
     fi
+
+    if hash "nvim" &>/dev/null; then
+        success "Check Requirements: nvim"
+    fi
+
     info "Checking true colors support in terminal:"
     bash -c "$(curl -fsSL https://raw.githubusercontent.com/JohnMorales/dotfiles/master/colors/24-bit-color.sh)"
 }
@@ -306,53 +308,76 @@ welcome() {
     echo_with_color ${Yellow} "          \ \__/ /     \ \__\ \__\    \ \__\    "
     echo_with_color ${Yellow} "           \|__|/       \|__|\|__|     \|__|    "
 }
-
 # }}}
 
-# download_font {{{
-download_font() {
-    URL="https://raw.githubusercontent.com/wsdjeg/DotFiles/master/local/share/fonts/$1"
-    PATH="$HOME/.local/share/fonts/$1"
-    if [[ -f "$path" ]]; then
-        success "Downloaded $1"
+# download_dejavu_font {{{
+download_dejavu_font() {
+    type=$1
+    file_url="https://raw.githubusercontent.com/wsdjeg/DotFiles/master/local/share/fonts/${type}"
+    file_path="${HOME}/.local/share/fonts/$1"
+
+    if [[ ! -f "$file_path" ]]; then
+        info "curl -s -o $file_path $file_url"
+        curl -s -o "$file_path" "$file_url"
+        success "Downloaded ${type} success"
     else
-        info "URL=$URL"
-        info "Downloading $1"
-        curl -s -o "$PATH" "$URL"
-        success "Downloaded $1"
+        info "Found existing file $file_path"
     fi
 }
 # }}}
 
+# download_fira_code_font() {{{
+download_fira_code_font() {
+    type=$1
+    file_url="https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-${type}.ttf?raw=true"
+    file_path="${HOME}/.local/share/fonts/FiraCode-${type}.ttf"
+    if [ ! -e "${file_path}" ]; then
+        info "wget -O $file_path $file_url"
+        wget -O "${file_path}" "${file_url}"
+        success "Downloaded ${type} success"
+    else
+        info "Found existing file $file_path"
+    fi;
+
+}
+
+# 下载字体
 # install_fonts {{{
-# 下载字体需要添加
 install_fonts() {
     if [[ ! -d "$HOME/.local/share/fonts" ]]; then
         mkdir -p $HOME/.local/share/fonts
     fi
 
-    download_font "DejaVu Sans Mono Bold Oblique for Powerline.ttf"
-    download_font "DejaVu Sans Mono Bold for Powerline.ttf"
-    download_font "DejaVu Sans Mono Oblique for Powerline.ttf"
-    download_font "DejaVu Sans Mono for Powerline.ttf"
-    download_font "DroidSansMonoForPowerlinePlusNerdFileTypesMono.otf"
-    download_font "Ubuntu Mono derivative Powerline Nerd Font Complete.ttf"
-    download_font "WEBDINGS.TTF"
-    download_font "WINGDNG2.ttf"
-    download_font "WINGDNG3.ttf"
-    download_font "devicons.ttf"
-    download_font "mtextra.ttf"
-    download_font "symbol.ttf"
-    download_font "wingding.ttf"
+    download_dejavu_font "DejaVu Sans Mono Bold Oblique for Powerline.ttf"
+    download_dejavu_font "DejaVu Sans Mono Bold for Powerline.ttf"
+    download_dejavu_font "DejaVu Sans Mono Oblique for Powerline.ttf"
+    download_dejavu_font "DejaVu Sans Mono for Powerline.ttf"
+    download_dejavu_font "DroidSansMonoForPowerlinePlusNerdFileTypesMono.otf"
+    download_dejavu_font "Ubuntu Mono derivative Powerline Nerd Font Complete.ttf"
+    download_dejavu_font "WEBDINGS.TTF" download_dejavu_font "WINGDNG2.ttf"
+    download_dejavu_font "WINGDNG3.ttf"
+    download_dejavu_font "devicons.ttf"
+    download_dejavu_font "mtextra.ttf"
+    download_dejavu_font "symbol.ttf"
+    download_dejavu_font "wingding.ttf"
+
+    download_fira_code_font Bold
+    download_fira_code_font Light download_fira_code_font Medium
+    download_fira_code_font Regular
+    download_fira_code_font Retina
+
+
     info "Updating font cache, please wait ..."
     if [ $System == "Darwin" ]; then
+        info "Install on macOS ..."
         if [ ! -e "$HOME/Library/Fonts" ]; then
             mkdir "$HOME/Library/Fonts"
         fi
         cp $HOME/.local/share/fonts/* $HOME/Library/Fonts/
     elif [ $System == "FreeBSD" ]; then
-        echo "FreeBSD..."
+        info "Install on FreeBSD ..."
     else
+        info "Install on linux..."
         fc-cache -fv >/dev/null
         mkfontdir "$HOME/.local/share/fonts" >/dev/null
         mkfontscale "$HOME/.local/share/fonts" >/dev/null
@@ -380,12 +405,24 @@ main() {
             need_cmd 'git'
             fetch_repo
             install_vim
+            install_package_manager
             install_package
             install_done
             exit 0
             ;;
+        --install-neovim)
+            welcome
+            need_cmd 'git'
+            fetch_repo
+            install_neovim
+            install_package_manager
+            install_neovim_package
+            install_done
+            exit 0
+            ;;
         --help | -h)
-            usage
+            install_fonts
+           # usage
             exit 0
             ;;
         --version | -v)
