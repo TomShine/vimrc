@@ -80,12 +80,13 @@ if g:isMac
 elseif g:isLinux
     if g:isGUI
         "set macligatures
-        "set guifont=Source\ Code\ Pro\ 12
-        set guifont=Fira\ Code\ \ Medium\ 12
+        set guifont=Source\ Code\ Pro 12
+        "set guifont=Fira\ Code\ \ Medium\ 12
+        set guifont=Droid\ Sans\ Mono\ Nerd\ Font\ Complete\ 12
     else
         set guifont=Fira\ Code\ 14
+        "set guifont=Droid\ Sans\ Mono\ Nerd\ Font\ Complete\ 12
     endif
-    " set guifont=Droid\ Sans\ Mono\ Nerd\ Font\ Complete\ 12
 endif
 
 "----------------------------------------------------------------------
