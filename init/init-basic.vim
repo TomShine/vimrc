@@ -7,6 +7,19 @@
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
 
+"----------------------------------------------------------------------
+"- OptImport
+"----------------------------------------------------------------------
+LoadScript site/opt/argtextobj.vim
+LoadScript site/opt/indent-object.vim
+LoadScript site/opt/apc.vim
+
+if has('gui_running')
+    LoadScript site/opt/hexhigh.vim
+endif
+
+runtime! macros/matchit.vim
+
 " 文件格式，默认 ffs=dos,unix
 set fileformat=unix             "设置新文件的<EOL>格式
 set fileformats=unix,dos,mac    "给出文件的<EOL>格式类型
@@ -193,3 +206,4 @@ let $GTAGSCONF = '/Users/tomshine/.dotfiles/home/.globalrc'
 if exists('py2') && has('python')
 elseif has('python3')
 endif
+

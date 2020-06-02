@@ -46,12 +46,9 @@ cnoremap <c-b> <left>
 cnoremap <c-d> <del>
 cnoremap <c-_> <c-k>
 
-
 "----------------------------------------------------------------------
-" Tab 快捷键
+" <leader>+数字键 切换tab
 "----------------------------------------------------------------------
-
-" <leader>+数字键 切换 tab
 noremap <silent><leader>1 1gt<cr>
 noremap <silent><leader>2 2gt<cr>
 noremap <silent><leader>3 3gt<cr>
@@ -63,7 +60,9 @@ noremap <silent><leader>8 8gt<cr>
 noremap <silent><leader>9 9gt<cr>
 noremap <silent><leader>0 10gt<cr>
 
+"----------------------------------------------------------------------
 " ALT+N 切换 tab
+"----------------------------------------------------------------------
 noremap <silent><m-1> :tabn 1<cr>
 noremap <silent><m-2> :tabn 2<cr>
 noremap <silent><m-3> :tabn 3<cr>
@@ -84,7 +83,6 @@ inoremap <silent><m-7> <ESC>:tabn 7<cr>
 inoremap <silent><m-8> <ESC>:tabn 8<cr>
 inoremap <silent><m-9> <ESC>:tabn 9<cr>
 inoremap <silent><m-0> <ESC>:tabn 10<cr>
-
 
 " MacVim 允许 CMD+数字键快速切换标签
 if has("gui_macvim")
@@ -111,8 +109,10 @@ if has("gui_macvim")
     inoremap <silent><d-0> <ESC>:tabn 10<cr>
 endif
 
+"----------------------------------------------------------------------
 " TAB：创建，关闭，上一个，下一个，左移，右移
 " 其实还可以用原生的 CTRL+PageUp, CTRL+PageDown 来切换标签
+"----------------------------------------------------------------------
 noremap <silent> <leader>tc :tabnew<cr>
 noremap <silent> <leader>tq :tabclose<cr>
 noremap <silent> <leader>tn :tabnext<cr>
@@ -144,20 +144,29 @@ nnoremap <silent> ]t :tabnext<cr>
 nnoremap <silent> [T :tabfirst<cr>
 nnoremap <silent> ]T :tablast<cr>
 
-" Tabularize
-" nnoremap <space>a= :Tabularize /=<CR>
-" vnoremap <space>a= :Tabularize /=<CR>
-" nnoremap <space>a/ :Tabularize /\/\//l2c1l0<CR>
-" vnoremap <space>a/ :Tabularize /\/\//l2c1l0<CR>
-" nnoremap <space>a, :Tabularize /,/l0r1<CR>
-" vnoremap <space>a, :Tabularize /,/l0r1<CR>
-" nnoremap <space>al :Tabularize /\|<cr>
-" vnoremap <space>al :Tabularize /\|<cr>
-" nnoremap <space>a<bar> :Tabularize /\|<cr>
-" vnoremap <space>a<bar> :Tabularize /\|<cr>
-" nnoremap <space>ar :Tabularize /\|/r0<cr>
-" vnoremap <space>ar :Tabularize /\|/r0<cr>
+"----------------------------------------------------------------------
+" ALT 键移动增强
+"----------------------------------------------------------------------
 
+" ALT+h/l 快速左右按单词移动（正常模式+插入模式）
+noremap <m-h> b
+noremap <m-l> w
+inoremap <m-h> <c-left>
+inoremap <m-l> <c-right>
+
+" ALT+j/k 逻辑跳转下一行/上一行（按 wrap 逻辑换行进行跳转）
+noremap <m-j> gj
+noremap <m-k> gk
+inoremap <m-j> <c-\><c-o>gj
+inoremap <m-k> <c-\><c-o>gk
+
+" 命令模式下的相同快捷
+cnoremap <m-h> <c-left>
+cnoremap <m-l> <c-right>
+
+" ALT+y 删除到行末
+noremap <m-y> d$
+inoremap <m-y> <c-\><c-o>d$
 
 "----------------------------------------------------------------------
 " Window 窗口切换：ALT+SHIFT+hjkl
@@ -192,7 +201,6 @@ elseif has('nvim')
     tnoremap <m-q> <c-\><c-n>
 endif
 
-
 "----------------------------------------------------------------------
 " 文件
 "----------------------------------------------------------------------
@@ -203,54 +211,12 @@ noremap <leader>fs :w<cr>
 inoremap <leader>fq <Esc>:q<cr>
 noremap <leader>fq :q<cr>
 
-" Plugin: NERDTree
-nmap <leader>nt :NERDTreeToggle<cr>
-
-" Plugin: Tagbar
-nmap <leader>tb :TagbarToggle<cr>
-
-" Plugin: leaderf
-" 打开文件模糊匹配
-let g:Lf_ShortcutF = '<leader>ff'
-" 打开最近使用的文件 MRU，进行模糊匹配
-noremap <leader>fr :LeaderfMru<cr>
-noremap <leader>fP :LeaderfBufTag!<cr>
-" 打开 buffer 模糊匹配
-let g:Lf_ShortcutB = '<leader>fb'
-" 打开 buffer 列表进行模糊匹配
-noremap <leader>fb :LeaderfBuffer<cr>
-" 全局 tags 模糊匹配
-noremap <m-m> :LeaderfTag<cr>
-noremap <leader>ft :LeaderfTag<cr>
-" 打开函数列表，按 i 进入模糊匹配，ESC 退出
-noremap <leader>fF :LeaderfFunction!<cr>
-
-noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
-noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
-noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
-noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
-noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
-
-
 "----------------------------------------------------------------------
 " Tags:  ctags 和 gtags
 "----------------------------------------------------------------------
 
 nmap <leader>tn :tnext<CR>      " 正向遍历同名标签
 nmap <leader>tp :tprevious<CR>  " 反向遍历同名标签
-
-" Plugin: gtags-cscope
-noremap <silent> <leader>tcs :GscopeFind s <C-R><C-W><cr>
-noremap <silent> <leader>tcg :GscopeFind g <C-R><C-W><cr>
-noremap <silent> <leader>tcc :GscopeFind c <C-R><C-W><cr>
-noremap <silent> <leader>tct :GscopeFind t <C-R><C-W><cr>
-noremap <silent> <leader>tce :GscopeFind e <C-R><C-W><cr>
-noremap <silent> <leader>tcf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
-noremap <silent> <leader>tci :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
-noremap <silent> <leader>tcd :GscopeFind d <C-R><C-W><cr>
-noremap <silent> <leader>tca :GscopeFind a <C-R><C-W><cr>
-noremap <silent> <leader>tck :GscopeKill<cr>
-
 
 "----------------------------------------------------------------------
 " Buffers
@@ -262,7 +228,6 @@ nnoremap <silent> <leader>bn :bnext<cr>
 nnoremap <silent> <leader>bf :bfirst<cr>
 nnoremap <silent> <leader>bl :blast<cr>
 
-
 "----------------------------------------------------------------------
 " Quickfix 和 Location
 "----------------------------------------------------------------------
@@ -272,21 +237,13 @@ nnoremap <silent> <leader>cn :cnext<cr>     " 跳到下一个错误
 nnoremap <silent> <leader>cf :cfirst<cr>
 nnoremap <silent> <leader>cl :clast<cr>
 
-" Plugin: Valloric/ListToggle
-let g:lt_quickfix_list_toggle_map = '<leader>qt'
 
 " Plugin: mh21/errormarker.vim
 " 清除 errormarker 标注的错误
-noremap <silent><leader>ha :RemoveErrorMarkers<cr>
-
 nnoremap <silent> <leader>lp :lprevious<cr>
 nnoremap <silent> <leader>ln :lnext<cr>
 nnoremap <silent> <leader>lf :lfirst<cr>
 nnoremap <silent> <leader>ll :llast<cr>
-
-" Plugin: Valloric/ListToggle
-let g:lt_location_list_toggle_map = '<leader>lt'
-
 
 "----------------------------------------------------------------------
 " 会话: Session
@@ -302,32 +259,6 @@ map ;ss :mksession! my.vim<cr>
 " 恢复快捷键
 map ;rs :source my.vim<cr> :rviminfo my.viminfo<cr>
 map ;rs :source my.vim<cr>
-
-
-"----------------------------------------------------------------------
-" 搜索
-"----------------------------------------------------------------------
-
-" F2 在项目目录下 Grep 光标下单词，默认 C/C++/Py/Js ，扩展名自己扩充
-" 支持 rg/grep/findstr ，其他类型可以自己扩充
-" 不是在当前目录 grep，而是会去到当前文件所属的项目目录 project root
-" 下面进行 grep，这样能方便的对相关项目进行搜索
-if executable('rg')
-    noremap <silent><leader>sf :AsyncRun! -cwd=<root> rg -n --no-heading
-                \ --color never -g *.h -g *.c* -g *.py -g *.js -g *.vim
-                \ <C-R><C-W> "<root>" <cr>
-elseif has('win32') || has('win64')
-    noremap <silent><F2> :AsyncRun! -cwd=<root> findstr /n /s /C:"<C-R><C-W>"
-                \ "\%CD\%\*.h" "\%CD\%\*.c*" "\%CD\%\*.py" "\%CD\%\*.js"
-                \ "\%CD\%\*.vim"
-                \ <cr>
-else
-    noremap <silent><F2> :AsyncRun! -cwd=<root> grep -n -s -R <C-R><C-W>
-                \ --include='*.h' --include='*.c*' --include='*.py'
-                \ --include='*.js' --include='*.vim'
-                \ '<root>' <cr>
-endif
-
 
 "----------------------------------------------------------------------
 " 复制和粘贴
@@ -364,9 +295,6 @@ vmap ;gp "+p
 " Plugin: SuperTab
 let g:SuperTabDefaultCompletionType = '<C-X><C-O>'
 
-" Plugin: YCM
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <leader>jr :YcmCompleter GoToReferences<cr>
 
 " UltiSnips 的 tab 键与 YCM 冲突，重新设定
 let g:UltiSnipsExpandTrigger="<leader><tab>"
@@ -402,54 +330,6 @@ cnoremap <m-l> <c-right>
 " ALT+y 删除到行末
 noremap <m-y> d$
 inoremap <m-y> <c-\><c-o>d$
-
-
-"----------------------------------------------------------------------
-" 编程语言
-"----------------------------------------------------------------------
-
-" Plugin: AsyncTask
-noremap <silent><F5> :AsyncTask file-run<cr>
-noremap <silent><F6> :AsyncTask make<cr>
-noremap <silent><F9> :AsyncTask file-build<cr>
-noremap <silent><F10> :call asyncrun#quickfix_toggle(6)<cr>
-inoremap <silent><F5> <ESC>:AsyncTask file-run<cr>
-inoremap <silent><F9> <ESC>:AsyncTask file-build<cr>
-
-" Plugin: NerdComment 注释
-map ;cc <plug>NERDCommenterComment
-map ;cu <plug>NERDCommenterUncomment
-
-" 语法检查
-" Plugin: rhysd/vim-grammarous
-"noremap <space>rg :GrammarousCheck --lang=en-US --no-move-to-first-error --no-preview<cr>
-"map <space>rr <Plug>(grammarous-open-info-window)
-"map <space>rv <Plug>(grammarous-move-to-info-window)
-"map <space>rs <Plug>(grammarous-reset)
-"map <space>rx <Plug>(grammarous-close-info-window)
-"map <space>rm <Plug>(grammarous-remove-error)
-"map <space>rd <Plug>(grammarous-disable-rule)
-"map <space>rn <Plug>(grammarous-move-to-next-error)
-"map <space>rp <Plug>(grammarous-move-to-previous-error)
-
-" Plugin: 'w0rp/ale'
-" 普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
-nmap sp <Plug>(ale_previous_wrap)
-nmap sn <Plug>(ale_next_wrap)
-
-" 给不同语言提供字典补全，插入模式下 c-x c-k 触发
-" Plugin: 'asins/vim-dict'
-
-" Plugin: IndentGuiles
-nmap <silent> <leader>gi :IndentGuidesToggle<cr> " 快捷键 i 开/关缩进可视化
-
-" Plugin: vim-go
-" Open :GoDeclsDir with ctrl-g
-nmap <C-g> :GoDeclsDir<cr>
-imap <C-g> <esc>:<C-u>GoDeclsDir<cr>
-
-" Python
-" TODO...
 
 
 "----------------------------------------------------------------------
