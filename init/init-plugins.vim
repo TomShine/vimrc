@@ -277,7 +277,7 @@ if index(g:bundle_group, 'basic') >= 0
     " 异步运行
     Plug 'skywind3000/asyncrun.vim'
     Plug 'skywind3000/asynctasks.vim'
-    LoadScript site/bundle/asynctasks.ShangVim
+    LoadScript site/bundle/asynctasks.vim
 
     " 终端
     Plug 'skywind3000/vim-terminal-help'
