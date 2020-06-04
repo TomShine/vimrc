@@ -277,7 +277,7 @@ if index(g:bundle_group, 'basic') >= 0
     " 异步运行
     Plug 'skywind3000/asyncrun.vim'
     Plug 'skywind3000/asynctasks.vim'
-    LoadScript site/bundle/asynctasks.ShangVim
+    LoadScript site/bundle/asynctasks.vim
 
     " 终端
     Plug 'skywind3000/vim-terminal-help'
@@ -579,7 +579,7 @@ endif
 " nerdtree: 文件树
 if index(g:bundle_group, 'nerdtree') >= 0
     Plug 'scrooloose/nerdtree', {'on': ['NERDTree', 'NERDTreeFocus', 'NERDTreeToggle', 'NERDTreeCWD', 'NERDTreeFind'] }
-    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+    "Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
     LoadScript site/bundle/nerdtree.vim
 endif
 
