@@ -152,6 +152,8 @@ install_vim() {
         fi
     fi
 
+    echo "source $HOME/.ShangVim/init.vim" >> $HOME/.vimrc
+
     mkdir "$HOME/.vim"
     success "Installed ShangVim for vim"
 }
@@ -185,7 +187,7 @@ install_neovim() {
 
 # install_package_manager {{{
 install_package_manager() {
-    if [[ ! -d "$HOME/.vim/autoload/plug.vim" ]]; then
+    if [[ ! -f "$HOME/.vim/autoload/plug.vim" ]]; then
         info "Install vim-plug start"
         curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
