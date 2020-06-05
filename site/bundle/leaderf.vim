@@ -10,9 +10,6 @@
 " ui 定制
 let g:Lf_StlSeparator = { 'left': '', 'right': '', 'font': '' }
 
-" let g:Lf_WindowPosition = 'popup'
-" let g:Lf_PreviewInPopup = 1
-
 " should use `Leaderf gtags --update` first
 let g:Lf_GtagsAutoGenerate = 0
 let g:Lf_Gtagslabel = 'native-pygments'
@@ -31,7 +28,6 @@ let g:Lf_WildIgnore = {
             \ 'dir': ['.svn','.git','.hg'],
             \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
             \ }
-
 " MRU 文件忽略扩展名
 let g:Lf_MruFileExclude = ['*.so', '*.exe', '*.py[co]', '*.sw?', '~$*', '*.bak', '*.tmp', '*.dll']
 " 最大历史文件保存 2048 个
@@ -49,10 +45,22 @@ let g:Lf_NormalMap = {
         \ "Function": [["<ESC>", ':exec g:Lf_py "functionExplManager.quit()"<cr>']],
         \ }
 
+"Ripgrep 配置
+let g:Lf_RgConfig = [
+        \ "--max-columns=150",
+        \ "--type-add web:*.{html,css,js}*",
+        \ "--glob=!git/*",
+        \ "--hidden"
+    \ ]
+
 if (exists('*popup_create') && has('patch-8.1.2000')) || has('nvim-0.4')
     let g:Lf_WindowPosition = 'popup'
+    let g:Lf_PreviewInPopup = 1
+    " disable Show icons, icons are shown by default
+    let g:Lf_ShowDevIcons = 0
 endif
 
+" let g:Lf_WindowPosition='bottom'
 
 "----------------------------------------------------------------------
 " source task
@@ -109,7 +117,6 @@ let g:Lf_Extensions.task = {
             \ 'after_enter': string(function('s:lf_win_init'))[10:-3],
         \ }
 
-" let g:Lf_WindowPosition='bottom'
 " echo s:lf_task_source()
 
 "----------------------------------------------------------------------
@@ -119,28 +126,55 @@ let g:Lf_Extensions.task = {
 let g:Lf_CommandMap = {'<Tab>': ['<ESC>']}
 
 " 打开文件模糊匹配
-"let g:Lf_ShortcutF = '<leader>ff'
-let g:Lf_ShortcutF = '<c-p>'
+let g:Lf_ShortcutF = '<leader>ff'
+" let g:Lf_ShortcutF = '<c-p>'
 " 打开 buffer 模糊匹配
 "let g:Lf_ShortcutB = '<leader>fb'
-let g:Lf_ShortcutB = '<m-n>'
+" let g:Lf_ShortcutB = '<m-n>'
 
 " 打开最近使用的文件 MRU，进行模糊匹配
-noremap <leader>fr :LeaderfMru<cr>
+noremap <leader>fm :LeaderfMru<cr>
 noremap <leader>fP :LeaderfBufTag!<cr>
 " 打开 buffer 列表进行模糊匹配
 noremap <leader>fb :LeaderfBuffer<cr>
 " 全局 tags 模糊匹配
-noremap <m-m> :LeaderfTag<cr>
+"noremap <m-m> :LeaderfTag<cr>
 noremap <leader>ft :LeaderfTag<cr>
 " 打开函数列表，按 i 进入模糊匹配，ESC 退出
+"noremap <Leader>ff :LeaderfFunction<cr>
 noremap <leader>fF :LeaderfFunction!<cr>
+"
+noremap <Leader>fl :LeaderfLine<cr>
 
+" gtags
 noremap <leader>fr :<C-U><C-R>=printf("Leaderf! gtags -r %s --auto-jump", expand("<cword>"))<CR><CR>
 noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand("<cword>"))<CR><CR>
 noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
 noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
+
+" rg
+" search word under cursor, the pattern is treated as regex, and enter normal mode directly
+noremap <C-F> :<C-U><C-R>=printf("Leaderf! rg -e %s ", expand("<cword>"))<CR>
+" search word under cursor, the pattern is treated as regex,
+" append the result to previous search results.
+noremap <C-G> :<C-U><C-R>=printf("Leaderf! rg --append -e %s ", expand("<cword>"))<CR>
+" search word under cursor literally only in current buffer
+noremap <C-B> :<C-U><C-R>=printf("Leaderf! rg -F --current-buffer -e %s ", expand("<cword>"))<CR>
+" search word under cursor literally in all listed buffers
+noremap <C-D> :<C-U><C-R>=printf("Leaderf! rg -F --all-buffers -e %s ", expand("<cword>"))<CR>
+" search visually selected text literally, don't quit LeaderF after accepting an entry
+xnoremap gf :<C-U><C-R>=printf("Leaderf! rg -F --stayOpen -e %s ", leaderf#Rg#visual())<CR>
+" recall last search. If the result window is closed, reopen it.
+noremap go :<C-U>Leaderf! rg --recall<CR>
+" search word under cursor in *.h and *.cpp files.
+noremap <Leader>a :<C-U><C-R>=printf("Leaderf! rg -e %s -g *.h -g *.cpp", expand("<cword>"))<CR>
+" the same as above
+noremap <Leader>a :<C-U><C-R>=printf("Leaderf! rg -e %s -g *.{h,cpp}", expand("<cword>"))<CR>
+" search word under cursor in cpp and java files.
+noremap <Leader>b :<C-U><C-R>=printf("Leaderf! rg -e %s -t cpp -t java", expand("<cword>"))<CR>
+" search word under cursor in cpp files, exclude the *.hpp files
+noremap <Leader>c :<C-U><C-R>=printf("Leaderf! rg -e %s -t cpp -g !*.hpp", expand("<cword>"))<CR>
 
 noremap <c-n> :cclose<cr>:Leaderf --nowrap mru --regexMode<cr>
 noremap <m-p> :cclose<cr>:Leaderf! --nowrap function<cr>
