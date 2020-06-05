@@ -182,6 +182,23 @@ inoremap <m-L> <esc><c-w>l
 inoremap <m-J> <esc><c-w>j
 inoremap <m-K> <esc><c-w>k
 
+noremap <silent><space>= :resize +3<cr>
+noremap <silent><space>- :resize -3<cr>
+noremap <silent><space>, :vertical resize -3<cr>
+noremap <silent><space>. :vertical resize +3<cr>
+
+nnoremap <silent><c-w><c-e> :ExpSwitch edit<cr>
+nnoremap <silent><c-w>e :ExpSwitch edit<cr>
+nnoremap <silent><c-w>m :ExpSwitch vs<cr>
+nnoremap <silent><c-w>M :ExpSwitch tabedit<cr>
+
+noremap <silent><space>hh :nohl<cr>
+noremap <silent><bs> :nohl<cr>:redraw!<cr>
+noremap <silent><tab>6 :VinegarOpen leftabove vs<cr>
+noremap <silent><tab>7 :VinegarOpen vs<cr>
+noremap <silent><tab>8 :VinegarOpen belowright sp<cr>
+noremap <silent><tab>9 :VinegarOpen tabedit<cr>
+
 if has('terminal') && exists(':terminal') == 2 && has('patch-8.1.1')
     " vim 8.1 支持 termwinkey ，不需要把 terminal 切换成 normal 模式
     " 设置 termwinkey 为 CTRL 加减号（GVIM），有些终端下是 CTRL+?

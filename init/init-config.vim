@@ -73,7 +73,7 @@ let mapleader = ","
 
 if g:isMac
     if g:isGUI
-        " set macligatures
+        set macligatures
         set guifont=Source_Code_Pro:h14
     else
         set guifont=Fira\ Code:h14

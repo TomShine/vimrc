@@ -80,6 +80,7 @@ if index(g:bundle_group, 'simple') >= 0
     " 文件浏览器，代替 netrw
     Plug 'justinmk/vim-dirvish'
     LoadScript site/bundle/dirvish.vim
+    LoadScript site/bundle/vinegar.vim
 
     " 配对括号和引号自动补全
     Plug 'Raimondi/delimitMate'
@@ -236,6 +237,9 @@ if index(g:bundle_group, 'basic') >= 0
 
     " 提供基于 TAGS 的定义预览，函数参数预览，quickfix 预览
     Plug 'skywind3000/vim-preview'
+    "P 预览 大p关闭
+    autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
+    autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
 
     " 括号彩虹
     Plug 'kien/rainbow_parentheses.vim'
@@ -298,8 +302,12 @@ if index(g:bundle_group, 'enhanced') >= 0
     Plug 'yegappan/grep'
     if executable('rg')
         let g:ackprg='rg --nogroup --nocolor --column'
+    elseif executable('pt')
+        let g:ackprg='pt --nogroup --nocolor --column'
     elseif executable('ag')
         let g:ackprg='ag --nogroup --nocolor --column'
+    elseif executable('ack')
+        let g:ackprg='ack --nogroup --nocolor --column'
     endif
 
     " vim-gista 提供 gist 接口
