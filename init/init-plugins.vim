@@ -413,7 +413,7 @@ if index(g:bundle_group, 'filetypes') >= 0
     Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
     LoadScript site/bundle/vimgo.vim
 
-    " Plug 'justinmk/vim-syntax-extra', { 'for': ['c', 'bison', 'flex', 'cpp'] }
+    Plug 'justinmk/vim-syntax-extra', { 'for': ['c', 'bison', 'flex', 'cpp'] }
     Plug 'pboettch/vim-cmake-syntax', { 'for': ['cmake'] }
     Plug 'beyondmarc/hlsl.vim'
     Plug 'tpope/vim-eunuch'
@@ -424,7 +424,7 @@ if index(g:bundle_group, 'filetypes') >= 0
     Plug 'skywind3000/vim-cppman'
 
     " Python 支持
-    Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+    "Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
     " python 语法文件增强
     Plug 'vim-python/python-syntax', { 'for': ['python'] }
 
@@ -626,31 +626,7 @@ endif
 
 if index(g:bundle_group, 'neoformat') >= 0
     Plug 'sbdchd/neoformat'
-    let g:neoformat_python_autopep8 = {
-            \ 'exe': 'autopep8',
-            \ 'args': ['-s 4', '-E'],
-            \ 'replace': 1,
-            \ 'stdin': 0,
-            \ 'valid_exit_codes': [0, 23],
-            \ 'no_append': 1,
-            \ }
-
-    let g:neoformat_enabled_python = ['autopep8']
-    "let g:neoformat_enabled_python = ['blank', 'autopep8', 'yapf', 'docformatter']
-    " Enable alignment
-    let g:neoformat_basic_format_align = 1
-
-    " Enable tab to spaces conversion
-    let g:neoformat_basic_format_retab = 1
-
-    " Enable trimmming of trailing whitespace
-    let g:neoformat_basic_format_trim = 1
-    let g:neoformat_run_all_formatters = 1
-
-    " augroup fmt
-    " autocmd!
-    " autocmd BufWritePre * undojoin | Neoformat
-    " augroup END
+    LoadScript site/bundle/neoformat.vim
 endif
 
 if index(g:bundle_group, 'lsp') >= 0
