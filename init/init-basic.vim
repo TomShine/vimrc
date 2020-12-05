@@ -202,8 +202,19 @@ let $GTAGSCONF = '/Users/tomshine/.dotfiles/home/.globalrc'
 "----------------------------------------------------------------------
 " Python 设置
 "----------------------------------------------------------------------
-"let g:syntastic_python_python_exec = 'python3'
-if exists('py2') && has('python')
-elseif has('python3')
+" let g:syntastic_python_python_exec = 'python3'
+if has('python_compiled')
+    "echo 'compiled with Python 2.x support'
+    if has('python_dynamic')
+        "echo 'Python 2.x dynamically loaded'
+    endif
 endif
+
+if has('python3_compiled')
+    "echo 'compiled with Python 3.x support'
+    if has('python3_dynamic')
+        "echo 'Python 3.x dynamically loaded'
+    endif
+endif
+
 
