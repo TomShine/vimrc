@@ -198,6 +198,7 @@ install_package_manager() {
 
 # install_package {{{
 install_package() {
+    #vim -c "GoInstallBinaries" -c "qa"
     vim +PlugInstall +qall
     success "vim install plugin sucess"
 }
