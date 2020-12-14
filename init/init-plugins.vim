@@ -286,6 +286,9 @@ if index(g:bundle_group, 'basic') >= 0
 
     " 终端
     Plug 'skywind3000/vim-terminal-help'
+
+    " 简化 Unix 命令行
+    Plug 'tpope/vim-eunuch'
 endif
 
 

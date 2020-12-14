@@ -121,6 +121,7 @@ echo_with_color() {
 # fetch_repo {{{
 fetch_repo() {
     if [[ -d "$HOME/.ShangVim" ]]; then
+        info "ShangVim Exist, So update..."
         info "Trying to update ShangVim"
         cd "$HOME/.ShangVim"
         git pull
