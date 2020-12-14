@@ -50,6 +50,7 @@ endif
 if !exists('g:bundle_group')
     let g:bundle_group = ['simple']
     let g:bundle_group += ['basic', 'tags', 'airline', 'nerdtree', 'filetypes']
+    " let g:bundle_group += ['leaderf', 'ale', 'grammer', 'ycm', 'echoodc']
     let g:bundle_group += ['leaderf', 'ale', 'grammer', 'ycm', 'echoodc']
     let g:bundle_group += ['echodoc', 'enhanced', 'hight']
     let g:bundle_group += ['tools']
@@ -155,7 +156,7 @@ if index(g:bundle_group, 'simple') >= 0
     let g:SuperTabRetainCompletionType=2
 
     " 代码片段
-    Plug 'SirVer/ultisnips'
+    "Plug 'SirVer/ultisnips'
     Plug 'honza/vim-snippets'
 
     " 显示 quickfix list 和 location-list
@@ -309,6 +310,17 @@ if index(g:bundle_group, 'enhanced') >= 0
     elseif executable('ack')
         let g:ackprg='ack --nogroup --nocolor --column'
     endif
+
+    "ctrlsf
+    Plug 'dyng/ctrlsf.vim'
+    nmap     <C-F>f <Plug>CtrlSFPrompt
+    vmap     <C-F>f <Plug>CtrlSFVwordPath
+    vmap     <C-F>F <Plug>CtrlSFVwordExec
+    nmap     <C-F>n <Plug>CtrlSFCwordPath
+    nmap     <C-F>p <Plug>CtrlSFPwordPath
+    nnoremap <C-F>o :CtrlSFOpen<CR>
+    nnoremap <C-F>t :CtrlSFToggle<CR>
+    inoremap <C-F>t <Esc>:CtrlSFToggle<CR>
 
     " vim-gista 提供 gist 接口
     Plug 'lambdalisue/vim-gista', { 'on': 'Gista' }
@@ -478,10 +490,10 @@ if index(g:bundle_group, 'ycm') >= 0
     "----------------------------------------------------------------------
     " YouCompleteMe 默认设置：YCM 需要你另外手动编译安装
     "----------------------------------------------------------------------
-    "augroup load_ycm
-    "    autocmd!
-    "    autocmd InsertEnter * call plug#load('YouCompleteMe','ultisnips') | autocmd! load_ycm
-    "augroup END
+    augroup load_ycm
+       autocmd!
+       autocmd InsertEnter * call plug#load('YouCompleteMe','ultisnips') | autocmd! load_ycm
+    augroup END
 
     LoadScript site/bundle/ycm.vim
 endif
