@@ -50,7 +50,6 @@ endif
 if !exists('g:bundle_group')
     let g:bundle_group = ['simple']
     let g:bundle_group += ['basic', 'tags', 'airline', 'nerdtree', 'filetypes']
-    " let g:bundle_group += ['leaderf', 'ale', 'grammer', 'ycm', 'echoodc']
     let g:bundle_group += ['leaderf', 'ale', 'grammer', 'ycm', 'echoodc']
     let g:bundle_group += ['echodoc', 'enhanced', 'hight']
     let g:bundle_group += ['tools']

@@ -5,11 +5,9 @@
 "======================================================================
 " vim: set ts=4 sw=4 tw=78 noet :
 
-
 let g:isMac = 0
 let g:isLinux = 0
 let g:isGUI = 0
-
 
 if has('mac')
     let g:isMac = 1
@@ -17,7 +15,7 @@ if has('mac')
 elseif has('unix')
     let g:isLinux = 1
 elseif has('bsd')
-    "let g:asynctasks_system = 'bsd'
+    let g:asynctasks_system = 'bsd'
 endif
 
 if has("gui_running")
@@ -74,9 +72,12 @@ let mapleader = ","
 if g:isMac
     if g:isGUI
         set macligatures
-        set guifont=Source_Code_Pro:h14
+	macligatures
+	set guifont=Fira\ Code:h12
+        " set guifont=Source_Code_Pro:h14
     else
-        set guifont=Fira\ Code:h14
+        set guifont=Source_Code_Pro:h14
+        " set guifont=Fira\ Code:h14
     endif
 elseif g:isLinux
     if g:isGUI
